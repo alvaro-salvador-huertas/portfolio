@@ -1,0 +1,949 @@
+/* 1. Design tokens: start here to change the visual identity. */
+:root {
+  color-scheme: light;
+  --color-paper: #f8f7f3;
+  --color-ink: #242722;
+  --color-muted: #62665f;
+  --color-accent: #234ed8;
+  --color-accent-dark: #193cae;
+  --color-line: #d8dad2;
+  --color-blue-tint: #edf1fa;
+  --color-blue-line: #c6d1e9;
+  --color-about: #eeefe8;
+  --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --content-width: 1168px;
+}
+
+/* 2. Base and accessibility. No web fonts or other network dependencies. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  color: var(--color-ink);
+  background: #d8e1ff;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+dl {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+
+h2 {
+  font-size: clamp(2.2rem, 4vw, 3.25rem);
+}
+
+h3 {
+  font-size: clamp(2.15rem, 3.5vw, 3rem);
+  overflow-wrap: anywhere;
+}
+
+h4 {
+  font-size: 0.875rem;
+  font-weight: 650;
+  line-height: 1.5;
+}
+
+em {
+  color: var(--color-accent);
+  font-weight: 400;
+}
+
+a {
+  color: inherit;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.25em;
+}
+
+a:hover {
+  color: var(--color-accent);
+}
+
+a:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  z-index: 10;
+  inset: 1rem auto auto 1rem;
+  padding: 0.65rem 1.25rem;
+  color: white;
+  background: var(--color-accent);
+  transform: translateY(-200%);
+}
+
+.skip-link:focus {
+  color: white;
+  transform: translateY(0);
+}
+
+.container {
+  width: min(var(--content-width), calc(100% - 5rem));
+  margin-inline: auto;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  line-height: 1.65;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.section {
+  padding-block: 6rem;
+}
+
+.section-index {
+  color: var(--color-accent);
+  margin-bottom: 1.25rem;
+}
+
+/* 3. Header and introduction. */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  min-height: 104px;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+}
+
+.brand-mark {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 400;
+  letter-spacing: -0.09em;
+  line-height: 1;
+}
+
+.brand-mark > span {
+  color: var(--color-accent);
+}
+
+.nav-list {
+  display: flex;
+  gap: 2.25rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-size: 0.8125rem;
+  text-decoration: none;
+}
+
+.nav-list a:hover {
+  text-decoration: underline;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 246px;
+  align-items: center;
+  gap: 3rem;
+  padding-block: 6.5rem 7rem;
+}
+
+.hero .eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.small-square {
+  display: inline-block;
+  flex: 0 0 6px;
+  height: 6px;
+  background: var(--color-accent);
+}
+
+h1 {
+  margin-top: 1.65rem;
+  font-size: clamp(3rem, 5.6vw, 4.8rem);
+  line-height: 1.08;
+}
+
+.hero-description {
+  max-width: 555px;
+  margin-top: 1.8rem;
+  color: var(--color-muted);
+  font-size: 1.0625rem;
+  line-height: 1.85;
+}
+
+.primary-link {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  min-height: 48px;
+  margin-top: 2rem;
+  padding: 0.65rem 1.1rem;
+  color: white;
+  background: var(--color-accent);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.primary-link:hover {
+  color: white;
+  background: var(--color-accent-dark);
+}
+
+.primary-link > span {
+  font-size: 1.2rem;
+}
+
+.focus-note {
+  margin-top: 3.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--color-accent);
+}
+
+.focus-note .eyebrow {
+  color: var(--color-accent);
+  font-size: 0.625rem;
+}
+
+.focus-note ol {
+  display: grid;
+  gap: 1.1rem;
+  padding: 0;
+  margin: 1.5rem 0;
+  list-style: none;
+}
+
+.focus-note li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.875rem;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.note-number {
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+}
+
+.note-footer {
+  color: var(--color-muted);
+  font-size: 0.75rem;
+}
+
+/* 4. Projects: the featured project gets the most space. */
+.projects {
+  padding-top: 3rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 2rem;
+  margin-bottom: 3.5rem;
+}
+
+.section-description {
+  color: var(--color-muted);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+.project {
+  border-top: 1px solid var(--color-line);
+}
+
+.project-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  padding-block: 1.5rem 2.5rem;
+}
+
+.project-topline .eyebrow {
+  color: var(--color-accent);
+}
+
+.label-divider {
+  margin-inline: 0.65rem;
+  color: var(--color-muted);
+}
+
+.project-status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--color-muted);
+  font-size: 0.6875rem;
+}
+
+.project-status > span {
+  flex: 0 0 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
+.featured-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: start;
+  gap: clamp(2rem, 6.5vw, 6.5rem);
+}
+
+.project-deck {
+  margin-top: 0.8rem;
+  margin-bottom: 2rem;
+  color: var(--color-muted);
+  font-family: var(--font-display);
+  font-size: 1.5625rem;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+}
+
+.project-detail + .project-detail {
+  margin-top: 1.4rem;
+}
+
+.project-detail p {
+  margin-top: 0.4rem;
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  line-height: 1.8;
+}
+
+.tech-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.8rem 0 1.15rem;
+}
+
+.tech-list li {
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--color-line);
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  line-height: 1.5;
+}
+
+.text-link {
+  display: inline-block;
+  padding-block: 0.55rem;
+  color: var(--color-accent);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.text-link > span[aria-hidden] {
+  display: inline-block;
+  margin-left: 0.35rem;
+  text-decoration: none;
+}
+
+.text-link:hover {
+  color: var(--color-accent-dark);
+  text-decoration-thickness: 2px;
+}
+
+.workflow {
+  padding: 1.75rem;
+  background: var(--color-blue-tint);
+  border: 1px solid var(--color-blue-line);
+}
+
+.workflow figcaption {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--color-accent);
+}
+
+.workflow figcaption > span {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.workflow-steps {
+  margin: 1.75rem 0 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.workflow-steps li {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 1.15rem;
+  background: var(--color-paper);
+  border: 1px solid var(--color-blue-line);
+}
+
+.workflow-steps li + li {
+  margin-top: 1.5rem;
+}
+
+.workflow-steps li + li::before {
+  position: absolute;
+  content: "";
+  top: -1.5rem;
+  left: 50%;
+  height: 1.5rem;
+  border-left: 1px solid var(--color-accent);
+}
+
+.workflow-steps li + li::after {
+  position: absolute;
+  content: "";
+  top: -7px;
+  left: calc(50% - 3px);
+  width: 7px;
+  height: 7px;
+  border-right: 1px solid var(--color-accent);
+  border-bottom: 1px solid var(--color-accent);
+  transform: rotate(45deg);
+}
+
+.workflow-steps .step-label {
+  margin-bottom: 0.45rem;
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.workflow-steps strong {
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.workflow-steps li > span:last-child {
+  margin-top: 0.25rem;
+  color: var(--color-muted);
+  font-size: 0.6875rem;
+  line-height: 1.6;
+}
+
+.workflow-footer {
+  color: var(--color-muted);
+  font-size: 0.6875rem;
+  line-height: 1.8;
+}
+
+.workflow-footer > span {
+  color: var(--color-accent);
+}
+
+.evaluation-note {
+  margin-top: 2rem;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--color-accent);
+}
+
+.evaluation-note p {
+  margin-top: 0.6rem;
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+  line-height: 1.8;
+}
+
+.evaluation-note .text-link {
+  margin-top: 0.35rem;
+  font-size: 0.75rem;
+}
+
+.link-language {
+  font-weight: 400;
+}
+
+.foundations-project {
+  margin-top: 4rem;
+}
+
+.foundations-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6.5vw, 6.5rem);
+}
+
+.foundations-project .project-deck {
+  margin-bottom: 1.5rem;
+}
+
+.foundations-project .tech-list {
+  margin-top: 0;
+}
+
+/* 5. Background, contact, and footer. */
+.about-section {
+  background: var(--color-about);
+  border-block: 1px solid var(--color-line);
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(3rem, 8vw, 8rem);
+}
+
+.about-copy h2 {
+  margin-bottom: 2rem;
+  font-size: clamp(2.3rem, 3.5vw, 3rem);
+  line-height: 1.15;
+}
+
+.about-copy > p:not(.eyebrow) {
+  color: var(--color-muted);
+  font-size: 0.9375rem;
+  line-height: 1.85;
+}
+
+.about-copy > p + p {
+  margin-top: 1rem;
+}
+
+.background-facts > div {
+  padding-block: 1.3rem;
+  border-top: 1px solid var(--color-line);
+}
+
+.background-facts > div:last-child {
+  border-bottom: 1px solid var(--color-line);
+}
+
+.background-facts dt {
+  margin-bottom: 0.45rem;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.background-facts dd {
+  margin: 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+.background-facts dd > span {
+  display: block;
+  color: var(--color-muted);
+  font-size: 0.8125rem;
+  font-weight: 400;
+}
+
+.contact-section {
+  padding-block: 5rem;
+  color: white;
+  background: var(--color-accent);
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(3rem, 8vw, 8rem);
+}
+
+.contact-section .section-index {
+  color: #dce5ff;
+}
+
+.contact-section h2 {
+  font-size: clamp(2.25rem, 4vw, 3.25rem);
+}
+
+.contact-section h2 + p {
+  max-width: 425px;
+  margin-top: 1.4rem;
+  color: #e5ebff;
+  font-size: 0.9375rem;
+  line-height: 1.8;
+}
+
+.contact-links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.contact-links li {
+  border-top: 1px solid #7894eb;
+}
+
+.contact-links li:last-child {
+  border-bottom: 1px solid #7894eb;
+}
+
+.contact-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.15rem;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-decoration: none;
+}
+
+.contact-links small {
+  display: block;
+  color: #e5ebff;
+  font-size: 0.75rem;
+}
+
+.contact-links a > span[aria-hidden] {
+  font-size: 1.6rem;
+}
+
+.contact-links a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
+.contact-links a:focus-visible {
+  outline-color: white;
+}
+
+.site-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 2rem;
+  padding-block: 1.75rem;
+  color: var(--color-muted);
+  font-size: 0.6875rem;
+}
+
+.footer-note {
+  margin-left: 1rem;
+}
+
+.site-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 44px;
+}
+
+/* 6. Smaller screens: preserve all content and keep navigation visible. */
+@media (max-width: 1050px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr) 210px;
+    gap: 2rem;
+  }
+
+  h1 {
+    font-size: clamp(2.85rem, 5.35vw, 4.4rem);
+  }
+
+  .workflow {
+    padding: 1.2rem;
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    width: calc(100% - 3rem);
+  }
+
+  .section {
+    padding-block: 4rem;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    padding-block: 4.5rem;
+  }
+
+  h1 {
+    font-size: clamp(2.75rem, 8vw, 4.5rem);
+  }
+
+  .focus-note {
+    margin: 0;
+  }
+
+  .focus-note ol {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-block: 1rem;
+  }
+
+  .focus-note li {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .note-footer {
+    margin-top: 0.75rem;
+  }
+
+  .featured-layout,
+  .foundations-layout,
+  .about-layout,
+  .contact-layout {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .project-copy {
+    max-width: 620px;
+  }
+
+  .workflow {
+    padding: 1.75rem;
+  }
+
+  .section-heading {
+    align-items: start;
+  }
+
+  .section-description {
+    max-width: 180px;
+    margin-top: 2.4rem;
+  }
+
+  .background-facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 2rem;
+  }
+
+  .background-facts > div:last-child {
+    border-bottom: 0;
+  }
+
+  .contact-section {
+    padding-block: 3.5rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .site-header {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 0.65rem;
+    padding-block: 1.25rem 0.7rem;
+  }
+
+  .brand {
+    align-self: start;
+  }
+
+  .nav-list {
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .hero {
+    padding-block: 3.5rem;
+  }
+
+  h1 {
+    font-size: clamp(2.3rem, 8.3vw, 2.8rem);
+  }
+
+  .hero-description {
+    font-size: 1rem;
+  }
+
+  .focus-note ol {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+  }
+
+  .focus-note li {
+    flex-direction: row;
+    gap: 0.9rem;
+  }
+
+  .section-heading {
+    display: block;
+    margin-bottom: 2rem;
+  }
+
+  .section-description {
+    max-width: none;
+    margin-top: 1.2rem;
+  }
+
+  .section-description br {
+    display: none;
+  }
+
+  .project-topline {
+    padding-bottom: 1.75rem;
+  }
+
+  .project-deck {
+    font-size: 1.375rem;
+  }
+
+  .workflow {
+    padding: 1.2rem;
+  }
+
+  .background-facts {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-note {
+    display: block;
+    margin-left: 0;
+  }
+}
+
+/* 7. Respect motion preferences and make the page useful when printed. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+@media (forced-colors: active) {
+  .primary-link {
+    border: 1px solid ButtonText;
+  }
+}
+
+@media print {
+  :root {
+    --color-paper: white;
+    --color-ink: black;
+    --color-muted: #333;
+  }
+
+  body {
+    font-size: 10pt;
+  }
+
+  .container {
+    width: 100%;
+  }
+
+  .site-header nav,
+  .skip-link,
+  .primary-link,
+  .site-footer a {
+    display: none;
+  }
+
+  .hero,
+  .section,
+  .contact-section {
+    padding-block: 2rem;
+  }
+
+  .hero,
+  .featured-layout,
+  .foundations-layout,
+  .about-layout,
+  .contact-layout {
+    display: block;
+  }
+
+  .focus-note,
+  .project-evidence,
+  .background-facts,
+  .foundations-details,
+  .contact-links {
+    margin-top: 1.5rem;
+  }
+
+  .contact-section,
+  .about-section,
+  .workflow {
+    color: black;
+    background: white;
+  }
+
+  .contact-section .section-index,
+  .contact-section h2 + p,
+  .contact-links small {
+    color: #333;
+  }
+
+  .project-detail,
+  .workflow,
+  .evaluation-note,
+  .background-facts > div {
+    break-inside: avoid;
+  }
+
+  h2,
+  h3,
+  h4 {
+    break-after: avoid;
+  }
+}
