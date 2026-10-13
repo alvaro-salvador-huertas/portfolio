@@ -2,6 +2,17 @@
    An intersection starts a finite CSS animation; it never unlocks content. */
 (() => {
   const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const hero = [...document.querySelectorAll('.hero-name, .hero-surname, .hero-description')];
+  const settleHero = () => hero.forEach(element => element.classList.add('has-entered'));
+
+  // Completed entries stay completed when motion preferences change later.
+  if (preference.matches) settleHero();
+  document.addEventListener('animationend', event => {
+    if (hero.includes(event.target)) event.target.classList.add('has-entered');
+  });
+  preference.addEventListener('change', event => {
+    if (event.matches) settleHero();
+  });
   if (preference.matches || !('IntersectionObserver' in window)) return;
 
   const blocks = [...document.querySelectorAll('[data-reveal]')];

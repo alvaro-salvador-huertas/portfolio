@@ -5,38 +5,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light">
     <meta name="theme-color" content="#F5F3EE">
-    <meta name="description" content="Álvaro Salvador Huertas, third-year Computer Engineering student at the University of Granada. Academic work in C++, Python projects, and an interest in AI agents, orchestration, and evaluation.">
-    <title>Álvaro Salvador Huertas - Software &amp; AI agents</title>
+    <meta name="description" content="Álvaro Salvador Huertas, third-year Computer Engineering student at the University of Granada. Academic work in C++, Python projects, and an interest in AI agents, orchestration, and evaluation." data-i18n-content="page.description">
+    <title data-i18n="page.title">Álvaro Salvador Huertas - Software &amp; AI agents</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="preload" href="assets/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
+    <script src="language.js" defer></script>
     <script src="motion.js" defer></script>
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
 
     <div class="opening" id="top">
       <header class="site-header site-shell">
-        <a class="brand" href="#top" aria-label="Álvaro Salvador Huertas - home">as<span>.</span></a>
-        <nav aria-label="Main navigation">
-          <ul class="nav-list">
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-          </ul>
-        </nav>
+        <a class="brand" href="#top" aria-label="as. - Álvaro Salvador Huertas - home" data-i18n-aria-label="home">as<span>.</span></a>
+        <div class="header-tools">
+          <div class="language-switch" role="group" aria-label="Page language" data-i18n-aria-label="language.label" hidden>
+            <button type="button" data-language="es" aria-label="ES - Spanish" data-i18n-aria-label="language.es" aria-pressed="false">ES</button>
+            <span aria-hidden="true">/</span>
+            <button type="button" data-language="en" aria-label="EN - English" data-i18n-aria-label="language.en" aria-pressed="true">EN</button>
+          </div>
+          <nav aria-label="Main navigation" data-i18n-aria-label="navigation">
+            <ul class="nav-list">
+              <li><a href="#about" data-i18n="section.about">About</a></li>
+              <li><a href="#projects" data-i18n="section.projects">Projects</a></li>
+              <li><a href="#skills" data-i18n="section.skills">Skills</a></li>
+              <li><a href="#contact" data-i18n="section.contact">Contact</a></li>
+            </ul>
+          </nav>
+        </div>
       </header>
 
       <!-- Minimum viewport height, never a fixed height: enlarged text can grow. -->
       <section class="hero site-shell" aria-labelledby="intro-title">
         <div class="hero-copy">
           <h1 id="intro-title"><span class="hero-name">Álvaro</span> <span class="hero-surname">Salvador Huertas</span></h1>
-          <p class="hero-description">Computer Engineering student. Software &amp; AI agents.</p>
+          <p class="hero-description" data-i18n="hero.description">Computer Engineering student. Software &amp; AI agents.</p>
         </div>
         <div class="hero-actions">
-          <a class="project-cta" href="#projects">Explore my projects <span aria-hidden="true">↓</span></a>
-          <a class="scroll-cue" href="#about">Scroll to explore <span aria-hidden="true">↓</span></a>
+          <a class="project-cta" href="#projects"><span data-i18n="hero.projects">Explore my projects</span> <span class="link-arrow arrow-down" aria-hidden="true">↓</span></a>
+          <a class="scroll-cue" href="#about"><span data-i18n="hero.scroll">Scroll to explore</span> <span class="link-arrow arrow-down" aria-hidden="true">↓</span></a>
         </div>
       </section>
     </div>
@@ -44,21 +52,21 @@
     <main class="site-shell" id="main" tabindex="-1">
       <!-- ABOUT: supplied academic context and motivations, not professional claims. -->
       <section class="content-section about-section" id="about" aria-labelledby="about-title">
-        <h2 id="about-title" data-reveal>About</h2>
+        <h2 id="about-title" data-reveal data-i18n="section.about">About</h2>
         <div class="section-body">
           <div class="intro-copy" data-reveal>
-            <p class="intro-lead">I'm Álvaro, a third-year Computer Engineering student at the University of Granada.</p>
-            <p id="focus-title">I'm interested in how AI agents work, how they are orchestrated, and how to evaluate their responses.</p>
-            <p class="personal-approach">I'm ambitious about the engineer I want to become. I take my work seriously, enjoy solving problems, and want to contribute to a team with initiative and responsibility.</p>
+            <p class="intro-lead" data-i18n="about.intro">I'm Álvaro, a third-year Computer Engineering student at the University of Granada.</p>
+            <p id="focus-title" data-i18n="about.focus">I'm interested in how AI agents work, how they are orchestrated, and how to evaluate their responses.</p>
+            <p class="personal-approach" data-i18n="about.approach">I'm ambitious about the engineer I want to become. I take my work seriously, enjoy solving problems, and want to contribute to a team with initiative and responsibility.</p>
           </div>
-          <dl class="programming-focus" aria-label="Programming context" data-reveal>
+          <dl class="programming-focus" aria-label="Programming context" data-i18n-aria-label="about.context" data-reveal>
             <div>
               <dt>C++</dt>
-              <dd>Academic coursework</dd>
+              <dd data-i18n="about.cpp">Academic coursework</dd>
             </div>
             <div>
               <dt>Python</dt>
-              <dd>Software &amp; agent projects</dd>
+              <dd data-i18n="about.python">Software &amp; agent projects</dd>
             </div>
           </dl>
         </div>
@@ -66,78 +74,78 @@
 
       <!-- PROJECTS: concise summaries; the linked report holds the evaluation detail. -->
       <section class="content-section projects-section" id="projects" aria-labelledby="projects-title">
-        <h2 id="projects-title" data-reveal>Projects</h2>
+        <h2 id="projects-title" data-reveal data-i18n="section.projects">Projects</h2>
         <div class="section-body">
 
           <article class="project featured-project" aria-labelledby="git-docs-title" data-reveal>
             <header class="project-heading">
               <h3 id="git-docs-title">git-docs-agent</h3>
-              <p class="project-status">Evaluated prototype</p>
+              <p class="project-status" data-i18n="git.status">Evaluated prototype</p>
             </header>
-            <p class="project-summary">Git questions need answers backed by documentation. I built a Python terminal assistant around Codex CLI and five local notes, with instructions to cite sources and acknowledge missing information.</p>
-            <ul class="tech-list" aria-label="git-docs-agent technologies">
+            <p class="project-summary" data-i18n="git.summary">Git questions need answers backed by documentation. I built a Python terminal assistant around Codex CLI and five local notes, with instructions to cite sources and acknowledge missing information.</p>
+            <ul class="tech-list" aria-label="git-docs-agent technologies" data-i18n-aria-label="git.technologies">
               <li>Python</li>
               <li>Codex CLI</li>
               <li>Markdown</li>
               <li>unittest</li>
             </ul>
-            <p class="project-evidence" id="evaluation-title">Initial evaluation completed: all five predefined cases passed with the revised prompt and the same source notes. Three additional exploratory checks produced favorable results. These are individual observations, not a measure of general reliability. Program tests and answer evaluations are assessed separately.</p>
-            <ul class="project-links" aria-label="git-docs-agent resources">
-              <li><a href="https://github.com/alvaro-salvador-huertas/git-docs-agent">Repository <span aria-hidden="true">↗</span></a></li>
-              <li><a href="https://github.com/alvaro-salvador-huertas/git-docs-agent/blob/main/evals/resultados-2026-10-13.md">Evaluation &amp; limitations — <time datetime="2026-10-13">13 Oct 2026</time> <span class="link-language">(Spanish)</span> <span aria-hidden="true">↗</span></a></li>
+            <p class="project-evidence" id="evaluation-title" data-i18n="git.evaluation">Initial evaluation completed: all five predefined cases passed with the revised prompt and the same source notes. Three additional exploratory checks produced favorable results. These are individual observations, not a measure of general reliability. Program tests and answer evaluations are assessed separately.</p>
+            <ul class="project-links" aria-label="git-docs-agent resources" data-i18n-aria-label="git.resources">
+              <li><a href="https://github.com/alvaro-salvador-huertas/git-docs-agent"><span data-i18n="repository">Repository</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
+              <li><a href="https://github.com/alvaro-salvador-huertas/git-docs-agent/blob/main/evals/resultados-2026-10-13.md"><span data-i18n="evaluation.link">Evaluation &amp; limitations</span> - <time datetime="2026-10-13" data-i18n="evaluation.date">13 Oct 2026</time> <span class="link-language" data-i18n="evaluation.language">(Spanish)</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
             </ul>
           </article>
 
           <article class="project foundations-project" aria-labelledby="carrera-title" data-reveal>
             <header class="project-heading">
               <h3 id="carrera-title">carrera-tech</h3>
-              <p class="project-status">Public repository</p>
+              <p class="project-status" data-i18n="carrera.status">Public repository</p>
             </header>
-            <p class="project-summary">Python exercises and a study log for recording sessions and reviewing progress by subject. It includes input validation, JSON persistence, subject-level statistics, and automated tests.</p>
-            <ul class="tech-list" aria-label="carrera-tech technologies">
+            <p class="project-summary" data-i18n="carrera.summary">Python exercises and a study log for recording sessions and reviewing progress by subject. It includes input validation, JSON persistence, subject-level statistics, and automated tests.</p>
+            <ul class="tech-list" aria-label="carrera-tech technologies" data-i18n-aria-label="carrera.technologies">
               <li>Python</li>
               <li>JSON</li>
-              <li>Automated tests</li>
+              <li data-i18n="carrera.tests">Automated tests</li>
             </ul>
-            <p class="project-context">My foundation for working with structured data and checking program behaviour.</p>
-            <ul class="project-links" aria-label="carrera-tech resources">
-              <li><a href="https://github.com/alvaro-salvador-huertas/carrera-tech">Repository <span aria-hidden="true">↗</span></a></li>
+            <p class="project-context" data-i18n="carrera.context">My foundation for working with structured data and checking program behaviour.</p>
+            <ul class="project-links" aria-label="carrera-tech resources" data-i18n-aria-label="carrera.resources">
+              <li><a href="https://github.com/alvaro-salvador-huertas/carrera-tech"><span data-i18n="repository">Repository</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
             </ul>
           </article>
-          <p class="development-note" data-reveal>I develop these projects with assistance from Codex, taking time to understand the code and check its behaviour.</p>
+          <p class="development-note" data-reveal data-i18n="development">I develop these projects with assistance from Codex, taking time to understand the code and check its behaviour.</p>
         </div>
       </section>
 
       <!-- SKILLS: distinguish languages, database software, tools and ongoing training. -->
       <section class="content-section skills-section" id="skills" aria-labelledby="skills-title">
-        <h2 id="skills-title" data-reveal>Skills</h2>
+        <h2 id="skills-title" data-reveal data-i18n="section.skills">Skills</h2>
         <div class="section-body">
           <dl class="skills-list">
             <div class="skill-row" data-reveal>
-              <dt>Programming</dt>
-              <dd><strong>C++ &amp; Python</strong><p>C++ through academic coursework; Python through software and AI agent projects.</p></dd>
+              <dt data-i18n="skills.programming">Programming</dt>
+              <dd><strong data-i18n="skills.cppPython">C++ &amp; Python</strong><p data-i18n="skills.programmingDetail">C++ through academic coursework; Python through software and AI agent projects.</p></dd>
             </div>
             <div class="skill-row" data-reveal>
-              <dt>Databases &amp; tools</dt>
-              <dd><strong>MySQL &amp; Oracle SQL Developer</strong><p>MySQL for relational databases; Oracle SQL Developer as a database development tool.</p></dd>
+              <dt data-i18n="skills.databases">Databases &amp; tools</dt>
+              <dd><strong data-i18n="skills.mysqlOracle">MySQL &amp; Oracle SQL Developer</strong><p data-i18n="skills.databasesDetail">MySQL for relational databases; Oracle SQL Developer as a database development tool.</p></dd>
             </div>
             <div class="skill-row" data-reveal>
-              <dt>Development workflow</dt>
-              <dd><strong>Linux, Git &amp; GitHub</strong><p>Working environment, version control, and repository collaboration.</p></dd>
+              <dt data-i18n="skills.workflow">Development workflow</dt>
+              <dd><strong data-i18n="skills.tools">Linux, Git &amp; GitHub</strong><p data-i18n="skills.workflowDetail">Working environment, version control, and repository collaboration.</p></dd>
             </div>
             <div class="skill-row" data-reveal>
-              <dt>Working approach</dt>
-              <dd><strong>Problem solving &amp; leadership</strong><p>I aim to break problems down, take initiative, and help a team move work forward.</p></dd>
+              <dt data-i18n="skills.approach">Working approach</dt>
+              <dd><strong data-i18n="skills.strengths">Problem solving &amp; leadership</strong><p data-i18n="skills.strengthsDetail">I aim to break problems down, take initiative, and help a team move work forward.</p></dd>
             </div>
           </dl>
           <dl class="learning-facts" data-reveal>
             <div>
-              <dt>Ongoing training</dt>
-              <dd>AWS<span>Introductory training in progress</span></dd>
+              <dt data-i18n="learning.title">Ongoing training</dt>
+              <dd>AWS<span data-i18n="learning.aws">Introductory training in progress</span></dd>
             </div>
             <div>
-              <dt>Languages</dt>
-              <dd>Spanish &amp; English<span>Native proficiency in both</span></dd>
+              <dt data-i18n="languages.title">Languages</dt>
+              <dd><span class="language-names" data-i18n="languages.names">Spanish &amp; English</span><span data-i18n="languages.level">Native proficiency in both</span></dd>
             </div>
           </dl>
         </div>
@@ -145,13 +153,13 @@
 
       <!-- CONTACT: email supplied by Álvaro; profile URLs remain unchanged. -->
       <section class="content-section contact-section" id="contact" aria-labelledby="contact-title">
-        <h2 id="contact-title" data-reveal>Contact</h2>
+        <h2 id="contact-title" data-reveal data-i18n="section.contact">Contact</h2>
         <div class="section-body" data-reveal>
-          <p>For internship opportunities or a conversation about my projects, you can reach me by email.</p>
-          <a class="email-link" href="mailto:salvadorhuertas.alvaro@gmail.com">salvadorhuertas.alvaro@gmail.com <span aria-hidden="true">↗</span></a>
-          <ul class="contact-links" aria-label="Contact profiles">
-            <li><a href="https://www.linkedin.com/in/%C3%A1lvaro-salvador-huertas-38b9a43a8/">LinkedIn <span aria-hidden="true">↗</span></a></li>
-            <li><a href="https://github.com/alvaro-salvador-huertas">GitHub <span aria-hidden="true">↗</span></a></li>
+          <p data-i18n="contact.description">For internship opportunities or a conversation about my projects, you can reach me by email.</p>
+          <a class="email-link" href="mailto:salvadorhuertas.alvaro@gmail.com">salvadorhuertas.alvaro@gmail.com <span class="link-arrow" aria-hidden="true">↗</span></a>
+          <ul class="contact-links" aria-label="Contact profiles" data-i18n-aria-label="contact.profiles">
+            <li><a href="https://www.linkedin.com/in/%C3%A1lvaro-salvador-huertas-38b9a43a8/">LinkedIn <span class="link-arrow" aria-hidden="true">↗</span></a></li>
+            <li><a href="https://github.com/alvaro-salvador-huertas">GitHub <span class="link-arrow" aria-hidden="true">↗</span></a></li>
           </ul>
         </div>
       </section>
@@ -159,7 +167,7 @@
 
     <footer class="site-footer site-shell">
       <p>Álvaro Salvador Huertas</p>
-      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+      <a href="#top"><span data-i18n="footer.top">Back to top</span> <span class="link-arrow arrow-up" aria-hidden="true">↑</span></a>
     </footer>
   </body>
 </html>
