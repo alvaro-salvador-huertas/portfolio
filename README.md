@@ -1,6 +1,8 @@
 # Portfolio de Álvaro Salvador Huertas
 
-Portfolio personal en inglés para responsables técnicos que seleccionan estudiantes para prácticas. HTML, CSS y JavaScript nativo, sin frameworks, dependencias ni compilación. La fuente se sirve desde un archivo local con licencia abierta.
+Mi portfolio personal en inglés, donde comparto mis proyectos, aprendizajes y logros. Lo iré actualizando a medida que avance y alcance nuevas metas personales.
+
+Está desarrollado con HTML, CSS y JavaScript nativo, sin frameworks, dependencias ni compilación. La fuente se sirve desde un archivo local con licencia abierta.
 
 ## Verlo en local
 
@@ -18,7 +20,7 @@ También puedes abrir `index.html` directamente: la página, los estilos, la fue
 
 La portada ocupa como mínimo una pantalla e incluye navegación compacta, el nombre completo, una descripción breve, acceso a los proyectos y una indicación para bajar. Después aparecen About, Projects, Skills y Contact como secciones abiertas, separadas por espacio y líneas finas.
 
-El nuevo encargo sustituye la composición de paneles y menú lateral inspirada en [Soham Mondal](https://www.sohammondal.com/), inspeccionada durante la revisión anterior. Se conservan la marca `as.`, la fuente Manrope, los destinos de los enlaces y todos los identificadores existentes.
+La identidad visual utiliza la marca `as.` y la fuente Manrope. La navegación enlaza las secciones del portfolio y los recursos de cada proyecto.
 
 La paleta es explícitamente clara: marfil `#F5F3EE`, carbón `#181818` y azul `#244BD8`. El color secundario del texto es `#595852`. `color-scheme: only light` y una única definición de colores evitan cambios por la preferencia clara u oscura del sistema.
 
