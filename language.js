@@ -1,14 +1,14 @@
-/* Each key has both languages. Keep the English HTML fallback in sync.
-   Only leaf text nodes and explicitly declared attributes are translated. */
+/* Keep both languages and the English HTML fallback in sync.
+   Translate only leaf text and explicitly declared attributes. */
 (() => {
   const messages = {
-    "page.description": {
-      "en": "Álvaro Salvador Huertas, third-year Computer Engineering student at the University of Granada. Academic work in C++, Python projects, and an interest in AI agents, orchestration, and evaluation.",
-      "es": "Álvaro Salvador Huertas, estudiante de tercero de Ingeniería Informática en la Universidad de Granada. Trabajo académico en C++, proyectos con Python e interés en agentes de IA, orquestación y evaluación."
-    },
     "page.title": {
       "en": "Álvaro Salvador Huertas - Software & AI agents",
       "es": "Álvaro Salvador Huertas - Software y agentes de IA"
+    },
+    "page.description": {
+      "en": "Álvaro Salvador Huertas, Computer Engineering student at the University of Granada. C++ coursework, Python projects and experiments with AI agents.",
+      "es": "Álvaro Salvador Huertas, estudiante de Ingeniería Informática en la Universidad de Granada. C++ en la carrera, proyectos en Python y exploración de agentes de IA."
     },
     "skip": {
       "en": "Skip to content",
@@ -22,6 +22,18 @@
       "en": "Main navigation",
       "es": "Navegación principal"
     },
+    "language.label": {
+      "en": "Page language",
+      "es": "Idioma de la página"
+    },
+    "language.es": {
+      "en": "ES - Spanish",
+      "es": "ES - Español"
+    },
+    "language.en": {
+      "en": "EN - English",
+      "es": "EN - Inglés"
+    },
     "section.about": {
       "en": "About",
       "es": "Sobre mí"
@@ -32,91 +44,79 @@
     },
     "section.skills": {
       "en": "Skills",
-      "es": "Habilidades"
+      "es": "Competencias"
     },
     "section.contact": {
       "en": "Contact",
       "es": "Contacto"
     },
     "hero.description": {
-      "en": "Computer Engineering student. Software & AI agents.",
-      "es": "Estudiante de Ingeniería Informática. Software y agentes de IA."
+      "en": "What I’m building, and what I’m learning along the way.",
+      "es": "Comparto lo que construyo y lo que aprendo por el camino."
     },
     "hero.projects": {
-      "en": "Explore my projects",
-      "es": "Explora mis proyectos"
-    },
-    "hero.scroll": {
-      "en": "Scroll to explore",
-      "es": "Desplázate para explorar"
+      "en": "View projects",
+      "es": "Ver proyectos"
     },
     "about.intro": {
-      "en": "I'm Álvaro, a third-year Computer Engineering student at the University of Granada.",
-      "es": "Soy Álvaro, estudiante de tercero de Ingeniería Informática en la Universidad de Granada."
+      "en": "I’m a third-year Computer Engineering student at the University of Granada. I’m passionate about building AI systems and understanding how they work.",
+      "es": "Estudio tercero de Ingeniería Informática en la Universidad de Granada. Me apasiona el desarrollo de sistemas de inteligencia artificial y entender cómo funcionan por dentro."
     },
     "about.focus": {
-      "en": "I'm interested in how AI agents work, how they are orchestrated, and how to evaluate their responses.",
-      "es": "Me interesa cómo funcionan los agentes de IA, cómo se orquestan y cómo evaluar sus respuestas."
-    },
-    "about.approach": {
-      "en": "I'm ambitious about the engineer I want to become. I take my work seriously, enjoy solving problems, and want to contribute to a team with initiative and responsibility.",
-      "es": "Tengo ambición por el ingeniero que quiero llegar a ser. Me tomo mi trabajo en serio, disfruto resolviendo problemas y quiero aportar a un equipo con iniciativa y responsabilidad."
-    },
-    "about.context": {
-      "en": "Programming context",
-      "es": "Contexto de programación"
-    },
-    "about.cpp": {
-      "en": "Academic coursework",
-      "es": "Trabajo académico"
-    },
-    "about.python": {
-      "en": "Software & agent projects",
-      "es": "Proyectos de software y agentes"
+      "en": "I use C++ in my coursework and Python in my own projects. My current focus is AI agents: how they use tools, work together, and how to evaluate their results.",
+      "es": "Trabajo con C++ en la carrera y desarrollo proyectos en Python. Ahora estoy centrado en agentes de IA: cómo utilizan herramientas, cómo se coordinan y cómo evaluar sus resultados."
     },
     "git.status": {
-      "en": "Evaluated prototype",
-      "es": "Prototipo evaluado"
+      "en": "AI agent prototype",
+      "es": "Prototipo de agente de IA"
     },
     "git.summary": {
-      "en": "Git questions need answers backed by documentation. I built a Python terminal assistant around Codex CLI and five local notes, with instructions to cite sources and acknowledge missing information.",
-      "es": "Las preguntas sobre Git necesitan respuestas respaldadas por documentación. He creado un asistente de terminal en Python basado en Codex CLI y cinco notas locales, con instrucciones para citar las fuentes y reconocer la información que falta."
+      "en": "I built this terminal assistant to answer Git questions using Codex CLI and local notes.",
+      "es": "He creado este asistente para consultar dudas sobre Git desde la terminal, con Codex CLI y notas locales."
     },
     "git.technologies": {
       "en": "git-docs-agent technologies",
       "es": "Tecnologías de git-docs-agent"
-    },
-    "git.evaluation": {
-      "en": "Initial evaluation completed: all five predefined cases passed with the revised prompt and the same source notes. Three additional exploratory checks produced favorable results. These are individual observations, not a measure of general reliability. Program tests and answer evaluations are assessed separately.",
-      "es": "Evaluación inicial completada: los cinco casos predefinidos se superaron con el prompt revisado y las mismas notas fuente. Tres comprobaciones exploratorias adicionales obtuvieron resultados favorables. Son observaciones individuales, no una medida de fiabilidad general. Las pruebas del programa y las evaluaciones de respuestas se valoran por separado."
     },
     "git.resources": {
       "en": "git-docs-agent resources",
       "es": "Recursos de git-docs-agent"
     },
     "repository": {
-      "en": "Repository",
-      "es": "Repositorio"
+      "en": "View repository",
+      "es": "Ver repositorio"
     },
     "evaluation.link": {
       "en": "Evaluation & limitations",
-      "es": "Evaluación y limitaciones"
-    },
-    "evaluation.date": {
-      "en": "13 Oct 2026",
-      "es": "13 oct 2026"
+      "es": "Evaluación y límites"
     },
     "evaluation.language": {
-      "en": "(Spanish)",
-      "es": "(español)"
+      "en": "(in Spanish)",
+      "es": "(en español)"
+    },
+    "git.question": {
+      "en": "How do git add and git commit differ?",
+      "es": "¿En qué se diferencian git add y git commit?"
+    },
+    "git.notes": {
+      "en": "Local notes",
+      "es": "Notas locales"
+    },
+    "git.agent": {
+      "en": "Agent",
+      "es": "Agente"
+    },
+    "git.answer": {
+      "en": "Answer with sources",
+      "es": "Respuesta con fuentes"
     },
     "carrera.status": {
-      "en": "Public repository",
-      "es": "Repositorio público"
+      "en": "Python practice",
+      "es": "Práctica con Python"
     },
     "carrera.summary": {
-      "en": "Python exercises and a study log for recording sessions and reviewing progress by subject. It includes input validation, JSON persistence, subject-level statistics, and automated tests.",
-      "es": "Ejercicios de Python y un registro de estudio para guardar sesiones y revisar el progreso por asignatura. Incluye validación de entradas, persistencia en JSON, estadísticas por asignatura y pruebas automatizadas."
+      "en": "This is where I keep my Python exercises and a study log for recording sessions and reviewing them by subject.",
+      "es": "Aquí reúno mis ejercicios de Python y un registro para guardar sesiones de estudio y revisarlas por asignatura."
     },
     "carrera.technologies": {
       "en": "carrera-tech technologies",
@@ -126,61 +126,65 @@
       "en": "Automated tests",
       "es": "Pruebas automatizadas"
     },
-    "carrera.context": {
-      "en": "My foundation for working with structured data and checking program behaviour.",
-      "es": "Mi base para trabajar con datos estructurados y comprobar el comportamiento de los programas."
-    },
     "carrera.resources": {
       "en": "carrera-tech resources",
       "es": "Recursos de carrera-tech"
     },
+    "carrera.storage": {
+      "en": "Save sessions",
+      "es": "Guardar sesiones"
+    },
+    "carrera.summaryLabel": {
+      "en": "Summary by subject",
+      "es": "Resumen por asignatura"
+    },
     "development": {
-      "en": "I develop these projects with assistance from Codex, taking time to understand the code and check its behaviour.",
-      "es": "Desarrollo estos proyectos con asistencia de Codex, dedicando tiempo a entender el código y comprobar su comportamiento."
+      "en": "I use Codex to help develop these projects. I review the code and check how it behaves.",
+      "es": "Uso Codex como apoyo para desarrollar estos proyectos. Reviso el código y compruebo cómo funciona."
     },
     "skills.programming": {
       "en": "Programming",
       "es": "Programación"
     },
+    "skills.cppPython": {
+      "en": "C++ & Python",
+      "es": "C++ y Python"
+    },
     "skills.programmingDetail": {
-      "en": "C++ through academic coursework; Python through software and AI agent projects.",
-      "es": "C++ en trabajos académicos; Python en proyectos de software y agentes de IA."
+      "en": "C++ for coursework; Python for personal projects.",
+      "es": "C++ en la carrera; Python en proyectos propios."
     },
     "skills.databases": {
-      "en": "Databases & tools",
-      "es": "Bases de datos y herramientas"
+      "en": "Databases",
+      "es": "Bases de datos"
+    },
+    "skills.mysqlOracle": {
+      "en": "MySQL & Oracle SQL Developer",
+      "es": "MySQL y Oracle SQL Developer"
     },
     "skills.databasesDetail": {
-      "en": "MySQL for relational databases; Oracle SQL Developer as a database development tool.",
-      "es": "MySQL para bases de datos relacionales; Oracle SQL Developer como herramienta de desarrollo de bases de datos."
+      "en": "Relational databases with MySQL; database development with Oracle SQL Developer.",
+      "es": "Bases de datos relacionales con MySQL y desarrollo de bases de datos con Oracle SQL Developer."
     },
     "skills.workflow": {
-      "en": "Development workflow",
-      "es": "Flujo de desarrollo"
+      "en": "Development tools",
+      "es": "Herramientas de desarrollo"
+    },
+    "skills.tools": {
+      "en": "Linux, Git & GitHub",
+      "es": "Linux, Git y GitHub"
     },
     "skills.workflowDetail": {
-      "en": "Working environment, version control, and repository collaboration.",
-      "es": "Entorno de trabajo, control de versiones y colaboración en repositorios."
-    },
-    "skills.approach": {
-      "en": "Working approach",
-      "es": "Forma de trabajar"
-    },
-    "skills.strengths": {
-      "en": "Problem solving & leadership",
-      "es": "Resolución de problemas y liderazgo"
-    },
-    "skills.strengthsDetail": {
-      "en": "I aim to break problems down, take initiative, and help a team move work forward.",
-      "es": "Busco descomponer los problemas, tomar la iniciativa y ayudar a un equipo a avanzar en su trabajo."
+      "en": "My working environment and tools for version control.",
+      "es": "Entorno de trabajo y control de versiones."
     },
     "learning.title": {
-      "en": "Ongoing training",
+      "en": "Currently learning",
       "es": "Formación en curso"
     },
     "learning.aws": {
-      "en": "Introductory training in progress",
-      "es": "Formación introductoria en curso"
+      "en": "Introductory training.",
+      "es": "Formación introductoria."
     },
     "languages.title": {
       "en": "Languages",
@@ -194,9 +198,13 @@
       "en": "Native proficiency in both",
       "es": "Dominio nativo de ambos"
     },
+    "contact.title": {
+      "en": "Let’s talk.",
+      "es": "¿Hablamos?"
+    },
     "contact.description": {
-      "en": "For internship opportunities or a conversation about my projects, you can reach me by email.",
-      "es": "Para oportunidades de prácticas o para hablar sobre mis proyectos, puedes escribirme por correo."
+      "en": "Have an internship opportunity or a question about a project? Send me an email.",
+      "es": "Si tienes una propuesta de prácticas o quieres hablar de algún proyecto, escríbeme."
     },
     "contact.profiles": {
       "en": "Contact profiles",
@@ -204,31 +212,43 @@
     },
     "footer.top": {
       "en": "Back to top",
-      "es": "Volver al inicio"
+      "es": "Volver arriba"
     },
-    "skills.cppPython": {
-      "en": "C++ & Python",
-      "es": "C++ y Python"
+    "git.questionLabel": {
+      "en": "Question",
+      "es": "Pregunta"
     },
-    "skills.mysqlOracle": {
-      "en": "MySQL & Oracle SQL Developer",
-      "es": "MySQL y Oracle SQL Developer"
+    "git.addAnswer": {
+      "en": "Stages changes in the index.",
+      "es": "Prepara cambios en el índice."
     },
-    "skills.tools": {
-      "en": "Linux, Git & GitHub",
-      "es": "Linux, Git y GitHub"
+    "git.commitAnswer": {
+      "en": "Creates a local commit from staged changes.",
+      "es": "Crea un commit local con los cambios preparados."
     },
-    "language.label": {
-      "en": "Page language",
-      "es": "Idioma de la página"
+    "git.sources": {
+      "en": "Sources",
+      "es": "Fuentes"
     },
-    "language.es": {
-      "en": "ES - Spanish",
-      "es": "ES - Español"
+    "git.caption": {
+      "en": "Illustrative workflow with an example answer.",
+      "es": "Esquema ilustrativo con una respuesta de ejemplo."
     },
-    "language.en": {
-      "en": "EN - English",
-      "es": "EN - Inglés"
+    "carrera.sessions": {
+      "en": "Study sessions",
+      "es": "Sesiones de estudio"
+    },
+    "carrera.networks": {
+      "en": "Networks",
+      "es": "Redes"
+    },
+    "carrera.total": {
+      "en": "Total",
+      "es": "Total"
+    },
+    "carrera.caption": {
+      "en": "Illustrative workflow. Sample data.",
+      "es": "Esquema ilustrativo. Datos de ejemplo."
     }
   };
   const storageKey = 'portfolio-language';
