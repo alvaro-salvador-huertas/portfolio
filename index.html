@@ -58,6 +58,57 @@
       <section class="projects-section section-space" id="projects" aria-labelledby="projects-title">
         <div class="site-shell">
           <h2 class="section-title" id="projects-title" data-reveal="title" data-i18n="section.projects">Projects</h2>
+          <article class="project orchestrator-project" aria-labelledby="orchestrator-title">
+            <div class="project-copy" data-reveal="project">
+              <p class="project-status" data-i18n="orchestrator.status">Evaluated prototype</p>
+              <h3 id="orchestrator-title">code-review-orchestrator</h3>
+              <p class="project-summary" data-i18n="orchestrator.summary">I built a Python controller that coordinates a developer agent, independent tests and a reviewer agent. It limits attempts and keeps logs to investigate the results.</p>
+              <div class="orchestrator-evidence">
+                <p data-i18n="orchestrator.results">Two small exercises, both approved on the first attempt: four real agent calls in total. One additional automatic correction is implemented and covered by simulations, but was not observed in this experiment.</p>
+                <p data-i18n="orchestrator.tests">The project’s 126 automated tests are separate from the candidate tests and those four real calls.</p>
+              </div>
+              <ul class="tech-list" aria-label="code-review-orchestrator technologies" data-i18n-aria-label="orchestrator.technologies">
+                <li>Python</li><li>Codex CLI</li><li>unittest</li><li>JSON</li>
+              </ul>
+              <ul class="project-links" aria-label="code-review-orchestrator resources" data-i18n-aria-label="orchestrator.resources">
+                <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator"><span data-i18n="repository">View repository</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
+                <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/evals/resultados-multicaso-2026-10-15.md" hreflang="es"><span data-i18n="evaluation.link">Evaluation &amp; limitations</span> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
+              </ul>
+            </div>
+            <figure class="project-visual orchestrator-visual" data-reveal="diagram" aria-labelledby="orchestrator-caption">
+              <!-- Simplified workflow, not a replay of an observed execution.
+                   A second attempt is conditional and consumes the remaining budget. -->
+              <svg class="diagram-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><marker id="orchestrator-tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="m1 1 6 3-6 3"/></marker></defs></svg>
+              <div class="diagram-surface orchestrator-flow">
+                <div class="diagram-panel orchestrator-stage" data-flow-step="0">
+                  <span class="diagram-label" data-i18n="orchestrator.developer">Developer agent</span>
+                  <p data-i18n="orchestrator.developerAction">Proposes a code change</p>
+                </div>
+                <svg class="flow-connectors orchestrator-connector" data-flow-step="1" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="24" marker-end="url(#orchestrator-tip)"/></svg>
+                <div class="diagram-panel orchestrator-stage" data-flow-step="2">
+                  <span class="diagram-label" data-i18n="orchestrator.independentTests">Independent tests</span>
+                  <p data-i18n="orchestrator.testsAction">Evaluate the candidate in a separate Python process</p>
+                </div>
+                <div class="orchestrator-gate" data-flow-step="3">
+                  <svg class="flow-connectors orchestrator-connector" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="24" marker-end="url(#orchestrator-tip)"/></svg>
+                  <span data-i18n="orchestrator.reviewGate">Only after tests pass</span>
+                </div>
+                <div class="diagram-panel orchestrator-stage" data-flow-step="4">
+                  <span class="diagram-label" data-i18n="orchestrator.reviewer">Reviewer agent</span>
+                  <p data-i18n="orchestrator.reviewerAction">Inspects the code and evidence</p>
+                </div>
+                <svg class="flow-connectors orchestrator-connector" data-flow-step="5" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="24" marker-end="url(#orchestrator-tip)"/></svg>
+                <div class="diagram-panel orchestrator-decision" data-flow-step="6">
+                  <span class="diagram-label" data-i18n="orchestrator.controller">Python controller’s decision</span>
+                  <p class="orchestrator-outcomes" data-i18n="orchestrator.decision">Approve, request a correction or stop</p>
+                  <p class="orchestrator-budget" data-i18n="orchestrator.budget">Up to 2 attempts in total. A correction needs remaining budget and valid evidence; technical errors stop the run.</p>
+                </div>
+                <p class="orchestrator-records" data-flow-step="7" data-i18n="orchestrator.records">Logs retained at each stage</p>
+              </div>
+              <figcaption id="orchestrator-caption" data-flow-step="8" data-i18n="orchestrator.caption">Illustrative workflow. It does not show a recorded run.</figcaption>
+            </figure>
+          </article>
+
           <article class="project featured-project" aria-labelledby="git-docs-title">
             <div class="project-copy" data-reveal="project">
               <p class="project-status" data-i18n="git.status">AI agent prototype</p>

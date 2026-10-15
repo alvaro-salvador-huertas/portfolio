@@ -66,6 +66,78 @@
       "en": "I use C++ in my coursework and Python in my own projects. My current focus is AI agents: how they use tools, work together, and how to evaluate their results.",
       "es": "Trabajo con C++ en la carrera y desarrollo proyectos en Python. Ahora estoy centrado en agentes de IA: cómo utilizan herramientas, cómo se coordinan y cómo evaluar sus resultados."
     },
+    "orchestrator.status": {
+      "en": "Evaluated prototype",
+      "es": "Prototipo evaluado"
+    },
+    "orchestrator.summary": {
+      "en": "I built a Python controller that coordinates a developer agent, independent tests and a reviewer agent. It limits attempts and keeps logs to investigate the results.",
+      "es": "He creado un controlador Python que coordina un agente desarrollador, pruebas independientes y un agente revisor. Limita los intentos y conserva registros para investigar los resultados."
+    },
+    "orchestrator.results": {
+      "en": "Two small exercises, both approved on the first attempt: four real agent calls in total. One additional automatic correction is implemented and covered by simulations, but was not observed in this experiment.",
+      "es": "Dos ejercicios pequeños, ambos aprobados en el primer intento: cuatro invocaciones reales de agentes en total. La corrección automática adicional está implementada y cubierta con simulaciones, pero no se observó en este experimento."
+    },
+    "orchestrator.tests": {
+      "en": "The project’s 126 automated tests are separate from the candidate tests and those four real calls.",
+      "es": "Las 126 pruebas automatizadas del proyecto son distintas de las pruebas de los candidatos y de esas cuatro invocaciones reales."
+    },
+    "orchestrator.technologies": {
+      "en": "code-review-orchestrator technologies",
+      "es": "Tecnologías de code-review-orchestrator"
+    },
+    "orchestrator.resources": {
+      "en": "code-review-orchestrator resources",
+      "es": "Recursos de code-review-orchestrator"
+    },
+    "orchestrator.developer": {
+      "en": "Developer agent",
+      "es": "Agente desarrollador"
+    },
+    "orchestrator.developerAction": {
+      "en": "Proposes a code change",
+      "es": "Propone un cambio de código"
+    },
+    "orchestrator.independentTests": {
+      "en": "Independent tests",
+      "es": "Pruebas independientes"
+    },
+    "orchestrator.testsAction": {
+      "en": "Evaluate the candidate in a separate Python process",
+      "es": "Evalúan el candidato en otro proceso Python"
+    },
+    "orchestrator.reviewGate": {
+      "en": "Only after tests pass",
+      "es": "Solo si supera las pruebas"
+    },
+    "orchestrator.reviewer": {
+      "en": "Reviewer agent",
+      "es": "Agente revisor"
+    },
+    "orchestrator.reviewerAction": {
+      "en": "Inspects the code and evidence",
+      "es": "Examina el código y la evidencia"
+    },
+    "orchestrator.controller": {
+      "en": "Python controller’s decision",
+      "es": "Decisión del controlador Python"
+    },
+    "orchestrator.decision": {
+      "en": "Approve, request a correction or stop",
+      "es": "Aprobar, pedir una corrección o detener"
+    },
+    "orchestrator.budget": {
+      "en": "Up to 2 attempts in total. A correction needs remaining budget and valid evidence; technical errors stop the run.",
+      "es": "Hasta 2 intentos en total. Una corrección requiere presupuesto disponible y evidencia válida; los errores técnicos detienen la ejecución."
+    },
+    "orchestrator.records": {
+      "en": "Logs retained at each stage",
+      "es": "Registros conservados en cada etapa"
+    },
+    "orchestrator.caption": {
+      "en": "Illustrative workflow. It does not show a recorded run.",
+      "es": "Esquema ilustrativo. No representa una ejecución registrada."
+    },
     "git.status": {
       "en": "AI agent prototype",
       "es": "Prototipo de agente de IA"

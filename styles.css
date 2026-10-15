@@ -117,7 +117,7 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 .project-links { display: flex; flex-direction: column; align-items: start; margin-top: 1.5rem; }
 .project-links a, .contact-links a { display: inline-block; min-height: 44px; padding-block: 0.6rem; font-size: 0.875rem; font-weight: 750; }
 .link-language { font-size: 0.75rem; font-weight: 500; }
-/* Real text and simple SVG paths form two static, readable explanations.
+/* Real text and simple SVG paths form static, readable explanations.
    The existing reveal steps follow inputs → connections → output once. */
 .project-visual { min-width: 0; }
 .diagram-defs { position: absolute; overflow: hidden; }
@@ -131,6 +131,21 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 .diagram-mobile { display: none; }
 .project-visual figcaption { margin-top: 1rem; text-align: center; font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
 .project-visual code { font-family: var(--font-mono); font-size: 0.8125rem; }
+
+/* A vertical sequence keeps roles and the controller's budget readable
+   at every width. Existing reveal steps supply the one-time entrance. */
+.orchestrator-evidence { margin-top: 1.25rem; color: var(--muted); font-size: 0.875rem; }
+.orchestrator-evidence p + p { margin-top: 0.75rem; }
+.orchestrator-stage p { margin-top: 0.4rem; font-size: 0.875rem; line-height: 1.5; font-weight: 600; }
+.orchestrator-connector { height: 24px; }
+.orchestrator-gate { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; padding-block: 0.35rem; }
+.orchestrator-gate .flow-connectors { width: 16px; }
+.orchestrator-gate span { order: -1; color: var(--muted); font-size: 0.75rem; line-height: 1.5; text-align: center; }
+.orchestrator-decision { border-top: 2px solid var(--accent); background: var(--white); }
+.orchestrator-decision > .diagram-label { color: var(--accent); }
+.orchestrator-outcomes { margin-top: 0.5rem; font-size: 1rem; font-weight: 700; line-height: 1.5; }
+.orchestrator-budget { margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.75rem; line-height: 1.6; }
+.orchestrator-records { margin-top: 1rem; color: var(--muted); font-family: var(--font-mono); font-size: 0.75rem; text-align: center; }
 
 /* Equal input columns align their centres with the SVG's 25% / 75% rails. */
 .git-inputs { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
