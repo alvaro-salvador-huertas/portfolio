@@ -75,12 +75,28 @@
       "es": "He creado un controlador Python que coordina un agente desarrollador, pruebas independientes y un agente revisor. Limita los intentos y conserva registros para investigar los resultados."
     },
     "orchestrator.results": {
-      "en": "Two small exercises, both approved on the first attempt: four real agent calls in total. One additional automatic correction is implemented and covered by simulations, but was not observed in this experiment.",
-      "es": "Dos ejercicios pequeños, ambos aprobados en el primer intento: cuatro invocaciones reales de agentes en total. La corrección automática adicional está implementada y cubierta con simulaciones, pero no se observó en este experimento."
+      "en": "In a separate experiment, two small exercises were approved on the first attempt: four real agent calls across development and review.",
+      "es": "En otro experimento, dos ejercicios pequeños se aprobaron al primer intento: cuatro invocaciones reales entre desarrollo y revisión."
     },
     "orchestrator.tests": {
-      "en": "The project’s 126 automated tests are separate from the candidate tests and those four real calls.",
-      "es": "Las 126 pruebas automatizadas del proyecto son distintas de las pruebas de los candidatos y de esas cuatro invocaciones reales."
+      "en": "153 automated tests with simulated agents check the controller, not model quality.",
+      "es": "153 pruebas automatizadas con agentes simulados comprueban el controlador, no la calidad del modelo."
+    },
+    "orchestrator.reviews": {
+      "en": "Four real reviews of prepared candidates: two defects detected beyond the available tests and two justified approvals. The findings were checked automatically by Codex.",
+      "es": "Cuatro revisiones reales de candidatos preparados: dos defectos detectados fuera de la cobertura de las pruebas y dos aprobaciones justificadas. Los hallazgos se contrastaron automáticamente con Codex."
+    },
+    "orchestrator.limits": {
+      "en": "These controlled cases do not establish general reliability. A second repair attempt is implemented and covered by simulations, but has not been observed with the real model.",
+      "es": "Estos casos controlados no acreditan fiabilidad general. El segundo intento de reparación está implementado y cubierto con simulaciones, pero aún no se ha observado con el modelo real."
+    },
+    "orchestrator.reviewerEvaluation": {
+      "en": "Reviewer evaluation",
+      "es": "Evaluación del revisor"
+    },
+    "orchestrator.multicaseEvaluation": {
+      "en": "Multi-case evaluation",
+      "es": "Evaluación multicaso"
     },
     "orchestrator.technologies": {
       "en": "code-review-orchestrator technologies",
@@ -107,8 +123,8 @@
       "es": "Evalúan el candidato en otro proceso Python"
     },
     "orchestrator.reviewGate": {
-      "en": "Only after tests pass",
-      "es": "Solo si supera las pruebas"
+      "en": "Only with passing tests and valid evidence",
+      "es": "Solo con pruebas superadas y evidencia válida"
     },
     "orchestrator.reviewer": {
       "en": "Reviewer agent",
@@ -181,34 +197,6 @@
     "git.answer": {
       "en": "Answer with sources",
       "es": "Respuesta con fuentes"
-    },
-    "carrera.status": {
-      "en": "Python practice",
-      "es": "Práctica con Python"
-    },
-    "carrera.summary": {
-      "en": "This is where I keep my Python exercises and a study log for recording sessions and reviewing them by subject.",
-      "es": "Aquí reúno mis ejercicios de Python y un registro para guardar sesiones de estudio y revisarlas por asignatura."
-    },
-    "carrera.technologies": {
-      "en": "carrera-tech technologies",
-      "es": "Tecnologías de carrera-tech"
-    },
-    "carrera.tests": {
-      "en": "Automated tests",
-      "es": "Pruebas automatizadas"
-    },
-    "carrera.resources": {
-      "en": "carrera-tech resources",
-      "es": "Recursos de carrera-tech"
-    },
-    "carrera.storage": {
-      "en": "Save sessions",
-      "es": "Guardar sesiones"
-    },
-    "carrera.summaryLabel": {
-      "en": "Summary by subject",
-      "es": "Resumen por asignatura"
     },
     "development": {
       "en": "I use Codex to help develop these projects. I review the code and check how it behaves.",
@@ -306,21 +294,53 @@
       "en": "Illustrative workflow with an example answer.",
       "es": "Esquema ilustrativo con una respuesta de ejemplo."
     },
-    "carrera.sessions": {
-      "en": "Study sessions",
-      "es": "Sesiones de estudio"
+    "orchestrator.evidenceTitle": {
+      "en": "Evidence & limits",
+      "es": "Evidencia y límites"
     },
-    "carrera.networks": {
-      "en": "Networks",
-      "es": "Redes"
+    "skills.title": {
+      "en": "What I build with",
+      "es": "Con qué construyo"
     },
-    "carrera.total": {
-      "en": "Total",
-      "es": "Total"
+    "skills.workspace": {
+      "en": "My working toolkit",
+      "es": "Mis herramientas de trabajo"
     },
-    "carrera.caption": {
-      "en": "Illustrative workflow. Sample data.",
-      "es": "Esquema ilustrativo. Datos de ejemplo."
+    "skills.academic": {
+      "en": "Academic foundation",
+      "es": "Base académica"
+    },
+    "skills.projects": {
+      "en": "Personal projects",
+      "es": "Proyectos propios"
+    },
+    "skills.cppDetail": {
+      "en": "My language for Computer Engineering coursework: working through problems and understanding how programs behave.",
+      "es": "Mi lenguaje en Ingeniería Informática: resolver problemas y entender cómo se comportan los programas."
+    },
+    "skills.pythonDetail": {
+      "en": "I use it to develop git-docs-agent and code-review-orchestrator: tools, tests and coordination between agents.",
+      "es": "Lo utilizo para desarrollar git-docs-agent y code-review-orchestrator: herramientas, pruebas y coordinación entre agentes."
+    },
+    "skills.mysqlDetail": {
+      "en": "Relational databases.",
+      "es": "Bases de datos relacionales."
+    },
+    "skills.oracleDetail": {
+      "en": "A tool for database development.",
+      "es": "Herramienta para el desarrollo de bases de datos."
+    },
+    "skills.linuxDetail": {
+      "en": "My working environment.",
+      "es": "Mi entorno de trabajo."
+    },
+    "skills.gitDetail": {
+      "en": "Version control and project repositories.",
+      "es": "Control de versiones y repositorios de proyectos."
+    },
+    "skills.approach": {
+      "en": "I break problems down and put what I learn into my own projects. I like to make my reasoning clear, listen to other perspectives and work through solutions together.",
+      "es": "Descompongo los problemas y llevo lo que aprendo a proyectos propios. Me interesa explicar el razonamiento, escuchar otras perspectivas y buscar soluciones en equipo."
     }
   };
   const storageKey = 'portfolio-language';
@@ -349,6 +369,7 @@
       else element.textContent = value;
     });
     document.documentElement.lang = language;
+    document.dispatchEvent(new Event('portfolio:languagechange'));
     buttons.forEach(button => {
       button.setAttribute('aria-pressed', String(button.dataset.language === language));
     });

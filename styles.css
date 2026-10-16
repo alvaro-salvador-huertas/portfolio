@@ -1,5 +1,5 @@
 /* Native CSS, local Manrope, normal document scrolling.
-   DESIGN_VARIANCE: 7 / MOTION_INTENSITY: 5 / VISUAL_DENSITY: 3.
+   DESIGN_VARIANCE: 7 / MOTION_INTENSITY: 7 / VISUAL_DENSITY: 3.
    Off-white surfaces, charcoal text, restrained terracotta details. */
 @font-face {
   font-family: "Manrope";
@@ -105,37 +105,89 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 .intro-lead { max-width: 36ch; font-size: clamp(1.375rem, 2.1vw, 1.875rem); line-height: 1.45; letter-spacing: -0.03em; font-weight: 500; }
 .intro-copy { padding-top: 0.2rem; font-size: clamp(1rem, 1.4vw, 1.1875rem); line-height: 1.75; }
 
-/* Projects: explanatory figures rather than invented product screenshots. */
-.projects-section { background: var(--wash); }
-.project { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); align-items: center; gap: clamp(2rem, 6vw, 6rem); }
-.project + .project { margin-top: clamp(3rem, 5vw, 5rem); padding-top: clamp(2.5rem, 4vw, 4rem); border-top: 1px solid var(--line); }
+/* Editorial windows. Static, full-height content is the default. */
+.projects-section {
+  --project-backdrop: #e3e5e8;
+  --project-surface: #faf9f6;
+  --project-bar: #dce0e5;
+  --project-border: #bdc2c9;
+  background: var(--project-backdrop);
+  overflow: clip;
+  padding-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+.project-sequence { position: relative; overflow-anchor: none; }
+.project-heading { z-index: 2; padding-bottom: 1rem; margin-bottom: 1rem; background: var(--project-backdrop); }
+.project-heading .section-title { margin: 0; font-size: clamp(1.75rem, 2.5vw, 2.25rem); line-height: 1.15; }
+.project-heading .section-rule { bottom: 0; background: var(--project-border); }
+.project-stack { display: grid; gap: clamp(2rem, 4vw, 4rem); }
+.project-slot { min-width: 0; display: flex; }
+.project-window { position: relative; width: 100%; background: var(--project-surface); border: 1px solid var(--project-border); border-radius: 12px; box-shadow: 0 12px 28px rgb(35 43 54 / 9%), 0 2px 6px rgb(35 43 54 / 4%); transform-origin: 50% 0; }
+.project-bar, .tool-bar { display: flex; align-items: center; gap: 0.85rem; padding: 0.8rem 1.25rem; border-bottom: 1px solid var(--line); background: #e8e7e4; border-radius: 11px 11px 0 0; }
+.project-bar { border-color: var(--project-border); background: var(--project-bar); }
+.window-dots { display: flex; gap: 6px; flex-shrink: 0; margin-right: 0.3rem; }
+.window-dots i { width: 10px; height: 10px; border: 1px solid rgb(41 39 36 / 12%); border-radius: 50%; background: #dc786e; }
+.window-dots i:nth-child(2) { background: #e6bd63; }
+.window-dots i:nth-child(3) { background: #8eb58c; }
+.project-number { flex-shrink: 0; color: var(--accent); font: 0.75rem var(--font-mono); }
+.project-bar h3 { min-width: 0; font-size: clamp(0.875rem, 1.25vw, 1.0625rem); font-weight: 650; letter-spacing: -0.02em; line-height: 1.4; }
+.project-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); align-items: center; gap: 1.5rem; padding: clamp(1rem, 2vw, 1.5rem); }
+.featured-project .project-layout { align-items: start; }
+/* The heading and windows share one sticky stage. Only inner windows transform.
+   Enable overlap only when the whole stage and its margins fit the viewport. */
+.project-sequence.is-stacked { height: var(--sequence-height); }
+.is-stacked .project-stage { position: sticky; top: var(--stage-top); }
+.is-stacked .project-stack { gap: 0; isolation: isolate; }
+.is-stacked .project-slot { grid-area: 1 / 1; pointer-events: none; }
+.is-stacked .project-slot:nth-child(2) { z-index: 1; overflow: clip; overflow-clip-margin: 32px; }
+.is-stacked .project-window { pointer-events: auto; }
+/* A focused window always stays above the other one, even if the visitor
+   scrolls while its link retains focus. DOM/tab order remains unchanged. */
+.is-stacked .project-slot:focus-within { z-index: 2; }
 .project-copy { min-width: 0; }
 .project-status { color: var(--muted); font-size: 0.8125rem; margin-bottom: 0.75rem; }
-.project h3 { font-size: clamp(2rem, 3.1vw, 3rem); font-weight: 700; }
-.project-summary { margin-top: 1.5rem; }
+.project-summary { font-size: 1.0625rem; line-height: 1.6; }
 .tech-list { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-top: 1.5rem; font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
 .project-links { display: flex; flex-direction: column; align-items: start; margin-top: 1.5rem; }
 .project-links a, .contact-links a { display: inline-block; min-height: 44px; padding-block: 0.6rem; font-size: 0.875rem; font-weight: 750; }
 .link-language { font-size: 0.75rem; font-weight: 500; }
-/* Real text and simple SVG paths form static, readable explanations.
-   The existing reveal steps follow inputs → connections → output once. */
+/* Static explanations are the baseline; Anime.js enhances their presentation. */
 .project-visual { min-width: 0; }
 .diagram-defs { position: absolute; overflow: hidden; }
 .diagram-surface { padding: clamp(1rem, 2vw, 1.75rem); border: 1px solid var(--line); border-radius: 8px; background: #eae8e2; }
-.diagram-panel, .document-sheet, .storage-file { border: 1px solid var(--line); border-radius: 5px; background: var(--page); box-shadow: 0 3px 8px rgb(41 39 36 / 4%); }
+.diagram-panel, .document-sheet { border: 1px solid var(--line); border-radius: 5px; background: var(--page); box-shadow: 0 3px 8px rgb(41 39 36 / 4%); }
 .diagram-panel, .document-sheet { padding: 1rem; }
 .diagram-label { display: flex; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.75rem; font-weight: 600; line-height: 1.4; }
-.diagram-icon, .agent-icon, .storage-icon { flex-shrink: 0; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
+.diagram-icon, .agent-icon { flex-shrink: 0; width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .flow-connectors { display: block; width: 100%; fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; overflow: visible; transform-origin: top; }
 .diagram-defs path { fill: none; stroke: var(--accent); stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .diagram-mobile { display: none; }
 .project-visual figcaption { margin-top: 1rem; text-align: center; font-size: 0.75rem; color: var(--muted); line-height: 1.5; }
 .project-visual code { font-family: var(--font-mono); font-size: 0.8125rem; }
 
-/* A vertical sequence keeps roles and the controller's budget readable
-   at every width. Existing reveal steps supply the one-time entrance. */
-.orchestrator-evidence { margin-top: 1.25rem; color: var(--muted); font-size: 0.875rem; }
+/* Scroll changes only decorative emphasis and tracing, never stage labels. */
+.orchestrator-visual figcaption { margin: 0 0 0.85rem; text-align: left; }
+[data-orchestrator-stage] { position: relative; }
+.flow-highlight { position: absolute; inset: -1px; border: 2px solid var(--accent); border-left-width: 5px; border-radius: inherit; opacity: 0; pointer-events: none; }
+.orchestrator-evidence { grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.875rem; line-height: 1.6; }
+.orchestrator-evidence h4 { grid-column: 1 / -1; margin: 0 0 0.25rem; color: var(--ink); font-size: 0.8125rem; font-weight: 750; }
 .orchestrator-evidence p + p { margin-top: 0.75rem; }
+.orchestrator-flow { padding: 1rem; }
+.orchestrator-flow .diagram-panel { padding: 0.75rem; }
+.orchestrator-flow .orchestrator-budget { margin-top: 0.5rem; padding-top: 0.5rem; }
+@media (min-width: 1200px) {
+  .orchestrator-project .project-layout { grid-template-columns: 0.9fr 1.15fr 1fr; align-items: start; }
+  .orchestrator-project .project-copy { padding-top: 0.25rem; }
+  .orchestrator-flow { padding: 0.75rem; }
+  .orchestrator-flow .diagram-panel { padding: 0.625rem; }
+  .orchestrator-flow .orchestrator-connector { height: 16px; }
+  .orchestrator-flow .orchestrator-gate { padding-block: 0; }
+  .orchestrator-flow .orchestrator-records { margin-top: 0.75rem; }
+  .orchestrator-evidence { grid-column: auto; display: block; padding: 0.25rem 0 0 1.25rem; border-top: 0; border-left: 1px solid var(--line); }
+  .orchestrator-evidence h4 { margin-bottom: 1rem; }
+  .git-flow { padding: 1rem; }
+  .git-flow .diagram-panel, .git-flow .document-sheet { padding: 0.75rem; }
+  .git-visual figcaption { margin-top: 0.5rem; }
+}
 .orchestrator-stage p { margin-top: 0.4rem; font-size: 0.875rem; line-height: 1.5; font-weight: 600; }
 .orchestrator-connector { height: 24px; }
 .orchestrator-gate { display: flex; flex-direction: column; align-items: center; gap: 0.25rem; padding-block: 0.35rem; }
@@ -169,62 +221,66 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 .answer-points dd { font-size: 0.875rem; line-height: 1.55; }
 .answer-sources { max-width: none; margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.75rem; line-height: 1.6; }
 .answer-sources cite { font-family: var(--font-mono); font-style: normal; }
-
-/* Sessions and the file sit on one rail; their output gets the full width. */
-.study-inputs { position: relative; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.session-group, .storage-group { display: flex; min-width: 0; padding-inline: 0.75rem; }
-.sessions-panel, .storage-file { flex: 1; }
-.session-list { display: grid; gap: 0.35rem; margin-top: 0.75rem; font-size: 0.875rem; font-variant-numeric: tabular-nums; }
-.session-list li { display: flex; justify-content: space-between; gap: 0.5rem; }
-.session-list li span:last-child { white-space: nowrap; }
-.storage-file { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; padding: 1rem 0.75rem; border-radius: 2px; }
-.storage-icon { width: 38px; height: 38px; }
-.storage-file code { font-weight: 600; }
-.storage-connector.diagram-desktop { position: absolute; top: 0; left: calc(50% - 0.75rem); width: 1.5rem; height: 100%; }
-.study-result-connector { height: 36px; }
-.study-result { background: var(--white); }
-.study-bars { display: grid; gap: 1rem; margin-top: 1rem; }
-.bar-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0.4rem 1rem; font-size: 0.875rem; }
-.bar-row dd { display: contents; }
-.bar-row dd > span { font-weight: 700; font-variant-numeric: tabular-nums; }
-.bar-fill { grid-column: 1 / -1; width: var(--bar-width); height: 8px; border-radius: 0 2px 2px 0; background: var(--ink); }
-.study-total { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; max-width: none; margin-top: 1.25rem; padding-top: 0.75rem; border-top: 1px solid var(--line); font-size: 0.8125rem; }
-.study-total strong { font-size: 1.75rem; font-weight: 650; letter-spacing: -0.035em; line-height: 1.2; }
-.study-total strong span { font-size: 0.8125rem; font-weight: 500; letter-spacing: 0; }
+.featured-project .git-join { height: 28px; }
+.featured-project .result-connector { height: 24px; }
+.featured-project .agent-core { padding-block: 0.625rem; }
+.featured-project .question-panel p, .featured-project .note-files { margin-top: 0.5rem; }
+.featured-project .answer-sources { margin-top: 0.75rem; }
 
 /* Narrow figures become vertical, with a continuous side rail for the two
    independent Git inputs. Text stays full size; only the paths change. */
 @media (max-width: 1100px) {
   .diagram-desktop { display: none; }
   .diagram-mobile { display: block; }
-  .git-inputs, .study-inputs { grid-template-columns: minmax(0, 1fr); }
+  .git-inputs { grid-template-columns: minmax(0, 1fr); }
   .input-branch { position: relative; display: grid; grid-template-columns: 24px minmax(0, 1fr); padding: 0; }
   .input-rail { position: absolute; top: 0; left: 0; width: 24px; height: 100%; }
   .input-branch > :is(.question-panel, .docs-stack) { grid-column: 2; margin-block: 0.5rem; }
   .docs-stack { margin-right: 6px; }
   .answer-points { grid-template-columns: minmax(0, 1fr); gap: 0.75rem; }
-  .session-group, .storage-group { padding: 0; }
-  .storage-group { width: min(100%, 13rem); justify-self: center; }
-  .storage-connector.diagram-mobile { height: 32px; }
 }
-.development-note { max-width: 65ch; margin-top: 3.5rem; color: var(--muted); font-size: 0.8125rem; }
+.development-note { max-width: 65ch; margin-top: 1.5rem; color: var(--muted); font-size: 0.8125rem; }
+.projects-section + .skills-section { padding-top: clamp(2rem, 4vw, 3rem); }
 
-/* Skills: open rows for tools, a separate area for ongoing learning. */
-.skills-layout { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: clamp(2rem, 7vw, 7rem); }
-.skills-list { display: grid; gap: 2rem; }
-.skill-row { padding-bottom: 2rem; border-bottom: 1px solid var(--line); }
-.skill-row:last-child { padding-bottom: 0; border-bottom: 0; }
-.skill-row dt { margin-bottom: 0.5rem; font-size: 0.8125rem; color: var(--muted); }
-.skill-row strong { font-size: clamp(1.375rem, 2.3vw, 2rem); font-weight: 600; letter-spacing: -0.04em; line-height: 1.3; }
-.skill-row p { margin-top: 0.6rem; color: var(--muted); font-size: 0.875rem; }
-.learning-facts { align-self: start; }
-.learning-aws { padding-left: 1.25rem; border-left: 2px solid var(--accent); }
-.learning-facts dt { color: var(--muted); font-size: 0.8125rem; margin-bottom: 0.5rem; }
-.learning-facts dd > span { display: block; font-size: 0.875rem; color: var(--muted); }
-.learning-aws strong { display: block; margin-bottom: 0.35rem; font-size: 1.5rem; line-height: 1.3; letter-spacing: -0.03em; font-weight: 600; }
-.learning-languages { margin-top: 2rem; padding-left: 1.375rem; }
-.learning-languages dt, .learning-languages dd > span { color: var(--muted); }
-.learning-languages strong { display: block; font-size: 1.125rem; margin-bottom: 0.3rem; font-weight: 650; }
+/* A working toolkit: two languages, supporting tools, ongoing study. */
+.tool-workbench { border: 1px solid var(--line); border-radius: 12px; background: var(--page); box-shadow: 0 16px 36px rgb(41 39 36 / 6%); }
+.tool-bar { color: var(--muted); font-size: 0.8125rem; }
+.tool-languages { display: grid; grid-template-columns: 1fr 1fr; }
+.tool-group { display: flex; align-items: flex-start; gap: 1rem; min-width: 0; padding: clamp(1.25rem, 2.4vw, 2rem); }
+.tool-group > div { min-width: 0; }
+.tool-group h3 { font-size: 1rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.4; }
+.tool-group p:not(.tool-label) { margin-top: 0.65rem; color: var(--muted); font-size: 0.875rem; line-height: 1.7; }
+.tool-primary + .tool-primary { border-left: 1px solid var(--line); }
+.tool-primary h3 { margin-top: 0.4rem; font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 600; letter-spacing: -0.05em; }
+.tool-icon { flex-shrink: 0; opacity: 0.75; }
+.tool-primary .tool-icon { margin-top: 0.15rem; }
+.tool-label { display: block; color: var(--muted); font-size: 0.75rem; }
+.tool-support { display: grid; grid-template-columns: 1fr 1fr 0.8fr; border-block: 1px solid var(--line); }
+.tool-support .tool-group + .tool-group { border-left: 1px solid var(--line); }
+.tool-items { margin-top: 1.25rem; font-size: 0.8125rem; }
+.tool-items > div + div { margin-top: 1rem; }
+.tool-items dt { font-weight: 700; }
+.tool-items dd { margin-top: 0.15rem; color: var(--muted); }
+.tool-learning { background: var(--wash); }
+.tool-learning h3 { margin-top: 0.45rem; font-size: 1.5rem; }
+.tool-learning .tool-label { color: var(--accent); }
+.tool-group:hover { background: #f0ece5; }
+.tool-notes { display: grid; grid-template-columns: 1.8fr 1fr; gap: 2rem; padding: clamp(1.25rem, 2.4vw, 2rem); }
+.work-approach { font-size: 0.875rem; }
+.tool-spoken { font-size: 0.8125rem; color: var(--muted); }
+.tool-spoken strong { display: block; margin-top: 0.4rem; color: var(--ink); font-size: 0.875rem; }
+@media (prefers-reduced-motion: no-preference) {
+  .tool-group { transition: background-color 180ms ease; }
+}
+@media (max-width: 767px) {
+  .tool-languages, .tool-support, .tool-notes { grid-template-columns: minmax(0, 1fr); }
+  .tool-primary + .tool-primary, .tool-support .tool-group + .tool-group { border-left: 0; border-top: 1px solid var(--line); }
+  .orchestrator-evidence { grid-template-columns: minmax(0, 1fr); }
+  .project-bar { gap: 0.5rem; padding-inline: 1rem; }
+  .project-number { margin-left: auto; order: 1; }
+  .window-dots { gap: 4px; margin-right: 0.25rem; }
+  .window-dots i { width: 8px; height: 8px; }
+}
 
 /* Contact closes with one clear invitation and the original email address. */
 .contact-section { background: var(--wash); }
@@ -240,11 +296,11 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 @media (max-width: 900px) {
   .header-tools { gap: 0.5rem 1rem; }
   .nav-list { gap: 0.25rem 1.25rem; }
-  .project { gap: 2rem; }
+  .project-layout { gap: 2rem; }
   .contact-layout { gap: 2rem; }
 }
 @media (max-width: 767px) {
-  .about-layout, .project, .skills-layout, .contact-layout { grid-template-columns: minmax(0, 1fr); }
+  .about-layout, .project-layout, .contact-layout { grid-template-columns: minmax(0, 1fr); }
   .intro-lead { max-width: 36ch; }
   .hero { padding-bottom: 2rem; }
   .hero-name { font-size: clamp(5rem, 21vw, 9rem); }
@@ -254,8 +310,6 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
   .hero-description { max-width: 30ch; }
   .hero h1 { padding-bottom: 2rem; }
   .hero-bottom { padding-top: 0; }
-  .learning-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
-  .learning-languages { margin-top: 0; padding: 1rem 0; }
   .email-link { font-size: clamp(0.875rem, 3.8vw, 1.25rem); }
 }
 @media (max-width: 639px) {
@@ -268,8 +322,6 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
   .nav-list a { font-size: 0.75rem; }
   .hero { padding-top: 1.5rem; }
   .hero h1 { margin-block: auto; }
-  .learning-facts { grid-template-columns: minmax(0, 1fr); }
-  .learning-languages { padding: 0; }
 }
 
 /* Underline and arrow feedback never moves the link's hit area. */
@@ -291,24 +343,39 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 }
 .nav-list a::after { transform: scaleX(0); }
 a:is(:hover, :focus-visible)::after { transform: scaleX(1); opacity: 1; }
+/* CSS owns underline pseudo-elements. Anime.js alone owns node transforms,
+   opacity, masks, control feedback and SVG drawing. Nothing is pre-hidden. */
 @media (prefers-reduced-motion: no-preference) {
-  a::after { transition: transform 220ms ease, opacity 220ms ease; }
-  .link-arrow { transition: transform 180ms ease; }
-  a:is(:hover, :focus-visible) .link-arrow { transform: translate(2px, -2px); }
-  a:is(:hover, :focus-visible) .arrow-down { transform: translateY(3px); }
-  a:is(:hover, :focus-visible) .arrow-up { transform: translateY(-3px); }
+  a::after { transition: transform 200ms ease, opacity 200ms ease; }
 }
-/* Entrances are finite Web Animations created only after initialization.
-   No CSS class pre-hides content, so script/API failures leave a readable page. */
-@media (prefers-reduced-motion: reduce) {
-  /* Show the final state immediately, even before the media-query change
-     event reaches JavaScript and cancels an in-flight Web Animation. */
-  .name-text, .hero-description, .project-cta, .site-header nav,
-  .language-switch, [data-reveal], [data-flow-step] {
+.section-heading { position: relative; display: flow-root; }
+.section-rule { position: absolute; left: 0; right: 0; height: 1px; background: var(--line); transform-origin: left; pointer-events: none; }
+.section-rule { bottom: 1rem; }
+.hero { transform-origin: 50% 35%; }
+.diagram-surface { transform-origin: 50% 25%; }
+.flow-trace { stroke-width: 3; }
+.has-scroll-flow .orchestrator-connector > line:not(.flow-trace) { opacity: 0.3; }
+/* Keyboard focus and print must never be clipped by an entrance. */
+.hero:focus-within { transform: none !important; opacity: 1 !important; }
+@media (prefers-reduced-motion: reduce), print {
+  .hero, .name-text, .hero-description, .project-cta, .site-header nav,
+  .language-switch, .section-title, .section-rule, .project-window,
+  .project h3, .project-summary, .diagram-surface, .intro-lead,
+  .tool-group, .tool-notes, .contact-heading, .contact-body,
+  .link-arrow, .language-switch button {
     opacity: 1 !important;
     transform: none !important;
+    clip-path: none !important;
   }
   .name-mask.is-masking { clip-path: none; }
+  .flow-highlight { opacity: 0 !important; }
+  .flow-trace { display: none; }
+  .has-scroll-flow .orchestrator-connector > line:not(.flow-trace) { opacity: 1; }
+  .project-sequence.is-stacked { height: auto; }
+  .is-stacked .project-stage { position: static; }
+  .is-stacked .project-stack { display: block; overflow: visible; }
+  .is-stacked .project-slot:nth-child(2) { overflow: visible; }
+  .is-stacked .project-slot + .project-slot { margin-top: 2rem; }
 }
 @media print {
   .opening { min-height: auto; background: var(--page); color: var(--ink); }
@@ -318,5 +385,7 @@ a:is(:hover, :focus-visible)::after { transform: scaleX(1); opacity: 1; }
   .hero-bottom { display: block; }
   .site-header, .skip-link, .project-cta { display: none; }
   .section-space { padding-block: 2rem; }
+  .flow-highlight { opacity: 0 !important; }
+  .orchestrator-connector { opacity: 1 !important; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }

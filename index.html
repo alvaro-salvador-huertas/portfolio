@@ -11,6 +11,7 @@
     <link rel="preload" href="assets/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
     <script src="language.js" defer></script>
+    <script src="assets/vendor/animejs/4.5.0/anime.umd.min.js" defer></script>
     <script src="motion.js" defer></script>
   </head>
   <body>
@@ -48,219 +49,217 @@
 
     <main id="main" tabindex="-1">
       <section class="about-section site-shell section-space" id="about" aria-labelledby="about-title">
-        <h2 class="section-title" id="about-title" data-reveal="title" data-i18n="section.about">About</h2>
+        <div class="section-heading">
+          <h2 class="section-title" id="about-title" data-i18n="section.about">About</h2>
+          <span class="section-rule" aria-hidden="true"></span>
+        </div>
         <div class="about-layout">
-          <p class="intro-lead" data-reveal="body" data-i18n="about.intro">I’m a third-year Computer Engineering student at the University of Granada. I’m passionate about building AI systems and understanding how they work.</p>
-          <p class="intro-copy" id="focus-title" data-reveal="body" data-i18n="about.focus">I use C++ in my coursework and Python in my own projects. My current focus is AI agents: how they use tools, work together, and how to evaluate their results.</p>
+          <p class="intro-lead" data-i18n="about.intro">I’m a third-year Computer Engineering student at the University of Granada. I’m passionate about building AI systems and understanding how they work.</p>
+          <p class="intro-copy" id="focus-title" data-i18n="about.focus">I use C++ in my coursework and Python in my own projects. My current focus is AI agents: how they use tools, work together, and how to evaluate their results.</p>
         </div>
       </section>
 
       <section class="projects-section section-space" id="projects" aria-labelledby="projects-title">
         <div class="site-shell">
-          <h2 class="section-title" id="projects-title" data-reveal="title" data-i18n="section.projects">Projects</h2>
-          <article class="project orchestrator-project" aria-labelledby="orchestrator-title">
-            <div class="project-copy" data-reveal="project">
-              <p class="project-status" data-i18n="orchestrator.status">Evaluated prototype</p>
-              <h3 id="orchestrator-title">code-review-orchestrator</h3>
-              <p class="project-summary" data-i18n="orchestrator.summary">I built a Python controller that coordinates a developer agent, independent tests and a reviewer agent. It limits attempts and keeps logs to investigate the results.</p>
-              <div class="orchestrator-evidence">
-                <p data-i18n="orchestrator.results">Two small exercises, both approved on the first attempt: four real agent calls in total. One additional automatic correction is implemented and covered by simulations, but was not observed in this experiment.</p>
-                <p data-i18n="orchestrator.tests">The project’s 126 automated tests are separate from the candidate tests and those four real calls.</p>
+          <div class="project-sequence">
+            <div class="project-stage">
+              <div class="section-heading project-heading">
+                <h2 class="section-title" id="projects-title" data-i18n="section.projects">Projects</h2>
+                <span class="section-rule" aria-hidden="true"></span>
               </div>
-              <ul class="tech-list" aria-label="code-review-orchestrator technologies" data-i18n-aria-label="orchestrator.technologies">
-                <li>Python</li><li>Codex CLI</li><li>unittest</li><li>JSON</li>
-              </ul>
-              <ul class="project-links" aria-label="code-review-orchestrator resources" data-i18n-aria-label="orchestrator.resources">
-                <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator"><span data-i18n="repository">View repository</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
-                <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/evals/resultados-multicaso-2026-10-15.md" hreflang="es"><span data-i18n="evaluation.link">Evaluation &amp; limitations</span> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
-              </ul>
-            </div>
-            <figure class="project-visual orchestrator-visual" data-reveal="diagram" aria-labelledby="orchestrator-caption">
-              <!-- Simplified workflow, not a replay of an observed execution.
-                   A second attempt is conditional and consumes the remaining budget. -->
-              <svg class="diagram-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><marker id="orchestrator-tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="m1 1 6 3-6 3"/></marker></defs></svg>
-              <div class="diagram-surface orchestrator-flow">
-                <div class="diagram-panel orchestrator-stage" data-flow-step="0">
-                  <span class="diagram-label" data-i18n="orchestrator.developer">Developer agent</span>
-                  <p data-i18n="orchestrator.developerAction">Proposes a code change</p>
-                </div>
-                <svg class="flow-connectors orchestrator-connector" data-flow-step="1" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="24" marker-end="url(#orchestrator-tip)"/></svg>
-                <div class="diagram-panel orchestrator-stage" data-flow-step="2">
-                  <span class="diagram-label" data-i18n="orchestrator.independentTests">Independent tests</span>
-                  <p data-i18n="orchestrator.testsAction">Evaluate the candidate in a separate Python process</p>
-                </div>
-                <div class="orchestrator-gate" data-flow-step="3">
-                  <svg class="flow-connectors orchestrator-connector" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="24" marker-end="url(#orchestrator-tip)"/></svg>
-                  <span data-i18n="orchestrator.reviewGate">Only after tests pass</span>
-                </div>
-                <div class="diagram-panel orchestrator-stage" data-flow-step="4">
-                  <span class="diagram-label" data-i18n="orchestrator.reviewer">Reviewer agent</span>
-                  <p data-i18n="orchestrator.reviewerAction">Inspects the code and evidence</p>
-                </div>
-                <svg class="flow-connectors orchestrator-connector" data-flow-step="5" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="24" marker-end="url(#orchestrator-tip)"/></svg>
-                <div class="diagram-panel orchestrator-decision" data-flow-step="6">
-                  <span class="diagram-label" data-i18n="orchestrator.controller">Python controller’s decision</span>
-                  <p class="orchestrator-outcomes" data-i18n="orchestrator.decision">Approve, request a correction or stop</p>
-                  <p class="orchestrator-budget" data-i18n="orchestrator.budget">Up to 2 attempts in total. A correction needs remaining budget and valid evidence; technical errors stop the run.</p>
-                </div>
-                <p class="orchestrator-records" data-flow-step="7" data-i18n="orchestrator.records">Logs retained at each stage</p>
-              </div>
-              <figcaption id="orchestrator-caption" data-flow-step="8" data-i18n="orchestrator.caption">Illustrative workflow. It does not show a recorded run.</figcaption>
-            </figure>
-          </article>
-
-          <article class="project featured-project" aria-labelledby="git-docs-title">
-            <div class="project-copy" data-reveal="project">
-              <p class="project-status" data-i18n="git.status">AI agent prototype</p>
-              <h3 id="git-docs-title">git-docs-agent</h3>
-              <p class="project-summary" data-i18n="git.summary">I built this terminal assistant to answer Git questions using Codex CLI and local notes.</p>
-              <ul class="tech-list" aria-label="git-docs-agent technologies" data-i18n-aria-label="git.technologies">
-                <li>Python</li><li>Codex CLI</li><li>Markdown</li><li>unittest</li>
-              </ul>
-              <ul class="project-links" id="evaluation-title" aria-label="git-docs-agent resources" data-i18n-aria-label="git.resources">
-                <li><a href="https://github.com/alvaro-salvador-huertas/git-docs-agent"><span data-i18n="repository">View repository</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
-                <li><a href="https://github.com/alvaro-salvador-huertas/git-docs-agent/blob/main/evals/resultados-2026-10-13.md"><span data-i18n="evaluation.link">Evaluation &amp; limitations</span> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
-              </ul>
-            </div>
-            <figure class="project-visual git-visual" data-reveal="diagram">
-              <!-- Example paraphrased from docs/git-add.md and docs/git-commit.md,
-                   section "Qué hace". This is not a recorded agent response. -->
-              <svg class="diagram-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><marker id="git-tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="m1 1 6 3-6 3"/></marker></defs></svg>
-              <div class="diagram-surface git-flow">
-                <div class="git-inputs">
-                  <div class="input-branch">
-                    <svg class="flow-connectors input-rail diagram-mobile" data-flow-step="1" aria-hidden="true" focusable="false"><line x1="100%" y1="50%" x2="12" y2="50%"/><line x1="12" y1="50%" x2="12" y2="100%"/></svg>
-                    <div class="diagram-panel question-panel" data-flow-step="0">
-                      <div class="diagram-label"><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 11a7 7 0 0 1-7 7H7l-4 3V6a3 3 0 0 1 3-3h7a7 7 0 0 1 7 8Z"/><path d="M7 8h8M7 12h5"/></svg><span data-i18n="git.questionLabel">Question</span></div>
-                      <p data-i18n="git.question">How do git add and git commit differ?</p>
-                    </div>
-                  </div>
-                  <div class="input-branch">
-                    <svg class="flow-connectors input-rail diagram-mobile" data-flow-step="1" aria-hidden="true" focusable="false"><line x1="12" y1="0" x2="12" y2="100%"/><line x1="100%" y1="50%" x2="12" y2="50%"/></svg>
-                    <div class="docs-stack" data-flow-step="0">
-                      <div class="document-sheet">
-                        <p class="diagram-label" data-i18n="git.notes">Local notes</p>
-                        <ul class="note-files">
-                          <li><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg><code>git-add.md</code></li>
-                          <li><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg><code>git-commit.md</code></li>
+              <div class="project-stack">
+                <div class="project-slot">
+                  <article class="project project-window orchestrator-project" aria-labelledby="orchestrator-title">
+                    <header class="project-bar">
+                      <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                      <span class="project-number" aria-hidden="true">01</span>
+                      <h3 id="orchestrator-title">code-review-orchestrator</h3>
+                    </header>
+                    <div class="project-layout">
+                      <div class="project-copy">
+                        <p class="project-status" data-i18n="orchestrator.status">Evaluated prototype</p>
+                        <p class="project-summary" data-i18n="orchestrator.summary">I built a Python controller that coordinates a developer agent, independent tests and a reviewer agent. It limits attempts and keeps logs to investigate the results.</p>
+                        <ul class="tech-list" aria-label="code-review-orchestrator technologies" data-i18n-aria-label="orchestrator.technologies">
+                          <li>Python</li><li>Codex CLI</li><li>unittest</li><li>JSON</li>
+                        </ul>
+                        <ul class="project-links" aria-label="code-review-orchestrator resources" data-i18n-aria-label="orchestrator.resources">
+                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator"><span data-i18n="repository">View repository</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
+                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/evals/revisor/resultados-2026-10-16.md" hreflang="es"><span data-i18n="orchestrator.reviewerEvaluation">Reviewer evaluation</span> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
+                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/evals/resultados-multicaso-2026-10-15.md" hreflang="es"><span data-i18n="orchestrator.multicaseEvaluation">Multi-case evaluation</span> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
                         </ul>
                       </div>
+                      <figure class="project-visual orchestrator-visual" aria-labelledby="orchestrator-caption">
+                        <figcaption id="orchestrator-caption" data-i18n="orchestrator.caption">Illustrative workflow. It does not show a recorded run.</figcaption>
+                        <!-- Simplified workflow, not a replay of an observed execution.
+                             A second attempt is conditional and consumes the remaining budget. -->
+                        <svg class="diagram-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><marker id="orchestrator-tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="m1 1 6 3-6 3"/></marker></defs></svg>
+                        <div class="diagram-surface orchestrator-flow">
+                          <div class="diagram-panel orchestrator-stage" data-orchestrator-stage>
+                            <span class="flow-highlight" aria-hidden="true"></span>
+                            <span class="diagram-label" data-i18n="orchestrator.developer">Developer agent</span>
+                            <p data-i18n="orchestrator.developerAction">Proposes a code change</p>
+                          </div>
+                          <svg class="flow-connectors orchestrator-connector" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="100%" marker-end="url(#orchestrator-tip)"/></svg>
+                          <div class="diagram-panel orchestrator-stage" data-orchestrator-stage>
+                            <span class="flow-highlight" aria-hidden="true"></span>
+                            <span class="diagram-label" data-i18n="orchestrator.independentTests">Independent tests</span>
+                            <p data-i18n="orchestrator.testsAction">Evaluate the candidate in a separate Python process</p>
+                          </div>
+                          <div class="orchestrator-gate">
+                            <svg class="flow-connectors orchestrator-connector" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="100%" marker-end="url(#orchestrator-tip)"/></svg>
+                            <span data-i18n="orchestrator.reviewGate">Only with passing tests and valid evidence</span>
+                          </div>
+                          <div class="diagram-panel orchestrator-stage" data-orchestrator-stage>
+                            <span class="flow-highlight" aria-hidden="true"></span>
+                            <span class="diagram-label" data-i18n="orchestrator.reviewer">Reviewer agent</span>
+                            <p data-i18n="orchestrator.reviewerAction">Inspects the code and evidence</p>
+                          </div>
+                          <svg class="flow-connectors orchestrator-connector" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="100%" marker-end="url(#orchestrator-tip)"/></svg>
+                          <div class="diagram-panel orchestrator-decision" data-orchestrator-stage>
+                            <span class="flow-highlight" aria-hidden="true"></span>
+                            <span class="diagram-label" data-i18n="orchestrator.controller">Python controller’s decision</span>
+                            <p class="orchestrator-outcomes" data-i18n="orchestrator.decision">Approve, request a correction or stop</p>
+                            <p class="orchestrator-budget" data-i18n="orchestrator.budget">Up to 2 attempts in total. A correction needs remaining budget and valid evidence; technical errors stop the run.</p>
+                          </div>
+                          <p class="orchestrator-records" data-i18n="orchestrator.records">Logs retained at each stage</p>
+                        </div>
+                      </figure>
+                        <div class="orchestrator-evidence">
+                          <h4 data-i18n="orchestrator.evidenceTitle">Evidence &amp; limits</h4>
+                          <p data-i18n="orchestrator.reviews">Four real reviews of prepared candidates: two defects detected beyond the available tests and two justified approvals. The findings were checked automatically by Codex.</p>
+                          <p data-i18n="orchestrator.results">In a separate experiment, two small exercises were approved on the first attempt: four real agent calls across development and review.</p>
+                          <p data-i18n="orchestrator.tests">153 automated tests with simulated agents check the controller, not model quality.</p>
+                          <p data-i18n="orchestrator.limits">These controlled cases do not establish general reliability. A second repair attempt is implemented and covered by simulations, but has not been observed with the real model.</p>
+                        </div>
                     </div>
-                  </div>
+                  </article>
                 </div>
-                <svg class="flow-connectors git-join diagram-desktop" data-flow-step="1" aria-hidden="true" focusable="false"><line x1="25%" y1="0" x2="25%" y2="18"/><line x1="75%" y1="0" x2="75%" y2="18"/><line x1="25%" y1="18" x2="75%" y2="18"/><line x1="50%" y1="18" x2="50%" y2="36" marker-end="url(#git-tip)"/></svg>
-                <svg class="flow-connectors git-join diagram-mobile" data-flow-step="1" aria-hidden="true" focusable="false"><line x1="12" y1="0" x2="12" y2="18"/><line x1="12" y1="18" x2="50%" y2="18"/><line x1="50%" y1="18" x2="50%" y2="36" marker-end="url(#git-tip)"/></svg>
-                <div class="agent-core" data-flow-step="2">
-                  <svg class="agent-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m6 9 3 3-3 3m6 0h5"/></svg>
-                  <div><span class="diagram-label" data-i18n="git.agent">Agent</span><strong>Codex CLI</strong></div>
-                </div>
-                <svg class="flow-connectors result-connector" data-flow-step="3" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="32" marker-end="url(#git-tip)"/></svg>
-                <div class="diagram-panel answer-panel" data-flow-step="4">
-                  <div class="diagram-label"><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 3h16v15H9l-5 3Z"/><path d="M8 8h8M8 12h5"/></svg><span data-i18n="git.answer">Answer with sources</span></div>
-                  <dl class="answer-points">
-                    <div><dt><code>git add</code></dt><dd data-i18n="git.addAnswer">Stages changes in the index.</dd></div>
-                    <div><dt><code>git commit</code></dt><dd data-i18n="git.commitAnswer">Creates a local commit from staged changes.</dd></div>
-                  </dl>
-                  <p class="answer-sources"><span data-i18n="git.sources">Sources</span>: <cite>git-add.md</cite><span aria-hidden="true"> / </span><cite>git-commit.md</cite></p>
-                </div>
-              </div>
-              <figcaption data-flow-step="5" data-i18n="git.caption">Illustrative workflow with an example answer.</figcaption>
-            </figure>
-          </article>
 
-          <article class="project foundations-project" aria-labelledby="carrera-title">
-            <div class="project-copy" data-reveal="project">
-              <p class="project-status" data-i18n="carrera.status">Python practice</p>
-              <h3 id="carrera-title">carrera-tech</h3>
-              <p class="project-summary" data-i18n="carrera.summary">This is where I keep my Python exercises and a study log for recording sessions and reviewing them by subject.</p>
-              <ul class="tech-list" aria-label="carrera-tech technologies" data-i18n-aria-label="carrera.technologies">
-                <li>Python</li><li>JSON</li><li data-i18n="carrera.tests">Automated tests</li>
-              </ul>
-              <ul class="project-links" aria-label="carrera-tech resources" data-i18n-aria-label="carrera.resources">
-                <li><a href="https://github.com/alvaro-salvador-huertas/carrera-tech"><span data-i18n="repository">View repository</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
-              </ul>
-            </div>
-            <figure class="project-visual study-visual" data-reveal="diagram">
-              <!-- User-supplied sample sessions: 20 + 15 = 35; 35 + 30 = 65.
-                   Both bars use the same scale, with no invented live data. -->
-              <svg class="diagram-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><marker id="study-tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="m1 1 6 3-6 3"/></marker></defs></svg>
-              <div class="diagram-surface study-flow">
-                <div class="study-inputs">
-                  <div class="session-group">
-                    <div class="diagram-panel sessions-panel" data-flow-step="0">
-                      <div class="diagram-label"><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-i18n="carrera.sessions">Study sessions</span></div>
-                      <ul class="session-list">
-                        <li><span>Python</span><span>20 min</span></li>
-                        <li><span>Python</span><span>15 min</span></li>
-                        <li><span data-i18n="carrera.networks">Networks</span><span>30 min</span></li>
-                      </ul>
+                <div class="project-slot">
+                  <article class="project project-window featured-project" aria-labelledby="git-docs-title">
+                    <header class="project-bar">
+                      <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                      <span class="project-number" aria-hidden="true">02</span>
+                      <h3 id="git-docs-title">git-docs-agent</h3>
+                    </header>
+                    <div class="project-layout">
+                      <div class="project-copy">
+                        <p class="project-status" data-i18n="git.status">AI agent prototype</p>
+                        <p class="project-summary" data-i18n="git.summary">I built this terminal assistant to answer Git questions using Codex CLI and local notes.</p>
+                        <ul class="tech-list" aria-label="git-docs-agent technologies" data-i18n-aria-label="git.technologies">
+                          <li>Python</li><li>Codex CLI</li><li>Markdown</li><li>unittest</li>
+                        </ul>
+                        <ul class="project-links" id="evaluation-title" aria-label="git-docs-agent resources" data-i18n-aria-label="git.resources">
+                          <li><a href="https://github.com/alvaro-salvador-huertas/git-docs-agent"><span data-i18n="repository">View repository</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
+                          <li><a href="https://github.com/alvaro-salvador-huertas/git-docs-agent/blob/main/evals/resultados-2026-10-13.md"><span data-i18n="evaluation.link">Evaluation &amp; limitations</span> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
+                        </ul>
+                      </div>
+                      <figure class="project-visual git-visual">
+                        <!-- Example paraphrased from docs/git-add.md and docs/git-commit.md,
+                             section "Qué hace". This is not a recorded agent response. -->
+                        <svg class="diagram-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><marker id="git-tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="m1 1 6 3-6 3"/></marker></defs></svg>
+                        <div class="diagram-surface git-flow">
+                          <div class="git-inputs">
+                            <div class="input-branch">
+                              <svg class="flow-connectors input-rail diagram-mobile" aria-hidden="true" focusable="false"><line x1="100%" y1="50%" x2="12" y2="50%"/><line x1="12" y1="50%" x2="12" y2="100%"/></svg>
+                              <div class="diagram-panel question-panel">
+                                <div class="diagram-label"><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 11a7 7 0 0 1-7 7H7l-4 3V6a3 3 0 0 1 3-3h7a7 7 0 0 1 7 8Z"/><path d="M7 8h8M7 12h5"/></svg><span data-i18n="git.questionLabel">Question</span></div>
+                                <p data-i18n="git.question">How do git add and git commit differ?</p>
+                              </div>
+                            </div>
+                            <div class="input-branch">
+                              <svg class="flow-connectors input-rail diagram-mobile" aria-hidden="true" focusable="false"><line x1="12" y1="0" x2="12" y2="100%"/><line x1="100%" y1="50%" x2="12" y2="50%"/></svg>
+                              <div class="docs-stack">
+                                <div class="document-sheet">
+                                  <p class="diagram-label" data-i18n="git.notes">Local notes</p>
+                                  <ul class="note-files">
+                                    <li><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg><code>git-add.md</code></li>
+                                    <li><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg><code>git-commit.md</code></li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <svg class="flow-connectors git-join diagram-desktop" aria-hidden="true" focusable="false"><line x1="25%" y1="0" x2="25%" y2="50%"/><line x1="75%" y1="0" x2="75%" y2="50%"/><line x1="25%" y1="50%" x2="75%" y2="50%"/><line x1="50%" y1="50%" x2="50%" y2="100%" marker-end="url(#git-tip)"/></svg>
+                          <svg class="flow-connectors git-join diagram-mobile" aria-hidden="true" focusable="false"><line x1="12" y1="0" x2="12" y2="50%"/><line x1="12" y1="50%" x2="50%" y2="50%"/><line x1="50%" y1="50%" x2="50%" y2="100%" marker-end="url(#git-tip)"/></svg>
+                          <div class="agent-core">
+                            <svg class="agent-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="2" y="4" width="20" height="16" rx="3"/><path d="m6 9 3 3-3 3m6 0h5"/></svg>
+                            <div><span class="diagram-label" data-i18n="git.agent">Agent</span><strong>Codex CLI</strong></div>
+                          </div>
+                          <svg class="flow-connectors result-connector" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="100%" marker-end="url(#git-tip)"/></svg>
+                          <div class="diagram-panel answer-panel">
+                            <div class="diagram-label"><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 3h16v15H9l-5 3Z"/><path d="M8 8h8M8 12h5"/></svg><span data-i18n="git.answer">Answer with sources</span></div>
+                            <dl class="answer-points">
+                              <div><dt><code>git add</code></dt><dd data-i18n="git.addAnswer">Stages changes in the index.</dd></div>
+                              <div><dt><code>git commit</code></dt><dd data-i18n="git.commitAnswer">Creates a local commit from staged changes.</dd></div>
+                            </dl>
+                            <p class="answer-sources"><span data-i18n="git.sources">Sources</span>: <cite>git-add.md</cite><span aria-hidden="true"> / </span><cite>git-commit.md</cite></p>
+                          </div>
+                        </div>
+                        <figcaption data-i18n="git.caption">Illustrative workflow with an example answer.</figcaption>
+                      </figure>
                     </div>
-                  </div>
-                  <svg class="flow-connectors storage-connector diagram-desktop" data-flow-step="1" aria-hidden="true" focusable="false"><line x1="0" y1="50%" x2="100%" y2="50%" marker-end="url(#study-tip)"/></svg>
-                  <svg class="flow-connectors storage-connector diagram-mobile" data-flow-step="1" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="32" marker-end="url(#study-tip)"/></svg>
-                  <div class="storage-group">
-                    <div class="storage-file" data-flow-step="2">
-                      <svg class="storage-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
-                      <span class="diagram-label" data-i18n="carrera.storage">Save sessions</span>
-                      <code>sesiones.json</code>
-                    </div>
-                  </div>
-                </div>
-                <svg class="flow-connectors study-result-connector diagram-desktop" data-flow-step="3" aria-hidden="true" focusable="false"><line x1="75%" y1="0" x2="75%" y2="18"/><line x1="75%" y1="18" x2="50%" y2="18"/><line x1="50%" y1="18" x2="50%" y2="36" marker-end="url(#study-tip)"/></svg>
-                <svg class="flow-connectors study-result-connector diagram-mobile" data-flow-step="3" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="36" marker-end="url(#study-tip)"/></svg>
-                <div class="diagram-panel study-result" data-flow-step="4">
-                  <div class="diagram-label"><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 4v16h17M8 15v-4M13 15V7M18 15v-6"/></svg><span data-i18n="carrera.summaryLabel">Summary by subject</span></div>
-                  <dl class="study-bars">
-                    <div class="bar-row"><dt>Python</dt><dd><span>35 min</span><div class="bar-fill" style="--bar-width: 100%" aria-hidden="true"></div></dd></div>
-                    <div class="bar-row"><dt data-i18n="carrera.networks">Networks</dt><dd><span>30 min</span><div class="bar-fill" style="--bar-width: 85.7142857143%" aria-hidden="true"></div></dd></div>
-                  </dl>
-                  <p class="study-total"><span data-i18n="carrera.total">Total</span><strong>65 <span>min</span></strong></p>
+                  </article>
                 </div>
               </div>
-              <figcaption data-flow-step="5" data-i18n="carrera.caption">Illustrative workflow. Sample data.</figcaption>
-            </figure>
-          </article>
-          <p class="development-note" data-reveal="body" data-i18n="development">I use Codex to help develop these projects. I review the code and check how it behaves.</p>
+            </div>
+          </div>
+
+          <p class="development-note" data-i18n="development">I use Codex to help develop these projects. I review the code and check how it behaves.</p>
         </div>
       </section>
 
       <section class="skills-section site-shell section-space" id="skills" aria-labelledby="skills-title">
-        <h2 class="section-title" id="skills-title" data-reveal="title" data-i18n="section.skills">Skills</h2>
-        <div class="skills-layout">
-          <dl class="skills-list">
-            <div class="skill-row" data-reveal="skill">
-              <dt data-i18n="skills.programming">Programming</dt>
-              <dd><strong data-i18n="skills.cppPython">C++ &amp; Python</strong><p data-i18n="skills.programmingDetail">C++ for coursework; Python for personal projects.</p></dd>
-            </div>
-            <div class="skill-row" data-reveal="skill">
-              <dt data-i18n="skills.databases">Databases</dt>
-              <dd><strong data-i18n="skills.mysqlOracle">MySQL &amp; Oracle SQL Developer</strong><p data-i18n="skills.databasesDetail">Relational databases with MySQL; database development with Oracle SQL Developer.</p></dd>
-            </div>
-            <div class="skill-row" data-reveal="skill">
-              <dt data-i18n="skills.workflow">Development tools</dt>
-              <dd><strong data-i18n="skills.tools">Linux, Git &amp; GitHub</strong><p data-i18n="skills.workflowDetail">My working environment and tools for version control.</p></dd>
-            </div>
-          </dl>
-          <dl class="learning-facts" data-reveal="body">
-            <div class="learning-aws">
-              <dt data-i18n="learning.title">Currently learning</dt>
-              <dd><strong>AWS</strong><span data-i18n="learning.aws">Introductory training.</span></dd>
-            </div>
-            <div class="learning-languages">
-              <dt data-i18n="languages.title">Languages</dt>
-              <dd><strong data-i18n="languages.names">Spanish &amp; English</strong><span data-i18n="languages.level">Native proficiency in both</span></dd>
-            </div>
-          </dl>
+        <div class="section-heading">
+          <h2 class="section-title" id="skills-title" data-i18n="skills.title">What I build with</h2>
+          <span class="section-rule" aria-hidden="true"></span>
+        </div>
+        <div class="skills-layout tool-workbench">
+          <div class="tool-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span data-i18n="skills.workspace">My working toolkit</span></div>
+          <div class="tool-languages">
+            <article class="tool-group tool-primary">
+              <img class="tool-icon" src="assets/vendor/tabler-icons/brand-cpp.svg" width="32" height="32" alt="">
+              <div><p class="tool-label" data-i18n="skills.academic">Academic foundation</p><h3>C++</h3><p data-i18n="skills.cppDetail">My language for Computer Engineering coursework: working through problems and understanding how programs behave.</p></div>
+            </article>
+            <article class="tool-group tool-primary">
+              <img class="tool-icon" src="assets/vendor/tabler-icons/brand-python.svg" width="32" height="32" alt="">
+              <div><p class="tool-label" data-i18n="skills.projects">Personal projects</p><h3>Python</h3><p data-i18n="skills.pythonDetail">I use it to develop git-docs-agent and code-review-orchestrator: tools, tests and coordination between agents.</p></div>
+            </article>
+          </div>
+          <div class="tool-support">
+            <article class="tool-group">
+              <img class="tool-icon" src="assets/vendor/tabler-icons/database.svg" width="24" height="24" alt="">
+              <div><h3 data-i18n="skills.databases">Databases</h3><dl class="tool-items">
+                <div><dt>MySQL</dt><dd data-i18n="skills.mysqlDetail">Relational databases.</dd></div>
+                <div><dt>Oracle SQL Developer</dt><dd data-i18n="skills.oracleDetail">A tool for database development.</dd></div>
+              </dl></div>
+            </article>
+            <article class="tool-group">
+              <img class="tool-icon" src="assets/vendor/tabler-icons/git-branch.svg" width="24" height="24" alt="">
+              <div><h3 data-i18n="skills.workflow">Development tools</h3><dl class="tool-items">
+                <div><dt>Linux</dt><dd data-i18n="skills.linuxDetail">My working environment.</dd></div>
+                <div><dt>Git · GitHub</dt><dd data-i18n="skills.gitDetail">Version control and project repositories.</dd></div>
+              </dl></div>
+            </article>
+            <article class="tool-group tool-learning">
+              <img class="tool-icon" src="assets/vendor/tabler-icons/cloud.svg" width="24" height="24" alt="">
+              <div><p class="tool-label" data-i18n="learning.title">Currently learning</p><h3>AWS</h3><p data-i18n="learning.aws">Introductory training.</p></div>
+            </article>
+          </div>
+          <div class="tool-notes">
+            <p class="work-approach" data-i18n="skills.approach">I break problems down and put what I learn into my own projects. I like to make my reasoning clear, listen to other perspectives and work through solutions together.</p>
+            <div class="tool-spoken"><span class="tool-label" data-i18n="languages.title">Languages</span><strong data-i18n="languages.names">Spanish &amp; English</strong><span data-i18n="languages.level">Native proficiency in both</span></div>
+          </div>
         </div>
       </section>
 
       <section class="contact-section section-space" id="contact" aria-labelledby="contact-title">
         <div class="site-shell contact-layout">
-          <div data-reveal="contact">
+          <div>
             <h2 id="contact-title" data-i18n="section.contact">Contact</h2>
             <p class="contact-heading" data-i18n="contact.title">Let’s talk.</p>
           </div>
-          <div class="contact-body" data-reveal="body">
+          <div class="contact-body">
             <p data-i18n="contact.description">Have an internship opportunity or a question about a project? Send me an email.</p>
             <a class="email-link" href="mailto:salvadorhuertas.alvaro@gmail.com">salvadorhuertas.alvaro@gmail.com <span class="link-arrow" aria-hidden="true">↗</span></a>
             <ul class="contact-links" aria-label="Contact profiles" data-i18n-aria-label="contact.profiles">
