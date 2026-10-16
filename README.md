@@ -46,8 +46,18 @@ Se utiliza **Anime.js 4.5.0**, distribución oficial UMD alojada en `assets/vend
 | `buildScroll()`, `hero-exit` | Transformación de la portada ligada al scroll, conservada. |
 | `buildProjects()`, `project-windows` | Timeline enlazada a `onScroll({ sync: true })`: entrada, lectura, ascenso de git-docs-agent y reducción del orquestador a 0,96. Se detiene al detener el scroll y retrocede al subir. |
 | `addFlow()` | Cuatro énfasis y tres conexiones con `svg.createDrawable()` en la misma timeline, antes de la superposición. Etiquetas siempre visibles y aviso de ilustración conservado. |
-| `orchestrator-flow` | En flujo vertical, el esquema tiene una escena de scroll propia, referenciada al contenedor estable del primer proyecto. Cada ventana conserva una entrada finita de 700 ms si el movimiento está habilitado. |
+| `orchestrator-flow` | En flujo vertical, el esquema tiene una escena de scroll propia, referenciada a su figura. Cada ventana entra al aparecer su barra y cada esquema tiene una entrada independiente de 700 ms al alcanzar su figura. |
 | `interaction()` | Transiciones breves de flechas y selector de idioma, conservadas. |
+
+### Ajuste móvil del 16 de octubre de 2026
+
+Tras el aviso de ausencia de animaciones en un móvil real, se corrigen dos comportamientos del código: `resize` cancelaba las entradas en curso incluso cuando solo cambiaba la altura, y el esquema del orquestador tomaba toda la tarjeta como referencia de scroll. En una tarjeta vertical larga, su texto y su esquema llegan a la pantalla en momentos distintos. No se ha confirmado cuál de estos factores produjo el síntoma en el dispositivo del usuario.
+
+- Por debajo de 960 px, un cambio solo de altura actualiza los límites del scroll sin finalizar las entradas. Los cambios de ancho, contenido o idioma siguen recalculando la composición.
+- Las ventanas comienzan su entrada al aparecer su barra, sin depender de una fracción de la altura de toda la tarjeta. Los dos esquemas entran por separado cuando sus figuras son visibles; el recorrido del orquestador se vincula a su propia figura.
+- Se conserva el relevo de escritorio y el flujo vertical legible en móvil, sin apilar tarjetas mayores que la pantalla. Se respetan movimiento reducido, foco y ausencia de JavaScript. El HTML versiona la URL de `motion.js` para solicitar el archivo corregido.
+
+Validación de este ajuste: sintaxis JavaScript y siete comprobaciones de lógica con DOM y Anime.js simulados. Cubren el cambio de altura móvil durante una entrada, la aparición independiente del esquema, el cambio de ancho, el relevo de escritorio, movimiento reducido, biblioteca ausente y foco. La versión anterior falla dos de esas comprobaciones; la corregida supera las siete. Son comprobaciones de control de eventos, no una reproducción visual en navegador ni una prueba de Safari/iPhone. En esta sesión no hay navegador de pruebas disponible: queda pendiente comprobar el aspecto y movimiento en el móvil real. Las verificaciones visuales históricas de abajo no se atribuyen a este ajuste.
 
 ### Diagnóstico anterior de la discrepancia
 
@@ -138,3 +148,4 @@ Se comprobó la reproducción del vídeo y la carga de las capturas. Después de
 Para verlo, entra en Proyectos y continúa bajando. Después de subir git-docs-agent, sigue desplazándote: durante 240 px a 864 px de altura (unos 202 px a 720), título y panel permanecen centrados, completos y estables. Después salen juntos hacia la nota y Habilidades, conservando la posición final de las ventanas. Al subir se invierte la secuencia. En las alturas donde no cabe el conjunto se conserva la lectura vertical completa.
 
 Todo queda sin commit ni push.
+
