@@ -18,6 +18,7 @@
   let observer, resizeObserver, heroEntry, refreshTimer;
   let failed = false, suspended = false, started = false;
   let projectScene = null, layoutSignature = '', pendingLayout = null;
+  let viewportWidth = innerWidth;
 
   function remember(element) {
     if (!originals.has(element)) originals.set(element, element.getAttribute('style'));
@@ -125,7 +126,7 @@
   function reveal(scene) {
     if (scene.played || preference.matches || suspended || failed) return;
     // A window has one owner: scroll in stacked mode, finite entry in flow.
-    if (scene.kind === 'project' && projectScene) return;
+    if ((scene.kind === 'project' || scene.kind === 'diagram') && projectScene) return;
     scene.played = true;
     observer.unobserve(scene.trigger);
     if (scene.root.contains(document.activeElement)) return;
@@ -150,6 +151,11 @@
         break;
       case 'project':
         timeline.add(remember(root), { y: [mobile() ? 32 : 52, 0], opacity: [0.6, 1], duration: 700 });
+        break;
+      case 'diagram':
+        // In vertical flow, the figure arrives much later than the window bar.
+        // Give it its own entry when it is actually in the viewport.
+        timeline.add(remember(root), { y: [28, 0], opacity: [0.55, 1], duration: 700 });
         break;
       case 'contact':
         title(timeline, root.querySelector('.contact-heading'));
@@ -218,10 +224,10 @@
     // The complete composition must fit, including the heading and both outer
     // margins. No negative sticky offset or clipped reading area on short screens.
     if (innerWidth < 960 || stageHeight + minMargin * 2 > innerHeight) {
-      addFlow(scrollTimeline('orchestrator-flow', $('.project-slot'),
+      addFlow(scrollTimeline('orchestrator-flow', $('.orchestrator-visual'),
         () => mobile() ? '78% top' : '80% top',
         () => mobile() ? '38% bottom' : '45% bottom'));
-      entrances.filter(scene => scene.kind === 'project' && !scene.played)
+      entrances.filter(scene => (scene.kind === 'project' || scene.kind === 'diagram') && !scene.played)
         .forEach(scene => observer.observe(scene.trigger));
       return;
     }
@@ -345,6 +351,20 @@
     }), 120);
   }
 
+  function resizeViewport() {
+    const widthChanged = viewportWidth !== innerWidth;
+    viewportWidth = innerWidth;
+    if (!started) return;
+    // Mobile browser chrome changes innerHeight during scrolling. The vertical
+    // layout cannot become stacked below 960px, so refresh bounds without
+    // finishing entrances or rebuilding their timelines on every such resize.
+    if (!widthChanged && innerWidth < 960 && !pendingLayout) {
+      syncScenes.forEach(scene => { if (scene.observer.target) scene.observer.refresh(); });
+      return;
+    }
+    refreshLayout();
+  }
+
   function start() {
     if (started || failed || suspended || preference.matches) return;
     started = true;
@@ -394,7 +414,8 @@
     addEntrance($('.about-layout'), 'about');
     $$('.tool-group').forEach(root => addEntrance(root, 'tool'));
     addEntrance($('.tool-notes'), 'notes');
-    $$('.project-window').forEach(root => addEntrance(root, 'project', root.parentElement));
+    $$('.project-window').forEach(root => addEntrance(root, 'project', root.querySelector('.project-bar')));
+    $$('.project-visual').forEach(figure => addEntrance(figure.querySelector('.diagram-surface'), 'diagram', figure));
     addEntrance($('.contact-layout'), 'contact');
     $$('a, button').forEach(control => {
       control.addEventListener('pointerenter', safely(() => interaction(control, true)));
@@ -408,7 +429,7 @@
       showProject(event.target);
     }));
     document.addEventListener('portfolio:languagechange', safely(refreshLayout));
-    window.addEventListener('resize', safely(refreshLayout));
+    window.addEventListener('resize', safely(resizeViewport));
     window.addEventListener('hashchange', safely(followAnchor));
     preference.addEventListener('change', safely(() => preference.matches ? stop() : start()));
     window.addEventListener('beforeprint', safely(() => { suspended = true; stop(); }));
@@ -422,3 +443,4 @@
     }));
   } catch { failed = true; stop(); }
 })();
+
