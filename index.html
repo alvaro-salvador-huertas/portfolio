@@ -78,19 +78,19 @@
                     <div class="project-layout">
                       <div class="project-copy">
                         <p class="project-status" data-i18n="orchestrator.status">Evaluated prototype</p>
-                        <p class="project-summary" data-i18n="orchestrator.summary">I built a Python controller that coordinates a developer agent, independent tests and a reviewer agent. It limits attempts and keeps logs to investigate the results.</p>
+                        <p class="project-summary" data-i18n="orchestrator.summary">I built a Python controller that coordinates developer and reviewer agents with independent tests. It sets execution limits and keeps logs you can inspect. The inspector now exports results as JSON for use in other tools.</p>
                         <ul class="tech-list" aria-label="code-review-orchestrator technologies" data-i18n-aria-label="orchestrator.technologies">
                           <li>Python</li><li>Codex CLI</li><li>unittest</li><li>JSON</li>
                         </ul>
                         <ul class="project-links" aria-label="code-review-orchestrator resources" data-i18n-aria-label="orchestrator.resources">
                           <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator"><span data-i18n="repository">View repository</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
-                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/evals/revisor/resultados-2026-10-16.md" hreflang="es"><span data-i18n="orchestrator.reviewerEvaluation">Reviewer evaluation</span> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
-                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/evals/resultados-multicaso-2026-10-15.md" hreflang="es"><span data-i18n="orchestrator.multicaseEvaluation">Multi-case evaluation</span> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
+                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/evals/tareas_reales/inspect_json/README.md" hreflang="es"><span data-i18n="orchestrator.realTask">Real task: JSON export</span> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
+                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/actions/runs/39062974165"><span data-i18n="orchestrator.ci">View tests in GitHub Actions</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
                         </ul>
                       </div>
                       <figure class="project-visual orchestrator-visual" aria-labelledby="orchestrator-caption">
-                        <figcaption id="orchestrator-caption" data-i18n="orchestrator.caption">Illustrative workflow. It does not show a recorded run.</figcaption>
-                        <!-- Simplified workflow, not a replay of an observed execution.
+                        <figcaption id="orchestrator-caption" data-i18n="orchestrator.caption">Benchmark exercises: illustrative flow, not a recorded run.</figcaption>
+                        <!-- Simplified benchmark workflow, not the JSON task or a replay of an observed execution.
                              A second attempt is conditional and consumes the remaining budget. -->
                         <svg class="diagram-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><marker id="orchestrator-tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="m1 1 6 3-6 3"/></marker></defs></svg>
                         <div class="diagram-surface orchestrator-flow">
@@ -126,10 +126,10 @@
                       </figure>
                         <div class="orchestrator-evidence">
                           <h4 data-i18n="orchestrator.evidenceTitle">Evidence &amp; limits</h4>
-                          <p data-i18n="orchestrator.reviews">Four real reviews of prepared candidates: two defects detected beyond the available tests and two justified approvals. The findings were checked automatically by Codex.</p>
-                          <p data-i18n="orchestrator.results">In a separate experiment, two small exercises were approved on the first attempt: four real agent calls across development and review.</p>
-                          <p data-i18n="orchestrator.tests">153 automated tests with simulated agents check the controller, not model quality.</p>
-                          <p data-i18n="orchestrator.limits">These controlled cases do not establish general reliability. A second repair attempt is implemented and covered by simulations, but has not been observed with the real model.</p>
+                          <p data-i18n="orchestrator.tests">238 automated tests passed in GitHub Actions, using simulated agents.</p>
+                          <p data-i18n="orchestrator.reviews">The JSON feature was integrated after development with an agent, review and assisted corrections under human direction.</p>
+                          <p><span data-i18n="orchestrator.results">Real model evaluations are documented separately:</span> <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/evals/revisor/resultados-2026-10-16.md" hreflang="es" data-i18n="orchestrator.reviewerEvaluation">Reviewer</a> · <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/evals/resultados-multicaso-2026-10-15.md" hreflang="es" data-i18n="orchestrator.multicaseEvaluation">Multi-case</a> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span>.</p>
+                          <p data-i18n="orchestrator.limits">The evaluations carried out do not establish general reliability.</p>
                         </div>
                     </div>
                   </article>
