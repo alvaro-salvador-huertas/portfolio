@@ -21,17 +21,36 @@ Los proyectos destacados son **code-review-orchestrator** y **git-docs-agent**, 
 
 ## Evidencia del orquestador
 
-Consulta documental realizada el **16 de octubre de 2026** sobre `main`, revisión [`9bec53279d82058fe188c0038bab5ba66ce64003`](https://github.com/alvaro-salvador-huertas/code-review-orchestrator/commit/9bec53279d82058fe188c0038bab5ba66ce64003). Se leyeron el README, el controlador `orchestrate_case.py`, los dos informes siguientes y la documentación de evaluación del revisor de esa revisión. El hito del revisor está integrado en ese `main`; el estado previo descrito en su protocolo no se presenta como el estado actual.
+Actualización del **17 de octubre de 2026**, contrastada en lectura con `main` de `../code-review-orchestrator`, commit [`a49c15ad3d31ef2dc39c176a922bea747cb61297`](https://github.com/alvaro-salvador-huertas/code-review-orchestrator/commit/a49c15ad3d31ef2dc39c176a922bea747cb61297). Se consultaron el [README](https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/a49c15ad3d31ef2dc39c176a922bea747cb61297/README.md), la [guía de funcionamiento](https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/a49c15ad3d31ef2dc39c176a922bea747cb61297/docs/funcionamiento.md) y los documentos de la tarea JSON indicados abajo. Sus referencias a una incorporación local describen etapas anteriores; el hito ya está integrado en ese `main`.
+
+La ficha presenta el controlador Python, sus límites de ejecución y registros consultables, y la exportación JSON del inspector para consumir resultados desde otras herramientas. ES, EN y el respaldo HTML comparten el mismo alcance.
 
 | Evidencia publicada | Alcance que se muestra |
 | --- | --- |
-| [Revisor, 16 de octubre](https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/9bec53279d82058fe188c0038bab5ba66ce64003/evals/revisor/resultados-2026-10-16.md) | Cuatro revisiones reales de candidatos preparados, dos defectos fuera de la cobertura de las pruebas y dos aprobaciones justificadas. El contraste posterior es automático, realizado por Codex. No hubo desarrollador ni reparación en este experimento. |
-| [Multicaso, 15 de octubre](https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/9bec53279d82058fe188c0038bab5ba66ce64003/evals/resultados-multicaso-2026-10-15.md) | Dos ejercicios aprobados al primer intento; cuatro invocaciones reales entre desarrollo y revisión. Las 4 y 16 pruebas de los candidatos son distintas de las invocaciones y de la suite del controlador. |
-| [Validación posterior del lanzador](https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/9bec53279d82058fe188c0038bab5ba66ce64003/evals/revisor/README.md#validación-local-del-lanzador) | 153 pruebas automatizadas con agentes simulados, sin llamadas reales al modelo. Es posterior a las validaciones de 126 y 148 pruebas; esos recuentos históricos no se suman. |
+| [Caso real: inspector JSON](https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/a49c15ad3d31ef2dc39c176a922bea747cb61297/evals/tareas_reales/inspect_json/README.md) y [revisión](https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/a49c15ad3d31ef2dc39c176a922bea747cb61297/evals/tareas_reales/inspect_json/revision.md) | Funcionalidad incorporada tras desarrollo con un agente, revisión y correcciones asistidas bajo dirección humana. No acredita una implementación completamente autónoma ni un ciclo automático de corrección. |
+| [GitHub Actions del commit integrado](https://github.com/alvaro-salvador-huertas/code-review-orchestrator/actions/runs/39062974165) | Ejecución completada con éxito sobre el commit indicado y 238 pruebas automatizadas superadas, comprobadas en su registro. Los agentes son simulados; esta suite es evidencia distinta de las evaluaciones reales del modelo. |
+| [Revisor, 16 de octubre](https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/a49c15ad3d31ef2dc39c176a922bea747cb61297/evals/revisor/resultados-2026-10-16.md) y [multicaso, 15 de octubre](https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/a49c15ad3d31ef2dc39c176a922bea747cb61297/evals/resultados-multicaso-2026-10-15.md) | Evaluaciones anteriores con el modelo real, accesibles desde el bloque de evidencia. Los informes conservan los resultados y límites de cada experimento. |
 
-La corrección adicional está implementada y cubierta por simulaciones; el segundo intento aún no se ha observado con el modelo real en estos informes. Los casos controlados no acreditan fiabilidad general. La presentación no atribuye resultados a ramas sin integrar ni convierte funcionalidades pendientes en terminadas. Los enlaces visibles llevan a los informes publicados en `main`; los enlaces anteriores fijan la revisión consultada.
+El esquema animado se rotula como **flujo ilustrativo de los ejercicios de benchmark**. Su presupuesto de hasta dos intentos no se atribuye a la tarea JSON ni representa una ejecución registrada. La limitación visible resume que las evaluaciones realizadas no establecen fiabilidad general. Los enlaces de la ficha llevan al repositorio, al caso JSON en `main`, a CI y a los informes anteriores; los enlaces documentales de esta tabla fijan la revisión consultada.
 
 Esta actualización del portfolio **no ejecuta agentes, candidatos ni pruebas del orquestador**; resume la evidencia publicada, sin afirmar acceso a los registros privados de `runs/`.
+
+### Comprobaciones del contenido — 17 de octubre de 2026
+
+Verificación local con Playwright 1.57.0 y Chrome 155.0.8059.79, comparando la propuesta con una copia anterior al cambio. Los tamaños móviles son **emulados; no se ha probado en un dispositivo real**. Las comprobaciones de fechas anteriores que siguen más abajo conservan su alcance histórico.
+
+| Comprobación realizada | Resultado |
+| --- | --- |
+| Idiomas y respaldo | Todos los textos y atributos traducibles coinciden con el diccionario en ES/EN. Respaldo inglés comprobado sin JavaScript a 390 × 844, con los cinco enlaces de la ficha disponibles y el selector oculto. |
+| Fuentes y enlaces | Los cinco enlaces de la ficha responden con HTTP 200. La API de Actions confirma el commit y el resultado satisfactorio; el registro contiene `Ran 238 tests` y `OK`. Se retiran de la ficha los recuentos y resultados históricos sustituidos. |
+| Altura y adaptación | Comparación ES/EN a 1440 × 720, 1440 × 900, 1366 × 720, 1366 × 650, 1260 × 673, 768 × 1024, 390 × 844 y 320 × 844. Sin desbordamiento horizontal ni texto recortado. En los tamaños de escritorio la altura de la tarjeta no cambia; en móvil se reduce entre 44 y 75 px. Se conserva la decisión de apilar o usar flujo vertical en las 16 combinaciones. Capturas revisadas en ambos idiomas, en escritorio y móvil emulado. |
+| Teclado | Tab y Mayús+Tab por los 20 controles a 1440 × 720, 1366 × 650 y 390 × 844, en ES/EN: orden correcto, foco visible de 3 px y sin oclusión. Las ventanas enfocadas caben completas cuando hay apilado. |
+| Movimiento reducido | A 1440 × 720 y 390 × 844, en ES/EN: contenido estático y completo, sin apilado ni trazados animados. |
+| Animación | En escritorio, ventanas y esquema cambian con el scroll y recuperan el mismo estado al recorrer cinco posiciones en sentido inverso, en ES/EN. El cambio de idioma conserva el apilado y los tres trazados. En móvil emulado se observa la entrada propia del esquema y el avance de sus trazados al desplazarse. |
+
+Al cambiar la altura del viewport emulado de 844 a 780 px, también cambian la portada y la altura del documento: la entrada en curso finaliza tanto en la versión anterior como en la propuesta. Esta comprobación no reproduce el comportamiento de las barras del navegador de un móvil real.
+
+Se comprobaron la sintaxis de `language.js`, `git diff --check` y la conservación de CSS, `motion.js`, CNAME y los archivos pendientes sin seguimiento. La propuesta se abrió en el navegador desde `http://localhost:8000/#orchestrator-title`.
 
 ## Movimiento con Anime.js
 

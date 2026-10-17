@@ -71,32 +71,40 @@
       "es": "Prototipo evaluado"
     },
     "orchestrator.summary": {
-      "en": "I built a Python controller that coordinates a developer agent, independent tests and a reviewer agent. It limits attempts and keeps logs to investigate the results.",
-      "es": "He creado un controlador Python que coordina un agente desarrollador, pruebas independientes y un agente revisor. Limita los intentos y conserva registros para investigar los resultados."
+      "en": "I built a Python controller that coordinates developer and reviewer agents with independent tests. It sets execution limits and keeps logs you can inspect. The inspector now exports results as JSON for use in other tools.",
+      "es": "He creado un controlador Python que coordina agentes de desarrollo y revisión con pruebas independientes. Limita la ejecución y conserva registros consultables. El inspector ahora exporta resultados en JSON para usarlos desde otras herramientas."
     },
     "orchestrator.results": {
-      "en": "In a separate experiment, two small exercises were approved on the first attempt: four real agent calls across development and review.",
-      "es": "En otro experimento, dos ejercicios pequeños se aprobaron al primer intento: cuatro invocaciones reales entre desarrollo y revisión."
+      "en": "Real model evaluations are documented separately:",
+      "es": "Las evaluaciones reales del modelo se documentan por separado:"
     },
     "orchestrator.tests": {
-      "en": "153 automated tests with simulated agents check the controller, not model quality.",
-      "es": "153 pruebas automatizadas con agentes simulados comprueban el controlador, no la calidad del modelo."
+      "en": "238 automated tests passed in GitHub Actions, using simulated agents.",
+      "es": "238 pruebas automatizadas superadas en GitHub Actions, con agentes simulados."
     },
     "orchestrator.reviews": {
-      "en": "Four real reviews of prepared candidates: two defects detected beyond the available tests and two justified approvals. The findings were checked automatically by Codex.",
-      "es": "Cuatro revisiones reales de candidatos preparados: dos defectos detectados fuera de la cobertura de las pruebas y dos aprobaciones justificadas. Los hallazgos se contrastaron automáticamente con Codex."
+      "en": "The JSON feature was integrated after development with an agent, review and assisted corrections under human direction.",
+      "es": "La tarea JSON se incorporó tras desarrollo con un agente, revisión y correcciones asistidas bajo dirección humana."
     },
     "orchestrator.limits": {
-      "en": "These controlled cases do not establish general reliability. A second repair attempt is implemented and covered by simulations, but has not been observed with the real model.",
-      "es": "Estos casos controlados no acreditan fiabilidad general. El segundo intento de reparación está implementado y cubierto con simulaciones, pero aún no se ha observado con el modelo real."
+      "en": "The evaluations carried out do not establish general reliability.",
+      "es": "Las evaluaciones realizadas no establecen fiabilidad general."
+    },
+    "orchestrator.realTask": {
+      "en": "Real task: JSON export",
+      "es": "Caso real: exportación JSON"
+    },
+    "orchestrator.ci": {
+      "en": "View tests in GitHub Actions",
+      "es": "Ver pruebas en GitHub Actions"
     },
     "orchestrator.reviewerEvaluation": {
-      "en": "Reviewer evaluation",
-      "es": "Evaluación del revisor"
+      "en": "Reviewer",
+      "es": "Revisor"
     },
     "orchestrator.multicaseEvaluation": {
-      "en": "Multi-case evaluation",
-      "es": "Evaluación multicaso"
+      "en": "Multi-case",
+      "es": "Multicaso"
     },
     "orchestrator.technologies": {
       "en": "code-review-orchestrator technologies",
@@ -151,8 +159,8 @@
       "es": "Registros conservados en cada etapa"
     },
     "orchestrator.caption": {
-      "en": "Illustrative workflow. It does not show a recorded run.",
-      "es": "Esquema ilustrativo. No representa una ejecución registrada."
+      "en": "Benchmark exercises: illustrative flow, not a recorded run.",
+      "es": "Ejercicios de benchmark: esquema ilustrativo, no una ejecución real."
     },
     "git.status": {
       "en": "AI agent prototype",
