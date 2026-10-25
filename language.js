@@ -67,44 +67,40 @@
       "es": "Trabajo con C++ en la carrera y desarrollo proyectos en Python. Ahora estoy centrado en agentes de IA: cómo utilizan herramientas, cómo se coordinan y cómo evaluar sus resultados."
     },
     "orchestrator.status": {
-      "en": "Evaluated prototype",
-      "es": "Prototipo evaluado"
+      "en": "v1.0.0 released",
+      "es": "v1.0.0 publicada"
     },
     "orchestrator.summary": {
-      "en": "I built a Python controller that coordinates developer and reviewer agents with independent tests. It sets execution limits and keeps logs you can inspect. The inspector now exports results as JSON for use in other tools.",
-      "es": "He creado un controlador Python que coordina agentes de desarrollo y revisión con pruebas independientes. Limita la ejecución y conserva registros consultables. El inspector ahora exporta resultados en JSON para usarlos desde otras herramientas."
+      "en": "I built a supervised Python workflow for AI-assisted code changes. It combines planning with versioned Git references, developer and reviewer agents in separate sessions, independent tests, execution limits and inspectable records. Changes require human approval before integration.",
+      "es": "He creado un flujo de trabajo supervisado en Python para cambios de código asistidos por IA. Combina planificación con referencias versionadas de Git, agentes de desarrollo y revisión en sesiones separadas, pruebas independientes, límites de ejecución y registros consultables. Incorporar los cambios requiere autorización humana."
     },
     "orchestrator.results": {
-      "en": "Real model evaluations are documented separately:",
-      "es": "Las evaluaciones reales del modelo se documentan por separado:"
+      "en": "Real experiments and assisted corrections are documented separately:",
+      "es": "Los experimentos reales y las correcciones asistidas se documentan por separado:"
     },
     "orchestrator.tests": {
-      "en": "238 automated tests passed in GitHub Actions, using simulated agents.",
-      "es": "238 pruebas automatizadas superadas en GitHub Actions, con agentes simulados."
+      "en": "The documented validation reports 768 test methods passed. Controller tests use simulated agents; Python evaluation processes actually run.",
+      "es": "La validación documentada recoge 768 métodos de prueba superados. Las pruebas del controlador usan agentes simulados; los procesos Python de evaluación sí se ejecutan."
     },
-    "orchestrator.reviews": {
-      "en": "The JSON feature was integrated after development with an agent, review and assisted corrections under human direction.",
-      "es": "La tarea JSON se incorporó tras desarrollo con un agente, revisión y correcciones asistidas bajo dirección humana."
+    "orchestrator.problem": {
+      "en": "An agent’s own verdict is not enough to validate a code change. This workflow adds independent checks and human oversight.",
+      "es": "El dictamen de un agente no basta para validar un cambio de código. Este flujo añade comprobaciones independientes y supervisión humana."
     },
     "orchestrator.limits": {
-      "en": "The evaluations carried out do not establish general reliability.",
-      "es": "Las evaluaciones realizadas no establecen fiabilidad general."
+      "en": "These results do not establish general reliability or measure an AI success rate.",
+      "es": "Estos resultados no acreditan fiabilidad general ni miden una tasa de éxito de la IA."
     },
-    "orchestrator.realTask": {
-      "en": "Real task: JSON export",
-      "es": "Caso real: exportación JSON"
+    "orchestrator.release": {
+      "en": "Release v1.0.0",
+      "es": "Versión v1.0.0"
     },
     "orchestrator.ci": {
-      "en": "View tests in GitHub Actions",
-      "es": "Ver pruebas en GitHub Actions"
+      "en": "CI for the released commit",
+      "es": "CI del commit publicado"
     },
-    "orchestrator.reviewerEvaluation": {
-      "en": "Reviewer",
-      "es": "Revisor"
-    },
-    "orchestrator.multicaseEvaluation": {
-      "en": "Multi-case",
-      "es": "Multicaso"
+    "orchestrator.versionResults": {
+      "en": "v1 results & limits",
+      "es": "Resultados y límites de v1"
     },
     "orchestrator.technologies": {
       "en": "code-review-orchestrator technologies",
@@ -147,8 +143,8 @@
       "es": "Decisión del controlador Python"
     },
     "orchestrator.decision": {
-      "en": "Approve, request a correction or stop",
-      "es": "Aprobar, pedir una corrección o detener"
+      "en": "Approve without integrating, request a correction or stop",
+      "es": "Aprobar sin incorporar, pedir una corrección o detener"
     },
     "orchestrator.budget": {
       "en": "Up to 2 attempts in total. A correction needs remaining budget and valid evidence; technical errors stop the run.",

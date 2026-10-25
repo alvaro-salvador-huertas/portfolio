@@ -77,15 +77,15 @@
                     </header>
                     <div class="project-layout">
                       <div class="project-copy">
-                        <p class="project-status" data-i18n="orchestrator.status">Evaluated prototype</p>
-                        <p class="project-summary" data-i18n="orchestrator.summary">I built a Python controller that coordinates developer and reviewer agents with independent tests. It sets execution limits and keeps logs you can inspect. The inspector now exports results as JSON for use in other tools.</p>
+                        <p class="project-status" data-i18n="orchestrator.status">v1.0.0 released</p>
+                        <p class="project-summary" data-i18n="orchestrator.summary">I built a supervised Python workflow for AI-assisted code changes. It combines planning with versioned Git references, developer and reviewer agents in separate sessions, independent tests, execution limits and inspectable records. Changes require human approval before integration.</p>
                         <ul class="tech-list" aria-label="code-review-orchestrator technologies" data-i18n-aria-label="orchestrator.technologies">
                           <li>Python</li><li>Codex CLI</li><li>unittest</li><li>JSON</li>
                         </ul>
                         <ul class="project-links" aria-label="code-review-orchestrator resources" data-i18n-aria-label="orchestrator.resources">
                           <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator"><span data-i18n="repository">View repository</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
-                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/evals/tareas_reales/inspect_json/README.md" hreflang="es"><span data-i18n="orchestrator.realTask">Real task: JSON export</span> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
-                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/actions/runs/39062974165"><span data-i18n="orchestrator.ci">View tests in GitHub Actions</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
+                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/releases/tag/v1.0.0" hreflang="es"><span data-i18n="orchestrator.release">Release v1.0.0</span> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
+                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/actions/runs/40208066440"><span data-i18n="orchestrator.ci">CI for the released commit</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
                         </ul>
                       </div>
                       <figure class="project-visual orchestrator-visual" aria-labelledby="orchestrator-caption">
@@ -118,7 +118,7 @@
                           <div class="diagram-panel orchestrator-decision" data-orchestrator-stage>
                             <span class="flow-highlight" aria-hidden="true"></span>
                             <span class="diagram-label" data-i18n="orchestrator.controller">Python controller’s decision</span>
-                            <p class="orchestrator-outcomes" data-i18n="orchestrator.decision">Approve, request a correction or stop</p>
+                            <p class="orchestrator-outcomes" data-i18n="orchestrator.decision">Approve without integrating, request a correction or stop</p>
                             <p class="orchestrator-budget" data-i18n="orchestrator.budget">Up to 2 attempts in total. A correction needs remaining budget and valid evidence; technical errors stop the run.</p>
                           </div>
                           <p class="orchestrator-records" data-i18n="orchestrator.records">Logs retained at each stage</p>
@@ -126,10 +126,10 @@
                       </figure>
                         <div class="orchestrator-evidence">
                           <h4 data-i18n="orchestrator.evidenceTitle">Evidence &amp; limits</h4>
-                          <p data-i18n="orchestrator.tests">238 automated tests passed in GitHub Actions, using simulated agents.</p>
-                          <p data-i18n="orchestrator.reviews">The JSON feature was integrated after development with an agent, review and assisted corrections under human direction.</p>
-                          <p><span data-i18n="orchestrator.results">Real model evaluations are documented separately:</span> <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/evals/revisor/resultados-2026-10-16.md" hreflang="es" data-i18n="orchestrator.reviewerEvaluation">Reviewer</a> · <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/evals/resultados-multicaso-2026-10-15.md" hreflang="es" data-i18n="orchestrator.multicaseEvaluation">Multi-case</a> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span>.</p>
-                          <p data-i18n="orchestrator.limits">The evaluations carried out do not establish general reliability.</p>
+                          <p data-i18n="orchestrator.problem">An agent’s own verdict is not enough to validate a code change. This workflow adds independent checks and human oversight.</p>
+                          <p data-i18n="orchestrator.tests">The documented validation reports 768 test methods passed. Controller tests use simulated agents; Python evaluation processes actually run.</p>
+                          <p><span data-i18n="orchestrator.results">Real experiments and assisted corrections are documented separately:</span> <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/v1.0.0/docs/cierre-v1.md" hreflang="es" data-i18n="orchestrator.versionResults">v1 results &amp; limits</a> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span>.</p>
+                          <p data-i18n="orchestrator.limits">These results do not establish general reliability or measure an AI success rate.</p>
                         </div>
                     </div>
                   </article>
