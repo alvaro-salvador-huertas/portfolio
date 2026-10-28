@@ -242,39 +242,41 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible {
 .development-note { max-width: 65ch; margin-top: 1.5rem; color: var(--muted); font-size: 0.8125rem; }
 .projects-section + .skills-section { padding-top: clamp(2rem, 4vw, 3rem); }
 
-/* A working toolkit: two languages, supporting tools, ongoing study. */
-.tool-workbench { border: 1px solid var(--line); border-radius: 12px; background: var(--page); box-shadow: 0 16px 36px rgb(41 39 36 / 6%); }
+/* Capabilities first, with ongoing study and spoken languages kept distinct. */
+.tool-workbench { container-type: inline-size; border: 1px solid var(--line); border-radius: 12px; background: var(--page); box-shadow: 0 16px 36px rgb(41 39 36 / 6%); }
 .tool-bar { color: var(--muted); font-size: 0.8125rem; }
-.tool-languages { display: grid; grid-template-columns: 1fr 1fr; }
+.tool-capabilities { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .tool-group { display: flex; align-items: flex-start; gap: 1rem; min-width: 0; padding: clamp(1.25rem, 2.4vw, 2rem); }
 .tool-group > div { min-width: 0; }
 .tool-group h3 { font-size: 1rem; font-weight: 700; letter-spacing: -0.025em; line-height: 1.4; }
 .tool-group p:not(.tool-label) { margin-top: 0.65rem; color: var(--muted); font-size: 0.875rem; line-height: 1.7; }
 .tool-primary + .tool-primary { border-left: 1px solid var(--line); }
-.tool-primary h3 { margin-top: 0.4rem; font-size: clamp(2rem, 4vw, 3.25rem); font-weight: 600; letter-spacing: -0.05em; }
+.tool-primary h3 { font-size: clamp(1.5rem, 2.4vw, 2rem); font-weight: 600; letter-spacing: -0.05em; }
 .tool-icon { flex-shrink: 0; opacity: 0.75; }
 .tool-primary .tool-icon { margin-top: 0.15rem; }
 .tool-label { display: block; color: var(--muted); font-size: 0.75rem; }
-.tool-support { display: grid; grid-template-columns: 1fr 1fr 0.8fr; border-block: 1px solid var(--line); }
+.tool-support { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--line); }
 .tool-support .tool-group + .tool-group { border-left: 1px solid var(--line); }
-.tool-items { margin-top: 1.25rem; font-size: 0.8125rem; }
-.tool-items > div + div { margin-top: 1rem; }
-.tool-items dt { font-weight: 700; }
-.tool-items dd { margin-top: 0.15rem; color: var(--muted); }
 .tool-learning { background: var(--wash); }
 .tool-learning h3 { margin-top: 0.45rem; font-size: 1.5rem; }
 .tool-learning .tool-label { color: var(--accent); }
 .tool-group:hover { background: #f0ece5; }
-.tool-notes { display: grid; grid-template-columns: 1.8fr 1fr; gap: 2rem; padding: clamp(1.25rem, 2.4vw, 2rem); }
-.work-approach { font-size: 0.875rem; }
-.tool-spoken { font-size: 0.8125rem; color: var(--muted); }
+.tool-notes { display: grid; grid-template-columns: 1.8fr 1fr; }
+.tool-spoken { padding: clamp(1.25rem, 2.4vw, 2rem); font-size: 0.8125rem; color: var(--muted); }
 .tool-spoken strong { display: block; margin-top: 0.4rem; color: var(--ink); font-size: 0.875rem; }
 @media (prefers-reduced-motion: no-preference) {
   .tool-group { transition: background-color 180ms ease; }
 }
-@media (max-width: 767px) {
-  .tool-languages, .tool-support, .tool-notes { grid-template-columns: minmax(0, 1fr); }
+/* Reflow according to available text space, including larger root text. */
+@container (max-width: 44rem) {
+  .tool-capabilities, .tool-support, .tool-notes { grid-template-columns: minmax(0, 1fr); }
   .tool-primary + .tool-primary, .tool-support .tool-group + .tool-group { border-left: 0; border-top: 1px solid var(--line); }
+}
+@container (max-width: 20rem) {
+  .tool-group { flex-direction: column; padding: 1rem; }
+  .tool-primary h3 { font-size: 1.25rem; }
+}
+@media (max-width: 767px) {
   .orchestrator-evidence { grid-template-columns: minmax(0, 1fr); }
   .project-bar { gap: 0.5rem; padding-inline: 1rem; }
   .project-number { margin-left: auto; order: 1; }

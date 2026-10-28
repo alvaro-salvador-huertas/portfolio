@@ -3,12 +3,12 @@
 (() => {
   const messages = {
     "page.title": {
-      "en": "Álvaro Salvador Huertas - Software & AI agents",
-      "es": "Álvaro Salvador Huertas - Software y agentes de IA"
+      "en": "Álvaro Salvador Huertas - AI Agents, Evals & Developer Tooling",
+      "es": "Álvaro Salvador Huertas - Agentes de IA, evaluación y herramientas de desarrollo"
     },
     "page.description": {
-      "en": "Álvaro Salvador Huertas, Computer Engineering student at the University of Granada. C++ coursework, Python projects and experiments with AI agents.",
-      "es": "Álvaro Salvador Huertas, estudiante de Ingeniería Informática en la Universidad de Granada. C++ en la carrera, proyectos en Python y exploración de agentes de IA."
+      "en": "Third-year Computer Engineering student at the University of Granada. I build Python tools for AI agent orchestration, evaluation and software quality.",
+      "es": "Estudiante de tercero de Ingeniería Informática en la Universidad de Granada. Desarrollo herramientas en Python para orquestación de agentes de IA, evaluación y calidad de software."
     },
     "skip": {
       "en": "Skip to content",
@@ -51,20 +51,20 @@
       "es": "Contacto"
     },
     "hero.description": {
-      "en": "What I’m building, and what I’m learning along the way.",
-      "es": "Comparto lo que construyo y lo que aprendo por el camino."
+      "en": "I design tools to orchestrate AI agents and evaluate the software they generate.",
+      "es": "Diseño herramientas para orquestar agentes de IA y evaluar el software que generan."
     },
     "hero.projects": {
       "en": "View projects",
       "es": "Ver proyectos"
     },
     "about.intro": {
-      "en": "I’m a third-year Computer Engineering student at the University of Granada. I’m passionate about building AI systems and understanding how they work.",
-      "es": "Estudio tercero de Ingeniería Informática en la Universidad de Granada. Me apasiona el desarrollo de sistemas de inteligencia artificial y entender cómo funcionan por dentro."
+      "en": "I’m a third-year Computer Engineering student at the University of Granada. I develop Python tools that integrate AI agents into workflows for querying documentation, planning, development and code review.",
+      "es": "Soy estudiante de tercero de Ingeniería Informática en la Universidad de Granada. Desarrollo herramientas en Python que integran agentes de IA en flujos de consulta documental, planificación, desarrollo y revisión de código."
     },
     "about.focus": {
-      "en": "I use C++ in my coursework and Python in my own projects. My current focus is AI agents: how they use tools, work together, and how to evaluate their results.",
-      "es": "Trabajo con C++ en la carrera y desarrollo proyectos en Python. Ahora estoy centrado en agentes de IA: cómo utilizan herramientas, cómo se coordinan y cómo evaluar sus resultados."
+      "en": "My projects combine Codex CLI, context versioned in Git, structured outputs and independent evaluation. I use acceptance criteria, automated tests and GitHub Actions to check generated changes and retain evidence before integration under human supervision.",
+      "es": "Mis proyectos combinan Codex CLI, contexto versionado en Git, salidas estructuradas y evaluación independiente. Trabajo con criterios de aceptación, pruebas automatizadas y GitHub Actions para contrastar los cambios generados y conservar evidencia antes de su incorporación bajo supervisión humana."
     },
     "orchestrator.status": {
       "en": "v1.0.0 released",
@@ -206,41 +206,53 @@
       "en": "I use Codex to help develop these projects. I review the code and check how it behaves.",
       "es": "Uso Codex como apoyo para desarrollar estos proyectos. Reviso el código y compruebo cómo funciona."
     },
-    "skills.programming": {
-      "en": "Programming",
-      "es": "Programación"
+    "skills.title": {
+      "en": "Capabilities",
+      "es": "Capacidades"
     },
-    "skills.cppPython": {
-      "en": "C++ & Python",
-      "es": "C++ y Python"
+    "skills.workspace": {
+      "en": "AI agents, evaluation & developer tooling",
+      "es": "Agentes de IA, evaluación y herramientas de desarrollo"
+    },
+    "skills.orchestration": {
+      "en": "Agent Orchestration",
+      "es": "Orquestación de agentes"
+    },
+    "skills.orchestrationDetail": {
+      "en": "Codex CLI integration and coordination of specialized agents in supervised planning, development and review workflows.",
+      "es": "Integración de Codex CLI y coordinación de agentes especializados en flujos supervisados de planificación, desarrollo y revisión."
+    },
+    "skills.evaluation": {
+      "en": "LLM & Agent Evaluation",
+      "es": "Evaluación de LLM y agentes"
+    },
+    "skills.evaluationDetail": {
+      "en": "Evaluation cases and criteria, answer and citation review, acceptance tests and failure analysis.",
+      "es": "Casos y criterios de evaluación, revisión de respuestas y citas, pruebas de aceptación y análisis de fallos."
+    },
+    "skills.context": {
+      "en": "Context Engineering",
+      "es": "Ingeniería de contexto"
+    },
+    "skills.contextDetail": {
+      "en": "Document context, Git-versioned references, separation of instructions from data and validation of structured outputs.",
+      "es": "Contexto documental, referencias versionadas en Git, separación de instrucciones y datos y validación de salidas estructuradas."
+    },
+    "skills.quality": {
+      "en": "Software Quality & CI",
+      "es": "Calidad de software y CI"
+    },
+    "skills.qualityDetail": {
+      "en": "Testing with unittest, acceptance and regression checks, pull request reviews and continuous integration with GitHub Actions.",
+      "es": "Pruebas con unittest, aceptación y regresión, revisión mediante pull requests e integración continua con GitHub Actions."
+    },
+    "skills.programming": {
+      "en": "Programming & Data",
+      "es": "Programación y datos"
     },
     "skills.programmingDetail": {
-      "en": "C++ for coursework; Python for personal projects.",
-      "es": "C++ en la carrera; Python en proyectos propios."
-    },
-    "skills.databases": {
-      "en": "Databases",
-      "es": "Bases de datos"
-    },
-    "skills.mysqlOracle": {
-      "en": "MySQL & Oracle SQL Developer",
-      "es": "MySQL y Oracle SQL Developer"
-    },
-    "skills.databasesDetail": {
-      "en": "Relational databases with MySQL; database development with Oracle SQL Developer.",
-      "es": "Bases de datos relacionales con MySQL y desarrollo de bases de datos con Oracle SQL Developer."
-    },
-    "skills.workflow": {
-      "en": "Development tools",
-      "es": "Herramientas de desarrollo"
-    },
-    "skills.tools": {
-      "en": "Linux, Git & GitHub",
-      "es": "Linux, Git y GitHub"
-    },
-    "skills.workflowDetail": {
-      "en": "My working environment and tools for version control.",
-      "es": "Entorno de trabajo y control de versiones."
+      "en": "Python, C++, SQL and relational databases. Linux and Git throughout the development workflow.",
+      "es": "Python, C++, SQL y bases de datos relacionales. Linux y Git como herramientas transversales de desarrollo."
     },
     "learning.title": {
       "en": "Currently learning",
@@ -301,50 +313,6 @@
     "orchestrator.evidenceTitle": {
       "en": "Evidence & limits",
       "es": "Evidencia y límites"
-    },
-    "skills.title": {
-      "en": "What I build with",
-      "es": "Con qué construyo"
-    },
-    "skills.workspace": {
-      "en": "My working toolkit",
-      "es": "Mis herramientas de trabajo"
-    },
-    "skills.academic": {
-      "en": "Academic foundation",
-      "es": "Base académica"
-    },
-    "skills.projects": {
-      "en": "Personal projects",
-      "es": "Proyectos propios"
-    },
-    "skills.cppDetail": {
-      "en": "My language for Computer Engineering coursework: working through problems and understanding how programs behave.",
-      "es": "Mi lenguaje en Ingeniería Informática: resolver problemas y entender cómo se comportan los programas."
-    },
-    "skills.pythonDetail": {
-      "en": "I use it to develop git-docs-agent and code-review-orchestrator: tools, tests and coordination between agents.",
-      "es": "Lo utilizo para desarrollar git-docs-agent y code-review-orchestrator: herramientas, pruebas y coordinación entre agentes."
-    },
-    "skills.mysqlDetail": {
-      "en": "Relational databases.",
-      "es": "Bases de datos relacionales."
-    },
-    "skills.oracleDetail": {
-      "en": "A tool for database development.",
-      "es": "Herramienta para el desarrollo de bases de datos."
-    },
-    "skills.linuxDetail": {
-      "en": "My working environment.",
-      "es": "Mi entorno de trabajo."
-    },
-    "skills.gitDetail": {
-      "en": "Version control and project repositories.",
-      "es": "Control de versiones y repositorios de proyectos."
-    },
-    "skills.approach": {
-      "en": "I break problems down and put what I learn into my own projects. I like to make my reasoning clear, listen to other perspectives and work through solutions together.",
-      "es": "Descompongo los problemas y llevo lo que aprendo a proyectos propios. Me interesa explicar el razonamiento, escuchar otras perspectivas y buscar soluciones en equipo."
     }
   };
   const storageKey = 'portfolio-language';
