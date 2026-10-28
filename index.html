@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light">
     <meta name="theme-color" content="#FAF9F6">
-    <meta name="description" content="Álvaro Salvador Huertas, Computer Engineering student at the University of Granada. C++ coursework, Python projects and experiments with AI agents." data-i18n-content="page.description">
-    <title data-i18n="page.title">Álvaro Salvador Huertas - Software &amp; AI agents</title>
+    <meta name="description" content="Third-year Computer Engineering student at the University of Granada. I build Python tools for AI agent orchestration, evaluation and software quality." data-i18n-content="page.description">
+    <title data-i18n="page.title">Álvaro Salvador Huertas - AI Agents, Evals &amp; Developer Tooling</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="preload" href="assets/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
@@ -41,7 +41,7 @@
           <span class="hero-surname"><span class="name-mask"><span class="name-text">Salvador</span></span> <span class="name-mask"><span class="name-text">Huertas<span class="name-period" aria-hidden="true">.</span></span></span></span>
         </h1>
         <div class="hero-bottom">
-          <p class="hero-description" data-i18n="hero.description">What I’m building, and what I’m learning along the way.</p>
+          <p class="hero-description" data-i18n="hero.description">I design tools to orchestrate AI agents and evaluate the software they generate.</p>
           <a class="project-cta" href="#projects"><span data-i18n="hero.projects">View projects</span><span class="link-arrow arrow-down" aria-hidden="true">↓</span></a>
         </div>
       </section>
@@ -54,8 +54,8 @@
           <span class="section-rule" aria-hidden="true"></span>
         </div>
         <div class="about-layout">
-          <p class="intro-lead" data-i18n="about.intro">I’m a third-year Computer Engineering student at the University of Granada. I’m passionate about building AI systems and understanding how they work.</p>
-          <p class="intro-copy" id="focus-title" data-i18n="about.focus">I use C++ in my coursework and Python in my own projects. My current focus is AI agents: how they use tools, work together, and how to evaluate their results.</p>
+          <p class="intro-lead" data-i18n="about.intro">I’m a third-year Computer Engineering student at the University of Granada. I develop Python tools that integrate AI agents into workflows for querying documentation, planning, development and code review.</p>
+          <p class="intro-copy" id="focus-title" data-i18n="about.focus">My projects combine Codex CLI, context versioned in Git, structured outputs and independent evaluation. I use acceptance criteria, automated tests and GitHub Actions to check generated changes and retain evidence before integration under human supervision.</p>
         </div>
       </section>
 
@@ -211,43 +211,40 @@
 
       <section class="skills-section site-shell section-space" id="skills" aria-labelledby="skills-title">
         <div class="section-heading">
-          <h2 class="section-title" id="skills-title" data-i18n="skills.title">What I build with</h2>
+          <h2 class="section-title" id="skills-title" data-i18n="skills.title">Capabilities</h2>
           <span class="section-rule" aria-hidden="true"></span>
         </div>
         <div class="skills-layout tool-workbench">
-          <div class="tool-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span data-i18n="skills.workspace">My working toolkit</span></div>
-          <div class="tool-languages">
+          <div class="tool-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span data-i18n="skills.workspace">AI agents, evaluation &amp; developer tooling</span></div>
+          <div class="tool-capabilities">
             <article class="tool-group tool-primary">
-              <img class="tool-icon" src="assets/vendor/tabler-icons/brand-cpp.svg" width="32" height="32" alt="">
-              <div><p class="tool-label" data-i18n="skills.academic">Academic foundation</p><h3>C++</h3><p data-i18n="skills.cppDetail">My language for Computer Engineering coursework: working through problems and understanding how programs behave.</p></div>
+              <img class="tool-icon" src="assets/vendor/tabler-icons/git-branch.svg" width="32" height="32" alt="">
+              <div><h3 data-i18n="skills.orchestration">Agent Orchestration</h3><p data-i18n="skills.orchestrationDetail">Codex CLI integration and coordination of specialized agents in supervised planning, development and review workflows.</p></div>
             </article>
             <article class="tool-group tool-primary">
               <img class="tool-icon" src="assets/vendor/tabler-icons/brand-python.svg" width="32" height="32" alt="">
-              <div><p class="tool-label" data-i18n="skills.projects">Personal projects</p><h3>Python</h3><p data-i18n="skills.pythonDetail">I use it to develop git-docs-agent and code-review-orchestrator: tools, tests and coordination between agents.</p></div>
+              <div><h3 data-i18n="skills.evaluation">LLM &amp; Agent Evaluation</h3><p data-i18n="skills.evaluationDetail">Evaluation cases and criteria, answer and citation review, acceptance tests and failure analysis.</p></div>
             </article>
           </div>
           <div class="tool-support">
             <article class="tool-group">
               <img class="tool-icon" src="assets/vendor/tabler-icons/database.svg" width="24" height="24" alt="">
-              <div><h3 data-i18n="skills.databases">Databases</h3><dl class="tool-items">
-                <div><dt>MySQL</dt><dd data-i18n="skills.mysqlDetail">Relational databases.</dd></div>
-                <div><dt>Oracle SQL Developer</dt><dd data-i18n="skills.oracleDetail">A tool for database development.</dd></div>
-              </dl></div>
+              <div><h3 data-i18n="skills.context">Context Engineering</h3><p data-i18n="skills.contextDetail">Document context, Git-versioned references, separation of instructions from data and validation of structured outputs.</p></div>
             </article>
             <article class="tool-group">
               <img class="tool-icon" src="assets/vendor/tabler-icons/git-branch.svg" width="24" height="24" alt="">
-              <div><h3 data-i18n="skills.workflow">Development tools</h3><dl class="tool-items">
-                <div><dt>Linux</dt><dd data-i18n="skills.linuxDetail">My working environment.</dd></div>
-                <div><dt>Git · GitHub</dt><dd data-i18n="skills.gitDetail">Version control and project repositories.</dd></div>
-              </dl></div>
+              <div><h3 data-i18n="skills.quality">Software Quality &amp; CI</h3><p data-i18n="skills.qualityDetail">Testing with unittest, acceptance and regression checks, pull request reviews and continuous integration with GitHub Actions.</p></div>
             </article>
+            <article class="tool-group">
+              <img class="tool-icon" src="assets/vendor/tabler-icons/brand-cpp.svg" width="24" height="24" alt="">
+              <div><h3 data-i18n="skills.programming">Programming &amp; Data</h3><p data-i18n="skills.programmingDetail">Python, C++, SQL and relational databases. Linux and Git throughout the development workflow.</p></div>
+            </article>
+          </div>
+          <div class="tool-notes">
             <article class="tool-group tool-learning">
               <img class="tool-icon" src="assets/vendor/tabler-icons/cloud.svg" width="24" height="24" alt="">
               <div><p class="tool-label" data-i18n="learning.title">Currently learning</p><h3>AWS</h3><p data-i18n="learning.aws">Introductory training.</p></div>
             </article>
-          </div>
-          <div class="tool-notes">
-            <p class="work-approach" data-i18n="skills.approach">I break problems down and put what I learn into my own projects. I like to make my reasoning clear, listen to other perspectives and work through solutions together.</p>
             <div class="tool-spoken"><span class="tool-label" data-i18n="languages.title">Languages</span><strong data-i18n="languages.names">Spanish &amp; English</strong><span data-i18n="languages.level">Native proficiency in both</span></div>
           </div>
         </div>
