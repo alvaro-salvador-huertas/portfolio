@@ -4,15 +4,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light">
-    <meta name="theme-color" content="#FAF9F6">
+    <meta name="theme-color" content="#173449">
     <meta name="description" content="Third-year Computer Engineering student at the University of Granada. I build Python tools for AI agent orchestration, evaluation and software quality." data-i18n-content="page.description">
     <title data-i18n="page.title">Álvaro Salvador Huertas - AI Agents, Evals &amp; Developer Tooling</title>
     <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
     <link rel="preload" href="assets/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
     <script src="language.js" defer></script>
-    <script src="assets/vendor/animejs/4.5.0/anime.umd.min.js" defer></script>
-    <script src="motion.js?v=1d10139ce1d3" defer></script>
+    <script src="motion.js?v=20261028-type" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
@@ -71,13 +70,12 @@
                 <div class="project-slot">
                   <article class="project project-window orchestrator-project" aria-labelledby="orchestrator-title">
                     <header class="project-bar">
-                      <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                      <span class="project-number" aria-hidden="true">01</span>
-                      <h3 id="orchestrator-title">code-review-orchestrator</h3>
+                      <h3 id="orchestrator-title" translate="no">code-review-orchestrator</h3>
                     </header>
                     <div class="project-layout">
                       <div class="project-copy">
                         <p class="project-status" data-i18n="orchestrator.status">v1.0.0 released</p>
+                        <p class="project-problem" data-i18n="orchestrator.problem">An agent’s own verdict is not enough to validate a code change. This workflow adds independent checks and human oversight.</p>
                         <p class="project-summary" data-i18n="orchestrator.summary">I built a supervised Python workflow for AI-assisted code changes. It combines planning with versioned Git references, developer and reviewer agents in separate sessions, independent tests, execution limits and inspectable records. Changes require human approval before integration.</p>
                         <ul class="tech-list" aria-label="code-review-orchestrator technologies" data-i18n-aria-label="orchestrator.technologies">
                           <li>Python</li><li>Codex CLI</li><li>unittest</li><li>JSON</li>
@@ -88,20 +86,24 @@
                           <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/actions/runs/40208066440"><span data-i18n="orchestrator.ci">CI for the released commit</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
                         </ul>
                       </div>
+                        <div class="orchestrator-evidence">
+                          <h4 data-i18n="orchestrator.evidenceTitle">Evidence &amp; limits</h4>
+                          <p data-i18n="orchestrator.tests">The documented validation reports 768 test methods passed. Controller tests use simulated agents; Python evaluation processes actually run.</p>
+                          <p><span data-i18n="orchestrator.results">Real experiments and assisted corrections are documented separately:</span> <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/v1.0.0/docs/cierre-v1.md" hreflang="es" data-i18n="orchestrator.versionResults">v1 results &amp; limits</a> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span>.</p>
+                          <p data-i18n="orchestrator.limits">These results do not establish general reliability or measure an AI success rate.</p>
+                        </div>
                       <figure class="project-visual orchestrator-visual" aria-labelledby="orchestrator-caption">
                         <figcaption id="orchestrator-caption" data-i18n="orchestrator.caption">Benchmark exercises: illustrative flow, not a recorded run.</figcaption>
                         <!-- Simplified benchmark workflow, not the JSON task or a replay of an observed execution.
                              A second attempt is conditional and consumes the remaining budget. -->
                         <svg class="diagram-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><marker id="orchestrator-tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="m1 1 6 3-6 3"/></marker></defs></svg>
                         <div class="diagram-surface orchestrator-flow">
-                          <div class="diagram-panel orchestrator-stage" data-orchestrator-stage>
-                            <span class="flow-highlight" aria-hidden="true"></span>
+                          <div class="diagram-panel orchestrator-stage">
                             <span class="diagram-label" data-i18n="orchestrator.developer">Developer agent</span>
                             <p data-i18n="orchestrator.developerAction">Proposes a code change</p>
                           </div>
                           <svg class="flow-connectors orchestrator-connector" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="100%" marker-end="url(#orchestrator-tip)"/></svg>
-                          <div class="diagram-panel orchestrator-stage" data-orchestrator-stage>
-                            <span class="flow-highlight" aria-hidden="true"></span>
+                          <div class="diagram-panel orchestrator-stage">
                             <span class="diagram-label" data-i18n="orchestrator.independentTests">Independent tests</span>
                             <p data-i18n="orchestrator.testsAction">Evaluate the candidate in a separate Python process</p>
                           </div>
@@ -109,14 +111,12 @@
                             <svg class="flow-connectors orchestrator-connector" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="100%" marker-end="url(#orchestrator-tip)"/></svg>
                             <span data-i18n="orchestrator.reviewGate">Only with passing tests and valid evidence</span>
                           </div>
-                          <div class="diagram-panel orchestrator-stage" data-orchestrator-stage>
-                            <span class="flow-highlight" aria-hidden="true"></span>
+                          <div class="diagram-panel orchestrator-stage">
                             <span class="diagram-label" data-i18n="orchestrator.reviewer">Reviewer agent</span>
                             <p data-i18n="orchestrator.reviewerAction">Inspects the code and evidence</p>
                           </div>
                           <svg class="flow-connectors orchestrator-connector" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="100%" marker-end="url(#orchestrator-tip)"/></svg>
-                          <div class="diagram-panel orchestrator-decision" data-orchestrator-stage>
-                            <span class="flow-highlight" aria-hidden="true"></span>
+                          <div class="diagram-panel orchestrator-decision">
                             <span class="diagram-label" data-i18n="orchestrator.controller">Python controller’s decision</span>
                             <p class="orchestrator-outcomes" data-i18n="orchestrator.decision">Approve without integrating, request a correction or stop</p>
                             <p class="orchestrator-budget" data-i18n="orchestrator.budget">Up to 2 attempts in total. A correction needs remaining budget and valid evidence; technical errors stop the run.</p>
@@ -124,13 +124,6 @@
                           <p class="orchestrator-records" data-i18n="orchestrator.records">Logs retained at each stage</p>
                         </div>
                       </figure>
-                        <div class="orchestrator-evidence">
-                          <h4 data-i18n="orchestrator.evidenceTitle">Evidence &amp; limits</h4>
-                          <p data-i18n="orchestrator.problem">An agent’s own verdict is not enough to validate a code change. This workflow adds independent checks and human oversight.</p>
-                          <p data-i18n="orchestrator.tests">The documented validation reports 768 test methods passed. Controller tests use simulated agents; Python evaluation processes actually run.</p>
-                          <p><span data-i18n="orchestrator.results">Real experiments and assisted corrections are documented separately:</span> <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/v1.0.0/docs/cierre-v1.md" hreflang="es" data-i18n="orchestrator.versionResults">v1 results &amp; limits</a> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span>.</p>
-                          <p data-i18n="orchestrator.limits">These results do not establish general reliability or measure an AI success rate.</p>
-                        </div>
                     </div>
                   </article>
                 </div>
@@ -138,9 +131,7 @@
                 <div class="project-slot">
                   <article class="project project-window featured-project" aria-labelledby="git-docs-title">
                     <header class="project-bar">
-                      <span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span>
-                      <span class="project-number" aria-hidden="true">02</span>
-                      <h3 id="git-docs-title">git-docs-agent</h3>
+                      <h3 id="git-docs-title" translate="no">git-docs-agent</h3>
                     </header>
                     <div class="project-layout">
                       <div class="project-copy">
@@ -173,8 +164,8 @@
                                 <div class="document-sheet">
                                   <p class="diagram-label" data-i18n="git.notes">Local notes</p>
                                   <ul class="note-files">
-                                    <li><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg><code>git-add.md</code></li>
-                                    <li><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg><code>git-commit.md</code></li>
+                                    <li><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg><code translate="no">git-add.md</code></li>
+                                    <li><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg><code translate="no">git-commit.md</code></li>
                                   </ul>
                                 </div>
                               </div>
@@ -190,8 +181,8 @@
                           <div class="diagram-panel answer-panel">
                             <div class="diagram-label"><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M4 3h16v15H9l-5 3Z"/><path d="M8 8h8M8 12h5"/></svg><span data-i18n="git.answer">Answer with sources</span></div>
                             <dl class="answer-points">
-                              <div><dt><code>git add</code></dt><dd data-i18n="git.addAnswer">Stages changes in the index.</dd></div>
-                              <div><dt><code>git commit</code></dt><dd data-i18n="git.commitAnswer">Creates a local commit from staged changes.</dd></div>
+                              <div><dt><code translate="no">git add</code></dt><dd data-i18n="git.addAnswer">Stages changes in the index.</dd></div>
+                              <div><dt><code translate="no">git commit</code></dt><dd data-i18n="git.commitAnswer">Creates a local commit from staged changes.</dd></div>
                             </dl>
                             <p class="answer-sources"><span data-i18n="git.sources">Sources</span>: <cite>git-add.md</cite><span aria-hidden="true"> / </span><cite>git-commit.md</cite></p>
                           </div>
@@ -215,7 +206,7 @@
           <span class="section-rule" aria-hidden="true"></span>
         </div>
         <div class="skills-layout tool-workbench">
-          <div class="tool-bar"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span data-i18n="skills.workspace">AI agents, evaluation &amp; developer tooling</span></div>
+          <div class="tool-bar"><span data-i18n="skills.workspace">AI agents, evaluation &amp; developer tooling</span></div>
           <div class="tool-capabilities">
             <article class="tool-group tool-primary">
               <img class="tool-icon" src="assets/vendor/tabler-icons/git-branch.svg" width="32" height="32" alt="">

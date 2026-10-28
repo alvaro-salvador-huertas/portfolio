@@ -1,6 +1,6 @@
 # Portfolio de Álvaro Salvador Huertas
 
-Portfolio en español de España e inglés: estudios, proyectos de software y exploración de agentes de IA. HTML, CSS y JavaScript, con Anime.js servido localmente y sin compilación. Manrope se sirve localmente con su licencia SIL Open Font License.
+Portfolio en español de España e inglés: estudios, proyectos de software y exploración de agentes de IA. HTML, CSS y JavaScript, sin dependencias de animación ni compilación. Manrope se sirve localmente con su licencia SIL Open Font License.
 
 ## Vista local
 
@@ -11,6 +11,34 @@ python3 -m http.server 8000 --bind 127.0.0.1
 ```
 
 Visita <http://localhost:8000> y detén el servidor con `Ctrl+C`. También puedes abrir `index.html` directamente.
+
+## Revisión visual y de movimiento — 28 de octubre de 2026
+
+La versión actual conserva literalmente los textos profesionales, las 78 entradas del diccionario ES/EN y todos los enlaces. CNAME, publicación estática, Manrope y sus licencias, iconos y diagramas de proyectos se mantienen. No se modifica Data Crime Scene ni se incorporan proyectos nuevos.
+
+- **Portada:** azul tinta `#173449`, texto claro, acento verde grisáceo `#B9D6C2` y Manrope local. Se ha retirado el croquis conceptual de la primera propuesta, con sus etiquetas y control de repetición. El nombre ocupa el ancho de la composición; presentación y enlace forman una segunda banda en escritorio y se apilan en móvil. La altura es intrínseca en tableta y móvil.
+- **Ritmo:** los encabezados de sección se alinean con sus separadores y tienen una escala más contenida, reduciendo el espacio entre título y contenido.
+- **Capacidades:** las cinco capacidades comparten 22 px, peso 650 e interlineado 1,4. Título y descripción se distribuyen en columnas sobre escritorio y se apilan según el espacio disponible, sin alturas fijas. Formación e idiomas quedan como información secundaria.
+- **Proyectos:** los artículos permanecen en el flujo del documento. El párrafo existente sobre el problema del orquestador precede al resumen de construcción; evidencia y límites preceden al diagrama en el orden de lectura. Los enlaces, afirmaciones, ejemplos y traducciones no se reescriben.
+- **Movimiento:** una única entrada con Web Animations API desplaza suavemente el título y la banda inferior 10 y 6 px, durante 620 y 440 ms respectivamente. El contenido está siempre visible, sin cambios de opacidad ni máscaras. Hover y foco se resuelven en CSS. No hay animaciones de secciones ni control del scroll.
+
+### Dependencias y degradación
+
+No se carga GSAP ni Anime.js. Los archivos GSAP añadidos para el croquis se han retirado; el bundle histórico de Anime.js y su licencia se conservan sin cargarlo. No hay CDN, gestores de paquetes ni paso de compilación en producción.
+
+La entrada no comienza con `prefers-reduced-motion`, una pestaña oculta, un ancla directa o una posición de scroll restaurada. Escape, foco, cambio de idioma, cambio de preferencia, salida de página e impresión la cancelan. Al finalizar o cancelar se retiran sus listeners con `AbortController`; no se reinicia al volver a una página restaurada. Sin Web Animations API el contenido queda estático. Sin JavaScript, el contenido completo continúa disponible en inglés y el selector de idioma permanece oculto.
+
+### Validación
+
+Se comprueban ES/EN a 390 × 844, 768 × 1024 y 1440 × 900: traducciones, desbordamiento, navegación, persistencia de idioma, foco visible y teclado. Se verifica movimiento reducido, texto ampliado al 200 % de la raíz, JavaScript desactivado y anclas directas. `node --check` de ambos scripts y `git diff --check` pasan. El repositorio no contiene un runner de tests ni un paso de compilación.
+
+La revisión anterior de enlaces encontró siete destinos GitHub con HTTP 200 y LinkedIn con HTTP 999 para el cliente automatizado; los enlaces no han cambiado. `mailto:` se conserva, sin enviar mensajes.
+
+Carga local sin compresión, con contexto nuevo y favicon incluido: **11 peticiones y 87.491 bytes de cuerpo**. La propuesta anterior con croquis solicitaba 12 peticiones y 170.241 bytes; la versión inicial del encargo, 12 peticiones y 229.735 bytes. Se verifican finalización, Escape, foco y cambio a movimiento reducido: en los cuatro casos quedan cero animaciones y cero listeners del efecto en `document`/`window`.
+
+Pruebas con Chrome de escritorio y viewports emulados: no sustituyen una prueba en móvil físico, Safari o Firefox. Las medidas de recursos locales sin compresión comparan bytes y peticiones; no demuestran mejoras de FPS, LCP o rendimiento en una red real.
+
+Las secciones que siguen son el registro histórico previo. Sus descripciones de Anime.js, ventanas, paletas y animaciones no describen la implementación actual.
 
 ## Diseño y contenido
 
