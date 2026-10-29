@@ -1,5 +1,7 @@
 # Anime.js local
 
+Recurso histórico conservado: desde la revisión visual del 28 de octubre de 2026, `index.html` no carga este bundle. El movimiento actual usa Web Animations API y CSS, sin biblioteca externa. La procedencia e integridad siguientes corresponden a la integración anterior.
+
 Versión exacta: **4.5.0**. Licencia: **MIT**, copyright © 2025 Julian Garnier, conservada íntegra en [4.5.0/LICENSE.md](4.5.0/LICENSE.md).
 
 Se aloja la distribución oficial UMD minificada en [4.5.0/anime.umd.min.js](4.5.0/anime.umd.min.js), sin modificar ni recompilar (118.043 bytes). La página la carga con `defer` antes de `motion.js`. Funciona en GitHub Pages, bajo un subdirectorio y sin bundler, import map, instalación npm ni CDN en producción.
