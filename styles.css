@@ -75,6 +75,16 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px s
 .project-cta:is(:hover, :focus-visible) { background: #d9eadf; border-color: #d9eadf; }
 .project-cta .link-arrow { font-size: 1.4rem; line-height: 1; }
 .link-arrow { display: inline-block; }
+/* The full-width section continues the opening; its inner shell keeps alignment. */
+.about-section {
+  --muted: #d4e1e9;
+  --line: #718b9d;
+  --accent: var(--mist);
+  background: var(--night);
+  color: #f1f6fa;
+}
+/* The skip link focuses main; keep its indicator legible in the first section. */
+#main:focus-visible > .about-section > .site-shell { outline: 3px solid var(--mist); outline-offset: 8px; }
 .about-layout { display: grid; grid-template-columns: 1.15fr 1fr; gap: clamp(2rem, 6vw, 6rem); }
 .intro-lead { max-width: 38ch; font-size: clamp(1.375rem, 2vw, 1.75rem); line-height: 1.55; letter-spacing: -0.025em; font-weight: 500; }
 .intro-copy { padding-top: 0.15rem; font-size: 1rem; line-height: 1.85; color: var(--muted); }
@@ -254,6 +264,8 @@ a:is(:hover, :focus-visible)::after { transform: scaleX(1); opacity: 1; }
   .hero h1, .hero-bottom, .link-arrow { transform: none !important; }
 }
 @media print {
+  .about-section { --muted: var(--ink); background: white; color: var(--ink); }
+  #main:focus-visible > .about-section > .site-shell { outline: none; }
   .opening, .contact-section { background: white; color: var(--ink); }
   .hero { min-height: auto; padding-block: 2rem; }
   .hero-name { font-size: 6rem; }
