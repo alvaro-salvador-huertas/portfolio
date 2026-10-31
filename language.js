@@ -310,6 +310,50 @@
       "en": "Illustrative workflow with an example answer.",
       "es": "Esquema ilustrativo con una respuesta de ejemplo."
     },
+    "crime.status": {
+      "en": "Published code · local application",
+      "es": "Código publicado · aplicación local"
+    },
+    "crime.problem": {
+      "en": "An interactive machine learning lab for investigating data leakage and comparing evaluation procedures.",
+      "es": "Laboratorio interactivo de machine learning para investigar fugas de información y comparar procedimientos de evaluación."
+    },
+    "crime.summary": {
+      "en": "Guided, Laboratory and Detective modes combine real training on synthetic data, eight case files with evidence and interventions, and reproducible JSON reports. The project puts experimental design, model evaluation and automated testing into practice.",
+      "es": "Los modos Guiado, Laboratorio y Detective combinan entrenamiento real sobre datos sintéticos, ocho expedientes con evidencias e intervenciones e informes JSON reproducibles. El proyecto aplica diseño experimental, evaluación de modelos y pruebas automatizadas."
+    },
+    "crime.technologies": {
+      "en": "Data Crime Scene technologies",
+      "es": "Tecnologías de Data Crime Scene"
+    },
+    "crime.resources": {
+      "en": "Data Crime Scene resources",
+      "es": "Recursos de Data Crime Scene"
+    },
+    "crime.code": {
+      "en": "View code",
+      "es": "Ver código"
+    },
+    "crime.methodology": {
+      "en": "Methodology",
+      "es": "Metodología"
+    },
+    "crime.tests": {
+      "en": "226 automated tests",
+      "es": "226 pruebas automatizadas"
+    },
+    "crime.imageAlt": {
+      "en": "Data Crime Scene’s Guided Mode: mode selector and initial case brief, with the prediction objective and timing. Interface in Spanish.",
+      "es": "Modo Guiado de Data Crime Scene: selector de modos e informe inicial del expediente, con el objetivo y el momento de predicción."
+    },
+    "crime.caption": {
+      "en": "Guided Mode · real application screenshot, before running the experiment.",
+      "es": "Recorrido guiado · captura real de la aplicación, antes de ejecutar el experimento."
+    },
+    "crime.imageLink": {
+      "en": "View full-size screenshot (in Spanish)",
+      "es": "Ver captura a tamaño completo"
+    },
     "orchestrator.evidenceTitle": {
       "en": "Evidence & limits",
       "es": "Evidencia y límites"
@@ -323,6 +367,7 @@
     ['data-i18n', null],
     ['data-i18n-aria-label', 'aria-label'],
     ['data-i18n-content', 'content'],
+    ['data-i18n-alt', 'alt'],
   ];
   const bindings = targets.flatMap(([marker, attribute]) =>
     [...document.querySelectorAll(`[${marker}]`)].map(element => ({

@@ -12,6 +12,30 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 Visita <http://localhost:8000> y detén el servidor con `Ctrl+C`. También puedes abrir `index.html` directamente.
 
+## Data Crime Scene — 31 de octubre de 2026
+
+Se añade como tercer proyecto, después de los dos existentes, con textos equivalentes en ES/EN y respaldo HTML completo en inglés. La ficha presenta la investigación de fugas de información, los modos Guiado, Laboratorio y Detective, el entrenamiento real con datos sintéticos, ocho expedientes, intervenciones e informes JSON reproducibles. Destaca diseño experimental, evaluación de modelos y pruebas automatizadas; las tecnologías son Python, scikit-learn, Streamlit y Plotly. El estado indica «Código publicado · aplicación local»; no se enlaza una demo pública.
+
+La fuente es el [README publicado](https://github.com/alvaro-salvador-huertas/data-crime-scene/blob/d1be2c01e9aa4d95bc3d97b449a6a20322bb4f3e/README.md), junto con la [metodología de ese commit](https://github.com/alvaro-salvador-huertas/data-crime-scene/blob/d1be2c01e9aa4d95bc3d97b449a6a20322bb4f3e/docs/metodologia.md). La [CI enlazada](https://github.com/alvaro-salvador-huertas/data-crime-scene/actions/runs/41199324937) corresponde a `d1be2c01e9aa4d95bc3d97b449a6a20322bb4f3e`, concluyó con éxito y su registro contiene `226 passed in 49.17s`. Son pruebas automatizadas de software, no 226 evaluaciones de modelos.
+
+### Captura y conservación
+
+`assets/projects/data-crime-scene-guided.webp` procede de la [captura real del inicio del recorrido guiado](https://github.com/alvaro-salvador-huertas/data-crime-scene/blob/d1be2c01e9aa4d95bc3d97b449a6a20322bb4f3e/docs/screenshots/visual-integration-20261029/01-guided-initial-1440.png), de la integración visual del proyecto (MIT). Se contrastó la copia local con el blob `963c26ef90011886282d1592c74d0153d85bfdac` del commit publicado. No muestra soluciones de Detective.
+
+La copia WebP sin pérdida conserva los 1440 × 1000 píxeles y reduce el archivo de 132.387 a 64.940 bytes. Se sirve localmente con dimensiones explícitas, carga diferida, texto alternativo traducido y enlace a tamaño completo para leer los detalles. El PNG original permanece intacto en Data Crime Scene. El traductor incorpora `data-i18n-alt`; el resto de su comportamiento se conserva.
+
+Se reutilizan la tarjeta, rejilla, tipografía, colores y enlaces actuales. Solo se añaden dos reglas de presentación para la captura y su enlace. No se modifican la portada, About, los proyectos anteriores, los textos profesionales, `motion.js`, dependencias ni despliegue. `.agents/` y `skills-lock.json` se conservan.
+
+### Validación de esta incorporación
+
+Chrome 156.0.8078.47, con viewports de 390 × 844, 768 × 1024, 1440 × 900, 1920 × 1080 y 1440 × 650. Se comparan ambas versiones en ES/EN, y se revisa la nueva versión sin JavaScript y con movimiento reducido: 35 escenarios y 515 comprobaciones, sin fallos. Incluyen traducciones de texto y atributos, respaldo inglés, carga y proporción de la captura, desbordamientos, anclas, recorrido Tab/Mayús+Tab, foco visible y errores de consola. Los tres enlaces públicos nuevos responden con HTTP 200.
+
+La portada conserva su altura mínima de viewport; About comienza después y mantiene el fondo azul continuo. Se comparan geometría y contenido fuera de la nueva ficha, incluidos los dos proyectos anteriores: sin cambios. También se comprueban ES/EN en una ventana real de 1440 × 650 píxeles CSS (DPR 1), persistencia de idioma tras recarga, navegación por teclado, salto al contenido, apertura de la captura y cancelación de la entrada por Escape, foco, cambio de idioma o movimiento reducido.
+
+`node --check` de ambos scripts y `git diff --check` pasan. No se detectan incidencias preexistentes ni introducidas dentro de estas comprobaciones; no se hacen correcciones incidentales. Los tamaños móviles son emulados, no dispositivos físicos; no se han probado Safari, Firefox ni lector de pantalla.
+
+La comparativa visual, informes JSON, textos finales ES/EN y diff completo (incluida la imagen nueva) se entregan en `/tmp/portfolio-data-crime-scene/`, fuera del repositorio. Abre `index.html` de esa carpeta para revisar las capturas. Las secciones siguientes conservan el historial de revisiones anteriores.
+
 ## Revisión visual y de movimiento — 28 de octubre de 2026
 
 La versión actual conserva literalmente los textos profesionales, las 78 entradas del diccionario ES/EN y todos los enlaces. CNAME, publicación estática, Manrope y sus licencias, iconos y diagramas de proyectos se mantienen. No se modifica Data Crime Scene ni se incorporan proyectos nuevos.

@@ -115,6 +115,8 @@ a:focus-visible, button:focus-visible, [tabindex]:focus-visible { outline: 3px s
 
 /* Existing project diagrams, retained as static explanations. */
 .project-visual { min-width: 0; }
+.project-screenshot { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 8px; }
+.project-visual .screenshot-link { display: inline-block; min-height: 44px; padding-block: 0.6rem; }
 .diagram-defs { position: absolute; overflow: hidden; }
 .diagram-surface { padding: clamp(1rem, 2vw, 1.75rem); border: 1px solid var(--line); border-radius: 8px; background: var(--wash); }
 .diagram-panel, .document-sheet { border: 1px solid var(--line); border-radius: 5px; background: var(--page); box-shadow: 0 3px 8px rgb(41 39 36 / 4%); }
