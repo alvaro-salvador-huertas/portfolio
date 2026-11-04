@@ -12,6 +12,16 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 Visita <http://localhost:8000> y detén el servidor con `Ctrl+C`. También puedes abrir `index.html` directamente.
 
+## Data Crime Scene: acceso a la demo — 4 de noviembre de 2026
+
+La ficha ofrece [Probar demo](https://data-crime-scene-eghdf4uzpugjdkobrn4g3t.streamlit.app/) como primer enlace, indicando que la interfaz está en español. ES/EN y el respaldo HTML presentan el estado «Código y demo públicos» / “Public code and demo”. La [metodología enlazada](https://github.com/alvaro-salvador-huertas/data-crime-scene/blob/e2651ab6686fa9358d2e135dc48be418c117e3e5/docs/metodologia.md) corresponde al commit integrado `e2651ab6686fa9358d2e135dc48be418c117e3e5`.
+
+La cifra visible es **276 pruebas automatizadas**, enlazada a la [CI de ese commit](https://github.com/alvaro-salvador-huertas/data-crime-scene/actions/runs/41821340440): `276 passed in 53.42s`, con los jobs `tests` y `security` correctos. Es evidencia de pruebas de software, no una cifra de evaluaciones de modelos. El arranque público y su aviso de límites se observaron el 4 de noviembre; no se atribuye a la demo una prueba de carga ni rendimiento en producción.
+
+Se reutilizan los estilos existentes sin modificar CSS, animaciones, captura, portada, presentación personal, otros proyectos o configuración de publicación. Las secciones siguientes mantienen sus afirmaciones y cifras como registros históricos.
+
+Comprobación de esta actualización: ES/EN en marcos del navegador de 390, 768 y 1440 píxeles CSS, con comparación de dimensiones frente a la base, enlaces dentro de sus contenedores y carga de la captura. La portada, About y los dos proyectos anteriores conservan sus dimensiones. También se comprobaron persistencia del idioma, cinco pasos de teclado con foco visible y respaldo inglés con JavaScript bloqueado en el marco. La página completa se inspeccionó en Chrome de escritorio; los marcos no representan dispositivos físicos. Sin errores propios de la página observados; la extensión del navegador registró avisos ajenos al sitio. Sintaxis JavaScript, recursos locales y diff comprobados. No se han probado Safari, Firefox ni lector de pantalla en esta intervención.
+
 ## Data Crime Scene — 31 de octubre de 2026
 
 Se añade como tercer proyecto, después de los dos existentes, con textos equivalentes en ES/EN y respaldo HTML completo en inglés. La ficha presenta la investigación de fugas de información, los modos Guiado, Laboratorio y Detective, el entrenamiento real con datos sintéticos, ocho expedientes, intervenciones e informes JSON reproducibles. Destaca diseño experimental, evaluación de modelos y pruebas automatizadas; las tecnologías son Python, scikit-learn, Streamlit y Plotly. El estado indica «Código publicado · aplicación local»; no se enlaza una demo pública.
