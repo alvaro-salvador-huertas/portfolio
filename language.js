@@ -311,8 +311,8 @@
       "es": "Esquema ilustrativo con una respuesta de ejemplo."
     },
     "crime.status": {
-      "en": "Published code · local application",
-      "es": "Código publicado · aplicación local"
+      "en": "Public code and demo",
+      "es": "Código y demo públicos"
     },
     "crime.problem": {
       "en": "An interactive machine learning lab for investigating data leakage and comparing evaluation procedures.",
@@ -334,13 +334,17 @@
       "en": "View code",
       "es": "Ver código"
     },
+    "crime.demo": {
+      "en": "Try demo",
+      "es": "Probar demo"
+    },
     "crime.methodology": {
       "en": "Methodology",
       "es": "Metodología"
     },
     "crime.tests": {
-      "en": "226 automated tests",
-      "es": "226 pruebas automatizadas"
+      "en": "276 automated tests",
+      "es": "276 pruebas automatizadas"
     },
     "crime.imageAlt": {
       "en": "Data Crime Scene’s Guided Mode: mode selector and initial case brief, with the prediction objective and timing. Interface in Spanish.",
