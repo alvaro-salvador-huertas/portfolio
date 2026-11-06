@@ -358,6 +358,54 @@
       "en": "View full-size screenshot (in Spanish)",
       "es": "Ver captura a tamaño completo"
     },
+    "shift.status": {
+      "en": "Public code · local application",
+      "es": "Código público · aplicación local"
+    },
+    "shift.problem": {
+      "en": "How do image classifiers behave when their inputs change?",
+      "es": "¿Cómo se comportan los clasificadores cuando cambian sus imágenes de entrada?"
+    },
+    "shift.summary": {
+      "en": "I built a robustness lab comparing five classifiers on handwritten digits under noise, blur and contrast changes, with and without training augmentation. It separates training, validation and test, and provides per-image predictions and reproducible JSON reports.",
+      "es": "He creado un laboratorio de robustez que compara cinco clasificadores sobre dígitos manuscritos con ruido, desenfoque y cambios de contraste, con y sin aumentación del entrenamiento. Separa entrenamiento, validación y test, y conserva predicciones por imagen e informes JSON reproducibles."
+    },
+    "shift.limits": {
+      "en": "A small benchmark with synthetic image corruptions; it does not establish production robustness or generalisation to unseen writers. The interface explores archived results without retraining.",
+      "es": "Benchmark pequeño con degradaciones sintéticas: no acredita robustez en producción ni generalización a nuevos escritores. La interfaz permite explorar resultados archivados sin reentrenar."
+    },
+    "shift.technologies": {
+      "en": "ShiftLab technologies",
+      "es": "Tecnologías de ShiftLab"
+    },
+    "shift.resources": {
+      "en": "ShiftLab resources",
+      "es": "Recursos de ShiftLab"
+    },
+    "shift.code": {
+      "en": "View code",
+      "es": "Ver código"
+    },
+    "shift.protocol": {
+      "en": "Protocol and data",
+      "es": "Protocolo y datos"
+    },
+    "shift.tests": {
+      "en": "42 automated tests",
+      "es": "42 pruebas automatizadas"
+    },
+    "shift.imageAlt": {
+      "en": "ShiftLab validation screen comparing five classifiers on clean and noisy digit images. Interface in Spanish; these are development results, not the final test.",
+      "es": "Pantalla de validación de ShiftLab: comparación de cinco clasificadores sobre dígitos limpios y con ruido. Son resultados de desarrollo, no del test final."
+    },
+    "shift.caption": {
+      "en": "Real validation screenshot, captured before the final test. Interface in Spanish.",
+      "es": "Captura real de validación, realizada antes del test final. Interfaz en español."
+    },
+    "shift.imageLink": {
+      "en": "View full-size screenshot",
+      "es": "Ver captura a tamaño completo"
+    },
     "orchestrator.evidenceTitle": {
       "en": "Evidence & limits",
       "es": "Evidencia y límites"
