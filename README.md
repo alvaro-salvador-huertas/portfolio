@@ -12,6 +12,20 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 Visita <http://localhost:8000> y detén el servidor con `Ctrl+C`. También puedes abrir `index.html` directamente.
 
+## ShiftLab — 6 de noviembre de 2026
+
+Se incorpora como cuarto proyecto, con textos equivalentes en ES/EN y respaldo HTML completo en inglés. La ficha presenta la comparación de cinco clasificadores de dígitos manuscritos ante ruido, desenfoque y cambios de contraste, con y sin aumentación del entrenamiento. Explica la separación entre entrenamiento, validación y test, las predicciones por imagen y los informes JSON reproducibles. Las degradaciones son sintéticas sobre imágenes reales: el benchmark no acredita robustez en producción ni generalización a nuevos escritores. La interfaz explora resultados archivados sin reentrenar.
+
+El estado es «Código público · aplicación local» / “Public code · local application”. Se enlazan el [repositorio](https://github.com/alvaro-salvador-huertas/shift-lab), el [protocolo y los datos del commit publicado](https://github.com/alvaro-salvador-huertas/shift-lab/blob/85a87ab440bcabff192d4656da7c78e13d70a4db/docs/protocolo.md) y la [CI de ese mismo commit](https://github.com/alvaro-salvador-huertas/shift-lab/actions/runs/41904458938), con **42 pruebas de software** correctas y dos avisos de deprecación. No se anuncia una demo pública de ShiftLab ni se presenta ese número como evaluaciones de modelos.
+
+`assets/projects/shiftlab-validation.png` es una copia exacta de la [captura real publicada](https://github.com/alvaro-salvador-huertas/shift-lab/blob/85a87ab440bcabff192d4656da7c78e13d70a4db/docs/screenshots/validation-v2-resumen-desktop.png), procedente del proyecto MIT: blob Git `40845520852be020eaaa7624b83ea7cb5fe15488`, 117.460 bytes y 1440 × 1000 píxeles. Corresponde a validación, anterior al test final; el pie y el texto alternativo lo indican en ambos idiomas. Se conservan sus píxeles originales, dimensiones explícitas, carga diferida y enlace a tamaño completo. Los avisos sobre el origen y licencia de los datos permanecen en [TERCEROS.md de ShiftLab](https://github.com/alvaro-salvador-huertas/shift-lab/blob/85a87ab440bcabff192d4656da7c78e13d70a4db/docs/TERCEROS.md).
+
+Se reutiliza el diseño existente sin cambiar CSS, animaciones, portada, About, los tres proyectos anteriores, dependencias ni configuración del dominio o despliegue. Los 90 valores anteriores del diccionario ES/EN permanecen intactos; se añaden doce entradas.
+
+Validación de esta intervención: comparación antes/después en marcos de Chrome de **390, 768 y 1440 píxeles CSS**, ES/EN. Los tres proyectos anteriores, la portada y About conservan exactamente contenido y geometría en las seis combinaciones; no se observa desbordamiento horizontal ni elementos de la nueva ficha fuera de su contenedor. Se comprueban la carga de la imagen, los cuatro enlaces de la ficha, el recorrido de teclado con foco visible de 3 px, la persistencia de idioma tras recarga y el respaldo inglés con scripts bloqueados en un marco. Inspección visual adicional en la ventana real de Chrome de 1363 × 936. Sin errores propios del sitio observados; el navegador registra avisos de su extensión ajenos a la página. Sintaxis JavaScript, recursos locales y diff revisados. Los marcos no representan dispositivos físicos; no se han probado Safari, Firefox, lector de pantalla ni una nueva emulación de movimiento reducido. No se reentrena ni se repite el test final de ShiftLab.
+
+Las secciones siguientes conservan su carácter histórico.
+
 ## Data Crime Scene: acceso a la demo — 4 de noviembre de 2026
 
 La ficha ofrece [Probar demo](https://data-crime-scene-eghdf4uzpugjdkobrn4g3t.streamlit.app/) como primer enlace, indicando que la interfaz está en español. ES/EN y el respaldo HTML presentan el estado «Código y demo públicos» / “Public code and demo”. La [metodología enlazada](https://github.com/alvaro-salvador-huertas/data-crime-scene/blob/e2651ab6686fa9358d2e135dc48be418c117e3e5/docs/metodologia.md) corresponde al commit integrado `e2651ab6686fa9358d2e135dc48be418c117e3e5`.
