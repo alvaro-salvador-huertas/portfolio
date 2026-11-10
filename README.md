@@ -12,6 +12,29 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 Visita <http://localhost:8000> y detén el servidor con `Ctrl+C`. También puedes abrir `index.html` directamente.
 
+## Data Crime Scene: caso técnico — 10 de noviembre de 2026
+
+La ficha añade «Ver caso técnico» / “View case study”. Abre [el caso en español](data-crime-scene/index.html) o [en inglés](data-crime-scene/en.html) según el idioma elegido en el portfolio. Ambas páginas contienen HTML completo y enlaces reales de cambio de idioma: el relato, la tabla de ocho filas y las tres fuentes funcionan sin JavaScript. El caso vuelve a la ficha; con JavaScript se conserva el idioma al regresar.
+
+El relato distingue tres pasos: problema medido, comparación y decisión. La prueba inicial de Chrome del 7 de noviembre se separa de la campaña HTTP del 9 de noviembre y de la verificación funcional posterior de la integración en Guiado. Todo se ejecutó en local con solicitudes simuladas y experimentos reales sobre datos sintéticos. No se atribuye capacidad medida al alojamiento ni se afirma que FIFO esté activa en la demo pública.
+
+Las fuentes se fijan al commit `c4c4d98` de Data Crime Scene: [capacidad-demo.md](https://github.com/alvaro-salvador-huertas/data-crime-scene/blob/c4c4d98/docs/capacidad-demo.md), [prototipo-cola.md](https://github.com/alvaro-salvador-huertas/data-crime-scene/blob/c4c4d98/docs/prototipo-cola.md) e [integracion-cola-guiado.md](https://github.com/alvaro-salvador-huertas/data-crime-scene/blob/c4c4d98/docs/integracion-cola-guiado.md). La serie seleccionable es únicamente **future con semillas distintas**; cada total suma **tres tandas** por política:
+
+| Solicitudes por tanda | Total por política | Resultados con rechazo | Resultados con FIFO | Máximo hasta recibir JSON, rechazo / FIFO (s) |
+| --- | --- | --- | --- | --- |
+| 1 | 3 | 3/3 | 3/3 | 0,257 / 0,246 |
+| 5 | 15 | 3/15 | 15/15 | 0,365 / 1,098 |
+| 10 | 30 | 3/30 | 30/30 | 0,461 / 2,290 |
+| 20 | 60 | 10/60 | 60/60 | 1,340 / 62,028 |
+
+El selector nativo de 1, 5, 10 y 20 se revela solo después de inicializarse. Lee los datos de la propia tabla HTML y actualiza una región de estado con `aria-live="polite"`; no envía solicitudes. El resumen redondea los tiempos a dos decimales según el idioma (62,03 s / 62.03 s); la tabla conserva tres. El reloj incluye sondeo, validación y descarga, y se separa del momento en que el JSON estaba disponible en el servidor. Se explica que FIFO evita reintentos, mantiene un cálculo activo, 12 inicios por ventana móvil de 60 s y 3 s por sesión, y que se integró **apagada por defecto**. Se conservan las limitaciones por proceso y de recuperación.
+
+Se reutilizan Manrope local, colores, márgenes y foco del portfolio. `case-study.css` se carga únicamente en estas páginas; `styles.css`, `motion.js`, las imágenes y el dominio permanecen intactos. En `index.html` solo se añade el enlace a la ficha de Data Crime Scene; `language.js` añade sus dos traducciones y un enlace traducible. No se instalan dependencias ni se modifica la publicación.
+
+La vista se sirve con el comando del apartado anterior: <http://localhost:8000/data-crime-scene/> (ES) y <http://localhost:8000/data-crime-scene/en.html> (EN). Las capturas y el diff de esta intervención se entregan como artefactos locales en `/tmp/portfolio-case-review/`, fuera del repositorio.
+
+Validación: Chrome 157.0.8103.38 headless, ES/EN a **390, 768 y 1440 × 1000 px CSS**. Pasan las cuatro tandas, cifras y tiempos localizados, enlaces de idioma, retorno a la ficha, selección nativa con flechas, Tab/Mayús+Tab, foco sólido de 3 px y desplazamiento de tabla con teclado. La página no desborda horizontalmente; la tabla tiene desplazamiento propio a 390 y 768 px. Seis escenarios adicionales sin JavaScript conservan los tres pasos, las ocho filas y las fuentes, con cambio de idioma mediante enlaces. Se comprueban también almacenamiento bloqueado y movimiento reducido. Sin errores propios de JavaScript ni respuestas HTTP fallidas observadas. Comparación con la copia inicial: contenido, geometría relativa y estilos iguales en portada, About, las otras tres fichas, capacidades y contacto, en las seis combinaciones; el nuevo enlace puede desplazar las secciones posteriores. Sintaxis JavaScript, referencias locales, anclas y `git diff --check` correctos. Se inspeccionan visualmente las capturas de página completa y de foco; no se prueban otros navegadores, dispositivos físicos ni lectores de pantalla. No se repiten las campañas de Data Crime Scene ni se consulta su demo pública.
+
 ## ShiftLab — 6 de noviembre de 2026
 
 Se incorpora como cuarto proyecto, con textos equivalentes en ES/EN y respaldo HTML completo en inglés. La ficha presenta la comparación de cinco clasificadores de dígitos manuscritos ante ruido, desenfoque y cambios de contraste, con y sin aumentación del entrenamiento. Explica la separación entre entrenamiento, validación y test, las predicciones por imagen y los informes JSON reproducibles. Las degradaciones son sintéticas sobre imágenes reales: el benchmark no acredita robustez en producción ni generalización a nuevos escritores. La interfaz explora resultados archivados sin reentrenar.

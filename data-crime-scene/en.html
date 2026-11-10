@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#173449">
+    <meta name="description" content="Data Crime Scene case study: local concurrent request measurements, rejection versus FIFO and integration with the queue disabled by default.">
+    <title>Data Crime Scene · Case study | Álvaro Salvador Huertas</title>
+    <link rel="alternate" hreflang="es" href="index.html">
+    <link rel="alternate" hreflang="en" href="en.html">
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="../assets/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="case-study.css">
+    <script src="case-study.js" defer></script>
+  </head>
+  <body class="case-page">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="case-opening" id="top">
+      <header class="site-header site-shell case-header">
+        <a class="brand" href="../index.html" aria-label="as. · Álvaro Salvador Huertas · Home">as<span>.</span></a>
+        <div class="header-tools">
+          <nav class="language-switch case-language" aria-label="Case study language">
+            <a href="index.html" lang="es" hreflang="es" aria-label="Español">ES</a>
+            <span aria-hidden="true">/</span>
+            <a href="en.html" lang="en" hreflang="en" aria-label="English" aria-current="page">EN</a>
+          </nav>
+          <a class="case-back" href="../index.html#data-crime-scene-title">Back to projects</a>
+        </div>
+      </header>
+      <div class="case-hero site-shell">
+        <h1 translate="no">Data Crime Scene</h1>
+        <p>Accept the request. Respect the turn.</p>
+        <nav aria-label="Data Crime Scene · Case study | Álvaro Salvador Huertas"><ul class="case-index">
+          <li><a href="#problem">The problem</a></li>
+          <li><a href="#comparison">The comparison</a></li>
+          <li><a href="#decision">The decision</a></li>
+        </ul></nav>
+      </div>
+    </div>
+    <main class="site-shell" id="main" tabindex="-1">
+      <article aria-label="Data Crime Scene · Case study | Álvaro Salvador Huertas">
+        <section class="case-step" id="problem" aria-labelledby="problem-title">
+          <h2 id="problem-title">1. What I measured</h2>
+          <div class="case-context">
+            <div>
+              <p>What happens when a group requests experiments at the same time? I measured how many requests returned results and how long they waited. The observed problem was rejection while a calculation was active: anyone left out had to click again.</p>
+              <p><strong>These were simulated requests run locally, with real experiments on synthetic data. No real users took part, and the hosted demo’s capacity was not measured.</strong></p>
+              <h3>Initial Chrome test · 7 November 2026</h3>
+              <p>Using independent browser contexts, batches of 5 and 10 returned one result per batch; the remaining requests were rejected. Each level was repeated three times. The 20 sessions were prepared, but the load generator exceeded its preventive memory threshold before any experiments were launched.</p>
+              <p>That attempt at 20 does not demonstrate a lack of server capacity. The policy allowed only one active calculation; a larger machine alone would not resolve those rejections.</p>
+            </div>
+            <figure>
+              <img class="project-screenshot" src="../assets/projects/data-crime-scene-guided.webp" width="1440" height="1000" loading="lazy" decoding="async" alt="Data Crime Scene Guided Mode before running: mode selector and initial case brief. Interface in Spanish.">
+              <figcaption>Product context: the start of Guided Mode, before running an experiment. Interface in Spanish.</figcaption>
+            </figure>
+          </div>
+        </section>
+        <section class="case-step" id="comparison" aria-labelledby="comparison-title">
+          <h2 id="comparison-title">2. What I compared</h2>
+          <h3>Later HTTP comparison · 9 November 2026</h3>
+          <p>I compared immediate rejection and a bounded FIFO queue using the same lightweight HTTP client and experiment engine. This campaign used neither Chrome nor the Streamlit interface. The selector shows the future series with distinct seeds (42…61 depending on batch size), with no cache reuse between requesters.</p>
+          <p>Each level sums three independent batches, each starting with a new process, cold cache and empty budget. Both policies received the same configurations, with their order alternated. This does not represent a continuous workshop.</p>
+          <section class="case-comparison" aria-labelledby="batch-title">
+            <h3 id="batch-title">Results by batch size</h3>
+            <div class="batch-controls" hidden>
+              <label for="batch-size">Requests per batch</label>
+              <select id="batch-size" aria-describedby="comparison-totals">
+                <option value="1">1</option><option value="5">5</option><option value="10">10</option><option value="20" selected>20</option>
+              </select>
+            </div>
+            <div class="comparison-results" role="status" aria-live="polite" aria-atomic="true">
+              <p class="comparison-totals" id="comparison-totals">3 batches of 20 requests: 60 requests in total per policy.</p>
+              <div class="policy-results">
+                <section class="policy-result" data-result="reject" aria-labelledby="reject-title">
+                  <h4 id="reject-title">Rejection · results</h4>
+                  <p class="result-count">10/60</p>
+                  <p class="result-time">Last JSON received: 1.34 s (observed maximum among successful results).</p>
+                </section>
+                <section class="policy-result" data-result="fifo" aria-labelledby="fifo-title">
+                  <h4 id="fifo-title">FIFO · results</h4>
+                  <p class="result-count">60/60</p>
+                  <p class="result-time">Last JSON received: 62.03 s (observed maximum among successful results).</p>
+                </section>
+              </div>
+            </div>
+            <p class="comparison-note">At the FIFO level of 20, 8 jobs in each batch waited for the quota to renew. Accepting a job removes the need to resubmit it; the wait remains.</p>
+          </section>
+          <div class="case-table-region" role="region" tabindex="0" aria-labelledby="table-caption" aria-label="Complete results table, scroll horizontally" aria-describedby="table-note">
+            <table class="case-table">
+              <caption id="table-caption">Complete series · future with distinct seeds · three batches per level and policy</caption>
+              <thead><tr><th scope="col">Requests / batch</th><th scope="col">Total in 3 batches</th><th scope="col">Policy</th><th scope="col">Results</th><th scope="col">Rejected</th><th scope="col">Max. to receive JSON (s)</th></tr></thead>
+            <tbody>
+              <tr data-batch="1" data-policy="reject" data-results="3" data-max-seconds="0.257"><th scope="rowgroup" rowspan="2">1</th><td rowspan="2">3</td><th scope="row">Rejection</th><td>3/3</td><td>0</td><td>0.257</td></tr>
+              <tr data-batch="1" data-policy="fifo" data-results="3" data-max-seconds="0.246"><th scope="row">FIFO</th><td>3/3</td><td>0</td><td>0.246</td></tr>
+            </tbody>
+            <tbody>
+              <tr data-batch="5" data-policy="reject" data-results="3" data-max-seconds="0.365"><th scope="rowgroup" rowspan="2">5</th><td rowspan="2">15</td><th scope="row">Rejection</th><td>3/15</td><td>12</td><td>0.365</td></tr>
+              <tr data-batch="5" data-policy="fifo" data-results="15" data-max-seconds="1.098"><th scope="row">FIFO</th><td>15/15</td><td>0</td><td>1.098</td></tr>
+            </tbody>
+            <tbody>
+              <tr data-batch="10" data-policy="reject" data-results="3" data-max-seconds="0.461"><th scope="rowgroup" rowspan="2">10</th><td rowspan="2">30</td><th scope="row">Rejection</th><td>3/30</td><td>27</td><td>0.461</td></tr>
+              <tr data-batch="10" data-policy="fifo" data-results="30" data-max-seconds="2.290"><th scope="row">FIFO</th><td>30/30</td><td>0</td><td>2.290</td></tr>
+            </tbody>
+            <tbody>
+              <tr data-batch="20" data-policy="reject" data-results="10" data-max-seconds="1.340"><th scope="rowgroup" rowspan="2">20</th><td rowspan="2">60</td><th scope="row">Rejection</th><td>10/60</td><td>50</td><td>1.340</td></tr>
+              <tr data-batch="20" data-policy="fifo" data-results="60" data-max-seconds="62.028"><th scope="row">FIFO</th><td>60/60</td><td>0</td><td>62.028</td></tr>
+            </tbody>
+            </table>
+          </div>
+          <p class="case-footnote" id="table-note">On narrow screens, scroll the table; with a keyboard, focus it and use the arrow keys. Totals sum three batches, not a single batch. Table times retain the report’s three decimal places.</p>
+          <p class="case-footnote">Time runs from sending the request to retrieving its JSON in the client, including sequential polling, validation and download. It is the maximum among successful results, not pure training time or rejection time. For FIFO/20, the maximum to JSON availability on the server was 60.345 s; the maximum to retrieval by the client was 62.028 s. There were no engine errors, timeouts or lost results in completed batches.</p>
+        </section>
+        <section class="case-step" id="decision" aria-labelledby="decision-title">
+          <h2 id="decision-title">3. What I decided</h2>
+          <div class="case-decision">
+            <p>I chose a bounded queue if the requirement is to accept 20 requests without manual retries. The prototype returned all results in these local batches without adding resources. For the current hosting, I would keep coordinated turns until integration is verified there; these data alone do not justify moving to AWS.</p>
+            <dl class="case-budget">
+          <div><dt>1</dt><dd>active calculation per process</dd></div>
+          <div><dt>12 / 60 s</dt><dd>starts in a rolling window</dd></div>
+          <div><dt>3 s</dt><dd>interval per session</dd></div>
+            </dl>
+            <p>FIFO reserves one execution slot and 19 waiting places. Accepting a queued job does not yet consume quota: the job consumes it when it starts, including cache hits. The queue orders waiting work and preserves the limits; it does not add compute capacity.</p>
+            <h3>Local integration, disabled by default</h3>
+            <p>It was subsequently integrated into Guided Mode through a startup option: DCS_GUIDED_FIFO=1. Omitting it or using 0 preserves the original rejection policy. The integration shares the in-process budget with Laboratory and Detective, without an extra HTTP service; those other modes retain their rejection rules.</p>
+            <p>A local functional check with two Chrome contexts verified queuing, submitted configuration and retrieval of each requester’s own JSON. This was a separate integration check, not a new capacity campaign.</p>
+            <p><strong>Activation in the public demo has not been established. Hosting checks and a continuous workshop remain pending. The queue and budget are per process, with no coordination between replicas: restarting loses jobs and results; reloading loses the session’s access to a pending job.</strong></p>
+          </div>
+          <aside class="case-sources" aria-labelledby="sources-title">
+            <h3 id="sources-title">Reports and evidence limits</h3>
+            <p>Sources in Spanish, pinned to commit c4c4d98:</p>
+            <ul>
+            <li><a href="https://github.com/alvaro-salvador-huertas/data-crime-scene/blob/c4c4d98/docs/capacidad-demo.md" hreflang="es">Initial Chrome test</a><small>capacidad-demo.md</small></li>
+            <li><a href="https://github.com/alvaro-salvador-huertas/data-crime-scene/blob/c4c4d98/docs/prototipo-cola.md" hreflang="es">Rejection and FIFO comparison</a><small>prototipo-cola.md</small></li>
+            <li><a href="https://github.com/alvaro-salvador-huertas/data-crime-scene/blob/c4c4d98/docs/integracion-cola-guiado.md" hreflang="es">Guided Mode queue integration</a><small>integracion-cola-guiado.md</small></li>
+            </ul>
+          </aside>
+        </section>
+      </article>
+    </main>
+    <footer class="site-footer site-shell case-footer">
+      <span>Álvaro Salvador Huertas</span>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </footer>
+  </body>
+</html>
