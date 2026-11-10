@@ -310,6 +310,14 @@
       "en": "Illustrative workflow with an example answer.",
       "es": "Esquema ilustrativo con una respuesta de ejemplo."
     },
+    "crime.caseStudy": {
+      "en": "View case study",
+      "es": "Ver caso técnico"
+    },
+    "crime.caseStudyHref": {
+      "en": "data-crime-scene/en.html",
+      "es": "data-crime-scene/"
+    },
     "crime.status": {
       "en": "Public code and demo",
       "es": "Código y demo públicos"
@@ -417,6 +425,7 @@
 
   const targets = [
     ['data-i18n', null],
+    ['data-i18n-href', 'href'],
     ['data-i18n-aria-label', 'aria-label'],
     ['data-i18n-content', 'content'],
     ['data-i18n-alt', 'alt'],
