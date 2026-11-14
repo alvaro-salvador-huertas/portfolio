@@ -2,6 +2,14 @@
    Translate only leaf text and explicitly declared attributes. */
 (() => {
   const messages = {
+    "orchestrator.caseStudy": {
+      "en": "View case study",
+      "es": "Ver caso técnico"
+    },
+    "orchestrator.caseStudyHref": {
+      "en": "code-review-orchestrator/en.html",
+      "es": "code-review-orchestrator/"
+    },
     "page.title": {
       "en": "Álvaro Salvador Huertas - AI Agents, Evals & Developer Tooling",
       "es": "Álvaro Salvador Huertas - Agentes de IA, evaluación y herramientas de desarrollo"

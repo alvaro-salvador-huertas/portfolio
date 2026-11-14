@@ -12,6 +12,22 @@ python3 -m http.server 8000 --bind 127.0.0.1
 
 Visita <http://localhost:8000> y detén el servidor con `Ctrl+C`. También puedes abrir `index.html` directamente.
 
+## code-review-orchestrator: caso técnico — 13 de noviembre de 2026
+
+La ficha enlaza «Ver caso técnico» / “View case study” a [ES](code-review-orchestrator/index.html) y [EN](code-review-orchestrator/en.html). El relato y las fuentes ocupan unas 335/315 palabras, respectivamente, para una lectura de unos dos minutos. Ambas páginas tienen HTML completo y enlaces nativos de idioma; JavaScript solo conserva la elección de idioma al regresar al portfolio.
+
+El caso de ShiftLab sigue cuatro pasos: regeneración de tres informes con `--from-results`, revisión del diff con criterios explícitos, reproducción y corrección del fallo Unicode antes de crear la carpeta de salida, y verificación con 61 pruebas, segunda revisión sin hallazgos y ejecución del JSON histórico. La incorporación se identifica con el merge `5d3ad83`.
+
+El aislamiento posterior se presenta por separado: la PR #27 cubre `inventory_base()` y `evaluate_flow()` invocados desde `orchestrate_project.py`, incluidas tareas configurables y entregas con varios archivos; excluye los demás runners directos y los agentes. Se explican Podman rootless, ausencia de red, entradas de solo lectura, cuotas por evaluación y parada sin alternativa de ejecución en el anfitrión si falla el aislamiento. Las **10 integraciones reales con Podman** y las **834 pruebas ordinarias correctas, con otras 10 opt-in omitidas**, son evidencia local de ese cambio; la CI enlazada también terminó correctamente. No se atribuye la revisión de ShiftLab al evaluador aislado y la incorporación sigue bajo decisión humana. Estas pruebas históricas no se repiten al añadir la página.
+
+Fuentes revisadas: [herramienta de revisión, PR #26](https://github.com/alvaro-salvador-huertas/code-review-orchestrator/pull/26), [ShiftLab, PR #2](https://github.com/alvaro-salvador-huertas/shift-lab/pull/2), [aislamiento y cuotas, PR #27](https://github.com/alvaro-salvador-huertas/code-review-orchestrator/pull/27) y [CI del aislamiento](https://github.com/alvaro-salvador-huertas/code-review-orchestrator/actions/runs/43446261444).
+
+Se reutilizan los estilos de Data Crime Scene mediante un enlace CSS, sin modificar aquel caso, `styles.css`, `motion.js`, recursos o dependencias. Los estilos nuevos solo ajustan el título largo y la densidad de lectura dentro de `.orchestrator-case`. La ficha añade un enlace y el diccionario ES/EN añade su etiqueta y destino. El trabajo se prepara en la rama local `content/orchestrator-case-study`, en un worktree separado desde `origin/main` (`a159cf0`), sin publicar.
+
+Para revisar desde la raíz de ese worktree, ejecuta `python3 -m http.server 8013 --bind 127.0.0.1` y abre <http://localhost:8013/code-review-orchestrator/> (ES) o <http://localhost:8013/code-review-orchestrator/en.html> (EN). También puedes abrir ambos HTML directamente. Capturas, comprobaciones y diff permanecen fuera del repositorio, en `/tmp/portfolio-orchestrator-review/`.
+
+Validación de esta incorporación: Chrome 157.0.8103.38 headless en ES/EN a **390, 768 y 1440 × 1000 px CSS**. Se comprueban el enlace traducido de la ficha, la navegación de ida y vuelta al orquestador, el cambio de idioma y su conservación al volver, anclas internas, cuatro fuentes, Tab/Mayús+Tab, salto al contenido y foco sólido de 3 px. Las seis vistas carecen de desbordamiento horizontal y el título cabe en una o dos líneas. Otros seis escenarios sin JavaScript conservan el relato completo, las fuentes y los enlaces de idioma y regreso. Se comprueban además lectura con almacenamiento bloqueado y movimiento reducido; sin errores propios de JavaScript ni respuestas HTTP fallidas observadas. Capturas inspeccionadas en móvil, tableta y escritorio; referencias locales y anclas, sintaxis de ambos scripts modificados/nuevos y `git diff --check` correctos. No se prueban lectores de pantalla, otros navegadores ni dispositivos físicos.
+
 ## Data Crime Scene: caso técnico — 10 de noviembre de 2026
 
 La ficha añade «Ver caso técnico» / “View case study”. Abre [el caso en español](data-crime-scene/index.html) o [en inglés](data-crime-scene/en.html) según el idioma elegido en el portfolio. Ambas páginas contienen HTML completo y enlaces reales de cambio de idioma: el relato, la tabla de ocho filas y las tres fuentes funcionan sin JavaScript. El caso vuelve a la ficha; con JavaScript se conserva el idioma al regresar.

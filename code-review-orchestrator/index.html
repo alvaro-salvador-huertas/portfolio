@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#173449">
+    <meta name="description" content="Cómo una revisión de code-review-orchestrator encontró una salida parcial en ShiftLab, se reprodujo el fallo y se verificó la corrección antes de incorporarla.">
+    <title>code-review-orchestrator · Caso técnico | Álvaro Salvador Huertas</title>
+    <link rel="alternate" hreflang="es" href="index.html">
+    <link rel="alternate" hreflang="en" href="en.html">
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="../assets/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../data-crime-scene/case-study.css">
+    <link rel="stylesheet" href="case-study.css">
+    <script src="case-study.js" defer></script>
+  </head>
+  <body class="case-page orchestrator-case">
+    <a class="skip-link" href="#main">Saltar al contenido</a>
+    <div class="case-opening" id="top">
+      <header class="site-header site-shell case-header">
+        <a class="brand" href="../index.html" aria-label="as. · Álvaro Salvador Huertas · Inicio">as<span>.</span></a>
+        <div class="header-tools">
+          <nav class="language-switch case-language" aria-label="Idioma del caso">
+            <a href="index.html" lang="es" hreflang="es" aria-label="Español" aria-current="page">ES</a>
+            <span aria-hidden="true">/</span>
+            <a href="en.html" lang="en" hreflang="en" aria-label="English">EN</a>
+          </nav>
+          <a class="case-back" href="../index.html#orchestrator-title">Volver a proyectos</a>
+        </div>
+      </header>
+      <div class="case-hero site-shell">
+        <h1 translate="no">code-review-<wbr>orchestrator</h1>
+        <p>Un hallazgo reproducido antes de incorporar el cambio.</p>
+        <nav aria-label="Caso técnico">
+          <ul class="case-index">
+            <li><a href="#story">El caso de ShiftLab</a></li>
+            <li><a href="#isolation">Aislamiento posterior</a></li>
+            <li><a href="#sources">Fuentes</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <main class="site-shell" id="main" tabindex="-1">
+      <article class="case-reading" id="story" aria-label="Caso real de ShiftLab">
+          <section class="case-step" aria-labelledby="step-1-title">
+            <h2 id="step-1-title">1. Regenerar sin reentrenar</h2>
+            <p>ShiftLab añadió <code>--from-results</code> para regenerar <code>results.json</code>, <code>cobertura-error.html</code> e <code>informe.txt</code> desde un JSON histórico. Debía conservar el umbral y los recuentos, sin reentrenar.</p>
+          </section>
+          <section class="case-step" aria-labelledby="step-2-title">
+            <h2 id="step-2-title">2. Revisar con criterios</h2>
+            <p><code>review_diff.py</code> evaluó el cambio con criterios explícitos. El revisor señaló un fallo concreto: un carácter Unicode inválido podía dejar una salida parcial. El hallazgo se trató como una hipótesis que había que reproducir.</p>
+          </section>
+          <section class="case-step" aria-labelledby="step-3-title">
+            <h2 id="step-3-title">3. Reproducir y corregir</h2>
+            <p>Se reprodujo el fallo. La corrección preparó y codificó los tres contenidos en UTF-8 <strong>antes de crear la carpeta de salida</strong>, evitando dejar archivos parciales por ese error. Se añadió una prueba de regresión.</p>
+          </section>
+          <section class="case-step" aria-labelledby="step-4-title">
+            <h2 id="step-4-title">4. Verificar e incorporar</h2>
+            <p>Pasaron <strong>61 pruebas de ShiftLab</strong>. La segunda revisión quedó sin hallazgos y la ejecución con el JSON histórico confirmó los tres archivos, el mismo umbral y los mismos recuentos. La PR se fusionó en <a href="https://github.com/alvaro-salvador-huertas/shift-lab/commit/5d3ad83ef20c7ad009cb2044b71dbd6c52fd3ddc"><code>5d3ad83</code></a>.</p>
+          </section>
+        <section class="case-step" id="isolation" aria-labelledby="isolation-title">
+          <h2 id="isolation-title">Después: aislar la evaluación</h2>
+            <p>El inventario dinámico y la evaluación iniciados desde <code>orchestrate_project.py</code> ejecutan código del proyecto: descubrir pruebas también puede importarlo.</p>
+            <p>La PR #27 aisló <code>inventory_base()</code> y <code>evaluate_flow()</code>, incluidas tareas configurables y entregas con varios archivos, en <strong>Podman rootless, sin red y con entradas de solo lectura</strong>. Las invocaciones directas de otros runners y los agentes quedan fuera de ese alcance.</p>
+            <p>Las cuotas por evaluación limitan resultados a 32 MiB y 1024 inodos; stdout y stderr, a 4 MiB cada uno. Si falla el aislamiento, el flujo se detiene sin ejecutar el candidato en el anfitrión.</p>
+            <p>Evidencia local de ese cambio: <strong>10 integraciones reales con Podman correctas</strong> y <strong>834 pruebas ordinarias correctas</strong> (otras 10 opt-in omitidas). Son evidencias separadas de las 61 de ShiftLab; la CI enlazada también terminó correctamente.</p>
+            <p><strong>La revisión de ShiftLab no usó este evaluador aislado.</strong> La incorporación de cambios sigue bajo decisión humana.</p>
+        </section>
+        <aside class="case-sources" id="sources" aria-labelledby="sources-title">
+          <h2 id="sources-title">Fuentes del caso</h2>
+          <ul>
+              <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/pull/26">Herramienta de revisión · PR #26</a></li>
+              <li><a href="https://github.com/alvaro-salvador-huertas/shift-lab/pull/2">Cambio en ShiftLab · PR #2</a></li>
+              <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/pull/27">Aislamiento y cuotas · PR #27</a></li>
+              <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/actions/runs/43446261444">CI del cambio de aislamiento</a></li>
+          </ul>
+          <p>Las cifras describen esas verificaciones; no son una tasa general de acierto de la IA.</p>
+        </aside>
+      </article>
+    </main>
+    <footer class="site-footer site-shell case-footer">
+      <span>Álvaro Salvador Huertas</span>
+      <a href="#top">Volver arriba <span aria-hidden="true">↑</span></a>
+    </footer>
+  </body>
+</html>

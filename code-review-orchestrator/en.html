@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <meta name="theme-color" content="#173449">
+    <meta name="description" content="How a code-review-orchestrator review found partial output in ShiftLab, reproduced the failure and verified the fix before integration.">
+    <title>code-review-orchestrator · Case study | Álvaro Salvador Huertas</title>
+    <link rel="alternate" hreflang="es" href="index.html">
+    <link rel="alternate" hreflang="en" href="en.html">
+    <link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+    <link rel="preload" href="../assets/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="../data-crime-scene/case-study.css">
+    <link rel="stylesheet" href="case-study.css">
+    <script src="case-study.js" defer></script>
+  </head>
+  <body class="case-page orchestrator-case">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="case-opening" id="top">
+      <header class="site-header site-shell case-header">
+        <a class="brand" href="../index.html" aria-label="as. · Álvaro Salvador Huertas · Home">as<span>.</span></a>
+        <div class="header-tools">
+          <nav class="language-switch case-language" aria-label="Case study language">
+            <a href="index.html" lang="es" hreflang="es" aria-label="Español">ES</a>
+            <span aria-hidden="true">/</span>
+            <a href="en.html" lang="en" hreflang="en" aria-label="English" aria-current="page">EN</a>
+          </nav>
+          <a class="case-back" href="../index.html#orchestrator-title">Back to projects</a>
+        </div>
+      </header>
+      <div class="case-hero site-shell">
+        <h1 translate="no">code-review-<wbr>orchestrator</h1>
+        <p>A finding reproduced before integrating the change.</p>
+        <nav aria-label="Case study">
+          <ul class="case-index">
+            <li><a href="#story">The ShiftLab case</a></li>
+            <li><a href="#isolation">Later isolation</a></li>
+            <li><a href="#sources">Sources</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <main class="site-shell" id="main" tabindex="-1">
+      <article class="case-reading" id="story" aria-label="Real ShiftLab case">
+          <section class="case-step" aria-labelledby="step-1-title">
+            <h2 id="step-1-title">1. Regenerate without retraining</h2>
+            <p>ShiftLab added <code>--from-results</code> to regenerate <code>results.json</code>, <code>cobertura-error.html</code> and <code>informe.txt</code> from a historical JSON file. It had to preserve the threshold and counts without retraining.</p>
+          </section>
+          <section class="case-step" aria-labelledby="step-2-title">
+            <h2 id="step-2-title">2. Review against explicit criteria</h2>
+            <p><code>review_diff.py</code> evaluated the change against explicit criteria. The reviewer flagged a specific failure: an invalid Unicode character could leave partial output. The finding was treated as a hypothesis to reproduce.</p>
+          </section>
+          <section class="case-step" aria-labelledby="step-3-title">
+            <h2 id="step-3-title">3. Reproduce and fix</h2>
+            <p>The failure was reproduced. The fix prepared and encoded all three contents as UTF-8 <strong>before creating the output directory</strong>, preventing partial files from being left by that error. A regression test was added.</p>
+          </section>
+          <section class="case-step" aria-labelledby="step-4-title">
+            <h2 id="step-4-title">4. Verify and integrate</h2>
+            <p>All <strong>61 ShiftLab tests passed</strong>. The second review had no findings, and running with the historical JSON confirmed all three files, the same threshold and the same counts. The PR was merged as <a href="https://github.com/alvaro-salvador-huertas/shift-lab/commit/5d3ad83ef20c7ad009cb2044b71dbd6c52fd3ddc"><code>5d3ad83</code></a>.</p>
+          </section>
+        <section class="case-step" id="isolation" aria-labelledby="isolation-title">
+          <h2 id="isolation-title">Later: isolating evaluation</h2>
+            <p>Dynamic test inventory and evaluation started from <code>orchestrate_project.py</code> execute project code: test discovery can import it too.</p>
+            <p>PR #27 isolated <code>inventory_base()</code> and <code>evaluate_flow()</code>, including configurable tasks and multi-file submissions, in <strong>rootless Podman, with networking disabled and read-only inputs</strong>. Direct calls to other runners and the agents remain outside that scope.</p>
+            <p>Per-evaluation quotas cap results at 32 MiB and 1024 inodes, and stdout and stderr at 4 MiB each. If isolation fails, the workflow stops without running the candidate on the host.</p>
+            <p>Local evidence for that change: <strong>10 passing integrations with real Podman containers</strong> and <strong>834 passing ordinary tests</strong> (10 other opt-in tests skipped). This evidence is separate from ShiftLab’s 61 tests; the linked CI also completed successfully.</p>
+            <p><strong>The ShiftLab review did not use this isolated evaluator.</strong> Integrating changes remains a human decision.</p>
+        </section>
+        <aside class="case-sources" id="sources" aria-labelledby="sources-title">
+          <h2 id="sources-title">Case sources</h2>
+          <ul>
+              <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/pull/26">Review tool · PR #26</a></li>
+              <li><a href="https://github.com/alvaro-salvador-huertas/shift-lab/pull/2">ShiftLab change · PR #2</a></li>
+              <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/pull/27">Isolation and quotas · PR #27</a></li>
+              <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/actions/runs/43446261444">CI for the isolation change</a></li>
+          </ul>
+          <p>These counts describe those checks; they are not a general AI success rate.</p>
+        </aside>
+      </article>
+    </main>
+    <footer class="site-footer site-shell case-footer">
+      <span>Álvaro Salvador Huertas</span>
+      <a href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </footer>
+  </body>
+</html>
