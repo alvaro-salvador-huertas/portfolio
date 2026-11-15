@@ -76,23 +76,24 @@
                     </header>
                     <div class="project-layout">
                       <div class="project-copy">
-                        <p class="project-status" data-i18n="orchestrator.status">v1.0.0 released</p>
+                        <p class="project-status" data-i18n="orchestrator.status">v1.2.0 released</p>
                         <p class="project-problem" data-i18n="orchestrator.problem">An agent’s own verdict is not enough to validate a code change. This workflow adds independent checks and human oversight.</p>
-                        <p class="project-summary" data-i18n="orchestrator.summary">I built a supervised Python workflow for AI-assisted code changes. It combines planning with versioned Git references, developer and reviewer agents in separate sessions, independent tests, execution limits and inspectable records. Changes require human approval before integration.</p>
+                        <p class="project-summary" data-i18n="orchestrator.summary">I built a supervised Python workflow for AI-assisted code changes. It combines planning with versioned Git references, developer and reviewer agents in separate sessions, independent tests in rootless Podman, execution limits and inspectable records. Changes require human approval before integration.</p>
                         <ul class="tech-list" aria-label="code-review-orchestrator technologies" data-i18n-aria-label="orchestrator.technologies">
-                          <li>Python</li><li>Codex CLI</li><li>unittest</li><li>JSON</li>
+                          <li>Python</li><li>Codex CLI</li><li>Podman rootless</li><li>unittest</li><li>JSON</li>
                         </ul>
                         <ul class="project-links" aria-label="code-review-orchestrator resources" data-i18n-aria-label="orchestrator.resources">
                           <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator"><span data-i18n="repository">View repository</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
                           <li><a href="code-review-orchestrator/en.html" data-i18n-href="orchestrator.caseStudyHref"><span data-i18n="orchestrator.caseStudy">View case study</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
-                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/releases/tag/v1.0.0" hreflang="es"><span data-i18n="orchestrator.release">Release v1.0.0</span> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
-                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/actions/runs/40208066440"><span data-i18n="orchestrator.ci">CI for the released commit</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
+                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/releases/tag/v1.2.0" hreflang="es"><span data-i18n="orchestrator.release">Release v1.2.0</span> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
+                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/actions/runs/43721882879"><span data-i18n="orchestrator.ci">Merge CI: 860 ordinary tests passed</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
+                          <li><a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/actions/runs/43716885073"><span data-i18n="orchestrator.podmanCi">PR CI: 13/13 real Podman integrations</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
                         </ul>
                       </div>
                         <div class="orchestrator-evidence">
                           <h4 data-i18n="orchestrator.evidenceTitle">Evidence &amp; limits</h4>
-                          <p data-i18n="orchestrator.tests">The documented validation reports 768 test methods passed. Controller tests use simulated agents; Python evaluation processes actually run.</p>
-                          <p><span data-i18n="orchestrator.results">Real experiments and assisted corrections are documented separately:</span> <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/v1.0.0/docs/cierre-v1.md" hreflang="es" data-i18n="orchestrator.versionResults">v1 results &amp; limits</a> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span>.</p>
+                          <p data-i18n="orchestrator.tests">v1.2.0 evidence: 860 ordinary tests passed in the merge CI, with 13 opt-in tests skipped. The PR CI passed all 13 real rootless Podman integrations with no skips. The checks use synthetic agents, without model calls.</p>
+                          <p><span data-i18n="orchestrator.results">Release scope, compatibility and validation:</span> <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/v1.2.0/docs/notas-v1.2.0.md" hreflang="es" data-i18n="orchestrator.versionResults">v1.2.0 notes &amp; limits</a> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span>.</p>
                           <p data-i18n="orchestrator.limits">These results do not establish general reliability or measure an AI success rate.</p>
                         </div>
                       <figure class="project-visual orchestrator-visual" aria-labelledby="orchestrator-caption">
@@ -108,7 +109,7 @@
                           <svg class="flow-connectors orchestrator-connector" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="100%" marker-end="url(#orchestrator-tip)"/></svg>
                           <div class="diagram-panel orchestrator-stage">
                             <span class="diagram-label" data-i18n="orchestrator.independentTests">Independent tests</span>
-                            <p data-i18n="orchestrator.testsAction">Evaluate the candidate in a separate Python process</p>
+                            <p data-i18n="orchestrator.testsAction">Evaluate the candidate in rootless Podman</p>
                           </div>
                           <div class="orchestrator-gate">
                             <svg class="flow-connectors orchestrator-connector" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="100%" marker-end="url(#orchestrator-tip)"/></svg>
