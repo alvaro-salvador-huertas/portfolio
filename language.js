@@ -75,20 +75,20 @@
       "es": "Mis proyectos combinan Codex CLI, contexto versionado en Git, salidas estructuradas y evaluación independiente. Trabajo con criterios de aceptación, pruebas automatizadas y GitHub Actions para contrastar los cambios generados y conservar evidencia antes de su incorporación bajo supervisión humana."
     },
     "orchestrator.status": {
-      "en": "v1.0.0 released",
-      "es": "v1.0.0 publicada"
+      "en": "v1.2.0 released",
+      "es": "v1.2.0 publicada"
     },
     "orchestrator.summary": {
-      "en": "I built a supervised Python workflow for AI-assisted code changes. It combines planning with versioned Git references, developer and reviewer agents in separate sessions, independent tests, execution limits and inspectable records. Changes require human approval before integration.",
-      "es": "He creado un flujo de trabajo supervisado en Python para cambios de código asistidos por IA. Combina planificación con referencias versionadas de Git, agentes de desarrollo y revisión en sesiones separadas, pruebas independientes, límites de ejecución y registros consultables. Incorporar los cambios requiere autorización humana."
+      "en": "I built a supervised Python workflow for AI-assisted code changes. It combines planning with versioned Git references, developer and reviewer agents in separate sessions, independent tests in rootless Podman, execution limits and inspectable records. Changes require human approval before integration.",
+      "es": "He creado un flujo de trabajo supervisado en Python para cambios de código asistidos por IA. Combina planificación con referencias versionadas de Git, agentes de desarrollo y revisión en sesiones separadas, pruebas independientes en Podman rootless, límites de ejecución y registros consultables. Incorporar los cambios requiere autorización humana."
     },
     "orchestrator.results": {
-      "en": "Real experiments and assisted corrections are documented separately:",
-      "es": "Los experimentos reales y las correcciones asistidas se documentan por separado:"
+      "en": "Release scope, compatibility and validation:",
+      "es": "Alcance, compatibilidad y validación de la versión:"
     },
     "orchestrator.tests": {
-      "en": "The documented validation reports 768 test methods passed. Controller tests use simulated agents; Python evaluation processes actually run.",
-      "es": "La validación documentada recoge 768 métodos de prueba superados. Las pruebas del controlador usan agentes simulados; los procesos Python de evaluación sí se ejecutan."
+      "en": "v1.2.0 evidence: 860 ordinary tests passed in the merge CI, with 13 opt-in tests skipped. The PR CI passed all 13 real rootless Podman integrations with no skips. The checks use synthetic agents, without model calls.",
+      "es": "Evidencia de v1.2.0: 860 pruebas ordinarias correctas en la CI del merge, con 13 opt-in omitidas. La CI de la PR superó las 13 integraciones reales con Podman rootless, sin omisiones. Las comprobaciones usan agentes sintéticos, sin llamadas a modelos."
     },
     "orchestrator.problem": {
       "en": "An agent’s own verdict is not enough to validate a code change. This workflow adds independent checks and human oversight.",
@@ -99,16 +99,20 @@
       "es": "Estos resultados no acreditan fiabilidad general ni miden una tasa de éxito de la IA."
     },
     "orchestrator.release": {
-      "en": "Release v1.0.0",
-      "es": "Versión v1.0.0"
+      "en": "Release v1.2.0",
+      "es": "Versión v1.2.0"
     },
     "orchestrator.ci": {
-      "en": "CI for the released commit",
-      "es": "CI del commit publicado"
+      "en": "Merge CI: 860 ordinary tests passed",
+      "es": "CI del merge: 860 pruebas ordinarias correctas"
+    },
+    "orchestrator.podmanCi": {
+      "en": "PR CI: 13/13 real Podman integrations",
+      "es": "CI de la PR: 13/13 integraciones reales con Podman"
     },
     "orchestrator.versionResults": {
-      "en": "v1 results & limits",
-      "es": "Resultados y límites de v1"
+      "en": "v1.2.0 notes & limits",
+      "es": "Notas y límites de v1.2.0"
     },
     "orchestrator.technologies": {
       "en": "code-review-orchestrator technologies",
@@ -131,8 +135,8 @@
       "es": "Pruebas independientes"
     },
     "orchestrator.testsAction": {
-      "en": "Evaluate the candidate in a separate Python process",
-      "es": "Evalúan el candidato en otro proceso Python"
+      "en": "Evaluate the candidate in rootless Podman",
+      "es": "Evalúan el candidato en Podman rootless"
     },
     "orchestrator.reviewGate": {
       "en": "Only with passing tests and valid evidence",
