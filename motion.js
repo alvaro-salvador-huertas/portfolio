@@ -29,6 +29,15 @@
   let heroFrame;
   let echo;
   let progress;
+  let capabilityScene;
+  let capabilityStage;
+  let capabilityViewport;
+  let capabilityTrack;
+  let capabilityFooter;
+  let capabilityCurrent;
+  let capabilityButtons = [];
+  const capabilityCards = Array.from(workbench.querySelectorAll('.tool-capabilities .tool-group, .tool-support .tool-group'));
+  let activeCapability = -1;
   let projectNav;
   let projectLinks = [];
   let activeProject = -1;
@@ -73,6 +82,53 @@
     progress.setAttribute('aria-hidden', 'true');
     document.body.prepend(progress);
 
+    capabilityScene = document.createElement('div');
+    capabilityScene.className = 'capability-scene';
+    capabilityStage = document.createElement('div');
+    capabilityStage.className = 'capability-stage';
+    const heading = skills.querySelector('.section-heading');
+    const notes = workbench.querySelector('.tool-notes');
+    skills.append(capabilityScene);
+    capabilityScene.append(capabilityStage);
+    capabilityStage.append(heading, workbench);
+    skills.append(notes);
+    capabilityViewport = document.createElement('div');
+    capabilityViewport.className = 'capability-viewport';
+    capabilityViewport.tabIndex = 0;
+    capabilityViewport.setAttribute('role', 'region');
+    capabilityViewport.setAttribute('aria-labelledby', 'skills-title');
+    capabilityTrack = document.createElement('div');
+    capabilityTrack.className = 'capability-track';
+    const primary = workbench.querySelector('.tool-capabilities');
+    const support = workbench.querySelector('.tool-support');
+    primary.before(capabilityViewport);
+    capabilityViewport.append(capabilityTrack);
+    capabilityTrack.append(primary, support);
+    capabilityFooter = document.createElement('div');
+    capabilityFooter.className = 'capability-footer';
+    capabilityCurrent = document.createElement('span');
+    capabilityCurrent.className = 'capability-current';
+    capabilityCurrent.setAttribute('aria-hidden', 'true');
+    const steps = document.createElement('div');
+    steps.className = 'capability-steps';
+    steps.setAttribute('role', 'group');
+    steps.setAttribute('aria-labelledby', 'skills-title');
+    capabilityCards.forEach(card => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      const label = document.createElement('span');
+      button.append(label);
+      steps.append(button);
+      capabilityButtons.push(button);
+      const mark = card.querySelector('.tool-icon').cloneNode();
+      mark.className = 'capability-watermark';
+      mark.setAttribute('aria-hidden', 'true');
+      card.append(mark);
+    });
+    capabilityFooter.append(capabilityCurrent, steps);
+    workbench.append(capabilityFooter);
+    syncCapabilityLabels();
+
     projectNav = document.createElement('nav');
     projectNav.className = 'project-index';
     projectNav.setAttribute('aria-labelledby', 'projects-title');
@@ -105,6 +161,25 @@
     const projectOffset = headerSpace + (innerWidth >= 1000 ? dockHeight + 28 : 16);
     root.style.setProperty('--project-offset', projectOffset + 'px');
     opening.classList.toggle('hero-pinned', wide.matches);
+    // Measure the intrinsic stage before reserving scroll distance.
+    skills.classList.toggle('capabilities-pinned', wide.matches);
+    capabilityScene.style.height = '';
+    capabilityTrack.style.transform = '';
+    const stageHeight = capabilityStage.offsetHeight;
+    const canPin = wide.matches && stageHeight + headerSpace + 40 <= innerHeight;
+    skills.classList.toggle('capabilities-pinned', canPin);
+    const travel = Math.max(0, capabilityTrack.scrollWidth - capabilityTrack.clientWidth);
+    const lead = 96;
+    const distance = Math.max(1, travel * 1.15);
+    const tail = 120;
+    const stageTop = headerSpace + Math.max(20, (innerHeight - headerSpace - stageHeight) / 2);
+    root.style.setProperty('--capability-top', stageTop + 'px');
+    if (canPin) {
+      capabilityViewport.scrollLeft = 0;
+      capabilityScene.style.height = (stageHeight + lead + distance + tail) + 'px';
+    }
+    syncCapabilityLabels();
+    activeCapability = -1;
     const projectMetrics = projects.map(project => {
       const figure = project.querySelector('.project-visual');
       figure?.classList.toggle('visual-pinned', innerWidth >= 1180 &&
@@ -121,6 +196,12 @@
       heroStart: opening.getBoundingClientRect().top + scrollY,
       heroDistance: Math.max(1, opening.offsetHeight - innerHeight),
       projectOffset,
+      capability: {
+        pinned: canPin,
+        travel,
+        distance,
+        start: capabilityScene.getBoundingClientRect().top + scrollY - stageTop + lead,
+      },
       projects: projectMetrics,
     };
     needsMeasure = false;
@@ -141,6 +222,13 @@
     hero.style.setProperty('--hero-frame-opacity', eased.toFixed(3));
     hero.style.setProperty('--hero-echo-opacity', (clamp((p - 0.1) / 0.4) * 0.3).toFixed(3));
     echo.style.setProperty('--echo-offset', (-p * 220) + 'px');
+    const capability = metrics.capability;
+    const capabilityPosition = capability.pinned
+      ? clamp((y - capability.start) / capability.distance)
+      : clamp(capabilityViewport.scrollLeft / Math.max(1, capability.travel));
+    if (capability.pinned) capabilityTrack.style.transform =
+      'translate3d(' + (-capabilityPosition * capability.travel).toFixed(3) + 'px, 0, 0)';
+    updateCapability(capabilityPosition);
     let current = 0;
     metrics.projects.forEach((project, index) => {
       if (y + metrics.projectOffset + innerHeight * 0.2 >= project.top) current = index;
@@ -203,16 +291,8 @@
       return;
     }
     if (element.matches('.tool-capabilities .tool-group, .tool-support .tool-group')) {
-      const cardIndex = Array.from(workbench.querySelectorAll('.tool-capabilities .tool-group, .tool-support .tool-group')).indexOf(element);
-      animate(element, [
-        { opacity: 0.25, transform: 'translate3d(0, 52px, 0) scale(.96)' },
-        { opacity: 1, transform: 'none' },
-      ], { duration: 950, delay: (cardIndex % 3) * 100 });
       const icon = element.querySelector('.tool-icon');
-      if (icon) animate(icon, [
-        { transform: 'translateY(8px) rotate(-12deg)', opacity: 0.1 },
-        { transform: 'none', opacity: 1 },
-      ], { duration: 850, delay: 180 + (cardIndex % 3) * 100 });
+      if (icon) animate(icon, [{transform: 'rotate(-12deg) scale(.8)'}, {transform: 'none'}], {duration: 850});
       return;
     }
     animate(element, [
@@ -241,11 +321,46 @@
     });
   }
 
+  function syncCapabilityLabels() {
+    capabilityButtons.forEach((button, index) => {
+      const label = capabilityCards[index].querySelector('h3').textContent;
+      button.setAttribute('aria-label', label);
+      button.firstChild.textContent = label;
+    });
+    if (activeCapability >= 0) capabilityCurrent.textContent = capabilityCards[activeCapability].querySelector('h3').textContent;
+  }
+
+  function updateCapability(position) {
+    const index = Math.round(position * (capabilityCards.length - 1));
+    if (index === activeCapability) return;
+    activeCapability = index;
+    capabilityCurrent.textContent = capabilityCards[index].querySelector('h3').textContent;
+    capabilityCards.forEach((card, current) => card.classList.toggle('capability-active', current === index));
+    capabilityButtons.forEach((button, current) => button.setAttribute('aria-pressed', String(current === index)));
+  }
+
+  function goToCapability(index) {
+    const position = clamp(index, 0, capabilityCards.length - 1) / (capabilityCards.length - 1);
+    const capability = metrics.capability;
+    if (!capability) return;
+    if (capability.pinned) window.scrollTo({top: capability.start + position * capability.distance, behavior: 'smooth'});
+    else capabilityViewport.scrollTo({left: position * capability.travel, behavior: 'smooth'});
+  }
+
+  function capabilityKeyboard(event) {
+    const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End'];
+    if (!keys.includes(event.key)) return;
+    event.preventDefault();
+    goToCapability(event.key === 'Home' ? 0 : event.key === 'End' ? capabilityCards.length - 1 :
+      activeCapability + (event.key === 'ArrowRight' ? 1 : -1));
+  }
+
   function start() {
     if (enabled || reduced.matches) return;
     enabled = true;
     events = new AbortController();
     wrapContent();
+    capabilityViewport.tabIndex = 0;
     root.classList.add('motion-ready');
     on(window, 'scroll', () => schedule(), { passive: true });
     on(window, 'resize', () => schedule(true), { passive: true });
@@ -253,10 +368,13 @@
     on(window, 'pagehide', settle);
     on(window, 'beforeprint', stop);
     on(wide, 'change', () => schedule(true));
-    on(document, 'portfolio:languagechange', () => { settle(); schedule(true); });
+    on(document, 'portfolio:languagechange', () => { settle(); syncCapabilityLabels(); schedule(true); });
     on(document, 'visibilitychange', () => { if (document.hidden) settle(); else schedule(true); });
     on(document, 'keydown', event => { if (event.key === 'Escape') settle(); });
     on(document, 'focusin', settle);
+    on(capabilityViewport, 'keydown', capabilityKeyboard);
+    on(capabilityViewport, 'scroll', () => schedule(), {passive: true});
+    capabilityButtons.forEach((button, index) => on(button, 'click', () => goToCapability(index)));
     on(hero, 'pointermove', event => {
       if (!fine.matches || !wide.matches || event.pointerType === 'touch') return;
       pointer = {
@@ -283,7 +401,8 @@
     if (window.ResizeObserver) {
       resizeObserver = new ResizeObserver(() => schedule(true));
       resizeObserver.observe(header);
-      resizeObserver.observe(workbench);
+      resizeObserver.observe(capabilityStage);
+      capabilityCards.forEach(card => resizeObserver.observe(card));
       resizeObserver.observe(projectNav);
       projects.forEach(project => resizeObserver.observe(project));
     }
@@ -314,6 +433,11 @@
     settle();
     root.classList.remove('motion-ready');
     opening.classList.remove('hero-pinned');
+    skills.classList.remove('capabilities-pinned');
+    if (capabilityScene) capabilityScene.style.height = '';
+    if (capabilityTrack) capabilityTrack.style.transform = '';
+    capabilityViewport?.removeAttribute('tabindex');
+    capabilityCards.forEach(card => card.classList.remove('capability-active'));
 
     if (heroFrame) heroFrame.style.transform = '';
     projects.forEach(project => {
