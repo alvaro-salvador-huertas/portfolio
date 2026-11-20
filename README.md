@@ -5,10 +5,11 @@ Portfolio en español de España e inglés: estudios, proyectos de software y ex
 ## Vista local
 
 El movimiento actual se inspira en las transiciones de selinameusel.com. La portada
-tipográfica se transforma con el scroll; proyectos y encabezados entran de forma
-escalonada, y las capacidades tienen un recorrido horizontal en escritorio cuando
-caben en pantalla. Móvil, movimiento reducido y la vista sin JavaScript conservan
-una presentación vertical. La [investigación y las comprobaciones](docs/movimiento-referencia.md)
+se transforma con el scroll. Proyectos combina un índice de lectura, entradas de
+texto y visuales, conexiones dibujadas y capturas con desplazamiento suave.
+Las capacidades se organizan en una cuadrícula de dos principales y tres de apoyo,
+con adaptación a tableta y móvil. Movimiento reducido y ausencia de JavaScript
+conservan el contenido completo. La [investigación y las comprobaciones](docs/movimiento-referencia.md)
 recogen la adaptación, las guías consultadas y los límites de verificación.
 
 Desde esta carpeta:

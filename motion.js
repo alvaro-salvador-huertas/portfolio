@@ -14,6 +14,7 @@
 
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const wide = matchMedia('(min-width: 1000px) and (min-height: 720px)');
+  const projects = Array.from(document.querySelectorAll('.project-window'));
   const fine = matchMedia('(hover: hover) and (pointer: fine)');
   const clamp = (value, min = 0, max = 1) => Math.min(max, Math.max(min, value));
   const easing = 'cubic-bezier(.16, 1, .3, 1)';
@@ -28,9 +29,9 @@
   let heroFrame;
   let echo;
   let progress;
-  let skillsStage;
-  let viewport;
-  let track;
+  let projectNav;
+  let projectLinks = [];
+  let activeProject = -1;
   let metrics = {};
   let pointer = { x: 0, y: 0 };
 
@@ -72,56 +73,55 @@
     progress.setAttribute('aria-hidden', 'true');
     document.body.prepend(progress);
 
-    skillsStage = document.createElement('div');
-    skillsStage.className = 'skills-stage';
-    skillsStage.append(...skills.childNodes);
-    skills.append(skillsStage);
-    viewport = document.createElement('div');
-    viewport.className = 'capability-viewport';
-    track = document.createElement('div');
-    track.className = 'capability-track';
-    const capabilities = workbench.querySelector('.tool-capabilities');
-    const support = workbench.querySelector('.tool-support');
-    capabilities.before(viewport);
-    viewport.append(track);
-    track.append(capabilities, support);
+    projectNav = document.createElement('nav');
+    projectNav.className = 'project-index';
+    projectNav.setAttribute('aria-labelledby', 'projects-title');
+    projects.forEach((project, index) => {
+      const heading = project.querySelector('h3');
+      project.id ||= 'project-' + heading.id;
+      project.tabIndex = -1;
+      const link = document.createElement('a');
+      link.href = '#' + project.id;
+      link.textContent = heading.textContent;
+      projectLinks.push(link);
+      projectNav.append(link);
+      const figure = project.querySelector('.project-visual');
+      if (figure) {
+        const art = document.createElement('div');
+        art.className = 'project-art';
+        const parts = Array.from(figure.children).filter(child => child.tagName !== 'FIGCAPTION');
+        parts[0]?.before(art);
+        art.append(...parts);
+      }
+      project.style.setProperty('--project-accent', ['#245baa', '#39776b', '#76589a', '#a35c35'][index]);
+    });
+    document.querySelector('.project-stack')?.before(projectNav);
   }
 
   function measure() {
     const headerSpace = header.getBoundingClientRect().height + (innerWidth < 768 ? 24 : 40);
     root.style.setProperty('--header-space', headerSpace + 'px');
-    root.style.setProperty('--skills-top', (headerSpace + 12) + 'px');
+    const dockHeight = projectNav.offsetHeight;
+    const projectOffset = headerSpace + (innerWidth >= 1000 ? dockHeight + 28 : 16);
+    root.style.setProperty('--project-offset', projectOffset + 'px');
     opening.classList.toggle('hero-pinned', wide.matches);
-    skills.classList.toggle('skills-pinned', wide.matches);
-    skills.style.height = '';
-    track.style.transform = '';
-    const stageHeight = skillsStage.offsetHeight;
-    const fits = wide.matches && stageHeight + headerSpace + 60 < innerHeight;
-    skills.classList.toggle('skills-pinned', fits);
-    const travel = fits ? Math.max(0, track.scrollWidth - track.clientWidth) : 0;
-    const distance = travel + 180;
-    const sectionStyle = getComputedStyle(skills);
-    const paddingTop = parseFloat(sectionStyle.paddingTop);
-    const paddingBottom = parseFloat(sectionStyle.paddingBottom);
-    if (fits) skills.style.height = (stageHeight + distance + paddingTop + paddingBottom) + 'px';
-    if (fits) {
-      viewport.tabIndex = 0;
-      viewport.setAttribute('role', 'region');
-      viewport.setAttribute('aria-labelledby', 'skills-title');
-    } else {
-      viewport.removeAttribute('tabindex');
-      viewport.removeAttribute('role');
-      viewport.removeAttribute('aria-labelledby');
-    }
+    const projectMetrics = projects.map(project => {
+      const figure = project.querySelector('.project-visual');
+      figure?.classList.toggle('visual-pinned', innerWidth >= 1180 &&
+        figure.offsetHeight + projectOffset + 36 < innerHeight);
+      return {
+        element: project,
+        art: project.querySelector('.project-art'),
+        top: project.getBoundingClientRect().top + scrollY,
+        height: project.offsetHeight,
+      };
+    });
     metrics = {
       maxScroll: Math.max(1, root.scrollHeight - innerHeight),
       heroStart: opening.getBoundingClientRect().top + scrollY,
       heroDistance: Math.max(1, opening.offsetHeight - innerHeight),
-      skillsStart: skills.getBoundingClientRect().top + scrollY +
-        paddingTop - headerSpace - 12,
-      skillsDistance: distance,
-      travel,
-      pinnedSkills: fits,
+      projectOffset,
+      projects: projectMetrics,
     };
     needsMeasure = false;
   }
@@ -141,9 +141,25 @@
     hero.style.setProperty('--hero-frame-opacity', eased.toFixed(3));
     hero.style.setProperty('--hero-echo-opacity', (clamp((p - 0.1) / 0.4) * 0.3).toFixed(3));
     echo.style.setProperty('--echo-offset', (-p * 220) + 'px');
-    if (metrics.pinnedSkills) {
-      const position = clamp((y - metrics.skillsStart) / metrics.skillsDistance);
-      track.style.transform = 'translate3d(' + (-position * metrics.travel) + 'px, 0, 0)';
+    let current = 0;
+    metrics.projects.forEach((project, index) => {
+      if (y + metrics.projectOffset + innerHeight * 0.2 >= project.top) current = index;
+      const position = clamp((y + innerHeight * 0.6 - project.top) /
+        Math.max(1, project.height + innerHeight * 0.15));
+      projectLinks[index].style.setProperty('--project-progress', position.toFixed(4));
+      project.element.style.setProperty('--project-progress', position.toFixed(4));
+      // Artwork moves independently; copy and links keep stable hit targets.
+      if (project.art && project.top < y + innerHeight && project.top + project.height > y) {
+        const drift = innerWidth >= 1000 ? (position - 0.5) * -24 : 0;
+        project.art.style.setProperty('--art-shift', drift.toFixed(2) + 'px');
+      }
+    });
+    if (current !== activeProject) {
+      activeProject = current;
+      projectLinks.forEach((link, index) => {
+        if (index === current) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
     }
   }
 
@@ -157,17 +173,46 @@
     if (seen.has(element)) return;
     seen.add(element);
     if (element.contains(document.activeElement)) return;
-    if (element.matches('.project-window')) {
-      animate(element, [
-        { opacity: 0.15, transform: 'translate3d(0, 55px, 0) scale(.975)' },
-        { opacity: 1, transform: 'none' },
-      ], { duration: 1000 });
-      element.querySelectorAll('.project-copy, .project-visual').forEach((part, partIndex) => {
+    if (element.matches('.project-copy')) {
+      Array.from(element.children).forEach((part, partIndex) => {
         animate(part, [
-          { opacity: 0.15, transform: 'translate3d(' + (partIndex % 2 ? 34 : -34) + 'px, 0, 0)' },
+          { opacity: 0.25, transform: 'translate3d(0, 32px, 0)' },
           { opacity: 1, transform: 'none' },
-        ], { delay: 100 + partIndex * 90 });
+        ], { duration: 750, delay: Math.min(partIndex, 5) * 75 });
       });
+      return;
+    }
+    if (element.matches('.project-visual')) {
+      animate(element, [
+        { opacity: 0.3, transform: 'translate3d(0, 44px, 0) scale(.96)' },
+        { opacity: 1, transform: 'none' },
+      ], { duration: 1100 });
+      const panels = element.querySelectorAll('.diagram-panel, .agent-core, .document-sheet');
+      panels.forEach((panel, panelIndex) => animate(panel, [
+        { opacity: 0.2, transform: 'translateY(14px)' },
+        { opacity: 1, transform: 'none' },
+      ], { duration: 700, delay: 180 + panelIndex * 85 }));
+      element.querySelectorAll('.flow-connectors path, .flow-connectors line').forEach(path => {
+        const length = path.getTotalLength?.();
+        if (!length || !Number.isFinite(length)) return;
+        animate(path, [
+          { strokeDasharray: length + ' ' + length, strokeDashoffset: length },
+          { strokeDasharray: length + ' ' + length, strokeDashoffset: 0 },
+        ], { duration: 1000, delay: 250 });
+      });
+      return;
+    }
+    if (element.matches('.tool-capabilities .tool-group, .tool-support .tool-group')) {
+      const cardIndex = Array.from(workbench.querySelectorAll('.tool-capabilities .tool-group, .tool-support .tool-group')).indexOf(element);
+      animate(element, [
+        { opacity: 0.25, transform: 'translate3d(0, 52px, 0) scale(.96)' },
+        { opacity: 1, transform: 'none' },
+      ], { duration: 950, delay: (cardIndex % 3) * 100 });
+      const icon = element.querySelector('.tool-icon');
+      if (icon) animate(icon, [
+        { transform: 'translateY(8px) rotate(-12deg)', opacity: 0.1 },
+        { transform: 'none', opacity: 1 },
+      ], { duration: 850, delay: 180 + (cardIndex % 3) * 100 });
       return;
     }
     animate(element, [
@@ -185,7 +230,7 @@
         reveal(entry.target, index);
       });
     }, { rootMargin: '0px 0px -5% 0px', threshold: 0.08 });
-    document.querySelectorAll('.section-heading, .about-layout, .project-window, .contact-layout').forEach(element => {
+    document.querySelectorAll('.section-heading, .about-layout, .project-copy, .project-visual, .orchestrator-evidence, .tool-capabilities .tool-group, .tool-support .tool-group, .tool-notes, .contact-layout').forEach(element => {
       if (seen.has(element)) return;
       if (element.getBoundingClientRect().top < innerHeight * 0.95) {
         seen.add(element);
@@ -194,16 +239,6 @@
       element.setAttribute('data-motion-pending', '');
       observer.observe(element);
     });
-  }
-
-  function keyboardTrack(event) {
-    if (!metrics.pinnedSkills ||
-        !['ArrowRight', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
-    event.preventDefault();
-    const position = clamp((scrollY - metrics.skillsStart) / metrics.skillsDistance);
-    const next = event.key === 'Home' ? 0 : event.key === 'End' ? 1 :
-      clamp(position + (event.key === 'ArrowRight' ? 0.3 : -0.3));
-    window.scrollTo({ top: metrics.skillsStart + next * metrics.skillsDistance, behavior: 'smooth' });
   }
 
   function start() {
@@ -222,7 +257,6 @@
     on(document, 'visibilitychange', () => { if (document.hidden) settle(); else schedule(true); });
     on(document, 'keydown', event => { if (event.key === 'Escape') settle(); });
     on(document, 'focusin', settle);
-    on(viewport, 'keydown', keyboardTrack);
     on(hero, 'pointermove', event => {
       if (!fine.matches || !wide.matches || event.pointerType === 'touch') return;
       pointer = {
@@ -249,7 +283,9 @@
     if (window.ResizeObserver) {
       resizeObserver = new ResizeObserver(() => schedule(true));
       resizeObserver.observe(header);
-      resizeObserver.observe(skillsStage);
+      resizeObserver.observe(workbench);
+      resizeObserver.observe(projectNav);
+      projects.forEach(project => resizeObserver.observe(project));
     }
     observeContent();
     schedule(true);
@@ -278,15 +314,12 @@
     settle();
     root.classList.remove('motion-ready');
     opening.classList.remove('hero-pinned');
-    skills.classList.remove('skills-pinned');
-    skills.style.height = '';
+
     if (heroFrame) heroFrame.style.transform = '';
-    if (track) track.style.transform = '';
-    if (viewport) {
-      viewport.removeAttribute('tabindex');
-      viewport.removeAttribute('role');
-      viewport.removeAttribute('aria-labelledby');
-    }
+    projects.forEach(project => {
+      project.querySelector('.project-visual')?.classList.remove('visual-pinned');
+      project.querySelector('.project-art')?.style.removeProperty('--art-shift');
+    });
     document.querySelectorAll('.project-screenshot').forEach(image => { image.style.transform = ''; });
   }
 
