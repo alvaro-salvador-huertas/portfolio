@@ -11,8 +11,8 @@
     <link rel="preload" href="assets/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="styles.css">
     <script src="language.js" defer></script>
-    <link rel="stylesheet" href="motion.css?v=20261120-projects">
-    <script src="motion.js?v=20261120-projects" defer></script>
+    <link rel="stylesheet" href="motion.css?v=20261120-capabilities">
+    <script src="motion.js?v=20261120-capabilities" defer></script>
   </head>
   <body>
     <a class="skip-link" href="#main" data-i18n="skip">Skip to content</a>
@@ -101,76 +101,7 @@
                         <figcaption id="orchestrator-caption" data-i18n="orchestrator.caption">Benchmark exercises: illustrative flow, not a recorded run.</figcaption>
                         <!-- Simplified benchmark workflow, not the JSON task or a replay of an observed execution.
                              A second attempt is conditional and consumes the remaining budget. -->
-                        <svg class="diagram-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><marker id="orchestrator-tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="m1 1 6 3-6 3"/></marker></defs></svg>
-                        <div class="diagram-surface orchestrator-flow">
-                          <div class="diagram-panel orchestrator-stage">
-                            <span class="diagram-label" data-i18n="orchestrator.developer">Developer agent</span>
-                            <p data-i18n="orchestrator.developerAction">Proposes a code change</p>
-                          </div>
-                          <svg class="flow-connectors orchestrator-connector" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="100%" marker-end="url(#orchestrator-tip)"/></svg>
-                          <div class="diagram-panel orchestrator-stage">
-                            <span class="diagram-label" data-i18n="orchestrator.independentTests">Independent tests</span>
-                            <p data-i18n="orchestrator.testsAction">Evaluate the candidate in rootless Podman</p>
-                          </div>
-                          <div class="orchestrator-gate">
-                            <svg class="flow-connectors orchestrator-connector" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="100%" marker-end="url(#orchestrator-tip)"/></svg>
-                            <span data-i18n="orchestrator.reviewGate">Only with passing tests and valid evidence</span>
-                          </div>
-                          <div class="diagram-panel orchestrator-stage">
-                            <span class="diagram-label" data-i18n="orchestrator.reviewer">Reviewer agent</span>
-                            <p data-i18n="orchestrator.reviewerAction">Inspects the code and evidence</p>
-                          </div>
-                          <svg class="flow-connectors orchestrator-connector" aria-hidden="true" focusable="false"><line x1="50%" y1="0" x2="50%" y2="100%" marker-end="url(#orchestrator-tip)"/></svg>
-                          <div class="diagram-panel orchestrator-decision">
-                            <span class="diagram-label" data-i18n="orchestrator.controller">Python controller’s decision</span>
-                            <p class="orchestrator-outcomes" data-i18n="orchestrator.decision">Approve without integrating, request a correction or stop</p>
-                            <p class="orchestrator-budget" data-i18n="orchestrator.budget">Up to 2 attempts in total. A correction needs remaining budget and valid evidence; technical errors stop the run.</p>
-                          </div>
-                          <p class="orchestrator-records" data-i18n="orchestrator.records">Logs retained at each stage</p>
-                        </div>
-                      </figure>
-                    </div>
-                  </article>
-                </div>
-
-                <div class="project-slot">
-                  <article class="project project-window featured-project" aria-labelledby="git-docs-title">
-                    <header class="project-bar">
-                      <h3 id="git-docs-title" translate="no">git-docs-agent</h3>
-                    </header>
-                    <div class="project-layout">
-                      <div class="project-copy">
-                        <p class="project-status" data-i18n="git.status">AI agent prototype</p>
-                        <p class="project-summary" data-i18n="git.summary">I built this terminal assistant to answer Git questions using Codex CLI and local notes.</p>
-                        <ul class="tech-list" aria-label="git-docs-agent technologies" data-i18n-aria-label="git.technologies">
-                          <li>Python</li><li>Codex CLI</li><li>Markdown</li><li>unittest</li>
-                        </ul>
-                        <ul class="project-links" id="evaluation-title" aria-label="git-docs-agent resources" data-i18n-aria-label="git.resources">
-                          <li><a href="https://github.com/alvaro-salvador-huertas/git-docs-agent"><span data-i18n="repository">View repository</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
-                          <li><a href="https://github.com/alvaro-salvador-huertas/git-docs-agent/blob/main/evals/resultados-2026-10-13.md"><span data-i18n="evaluation.link">Evaluation &amp; limitations</span> <span class="link-language" data-i18n="evaluation.language">(in Spanish)</span> <span class="link-arrow" aria-hidden="true">↗</span></a></li>
-                        </ul>
-                      </div>
-                      <figure class="project-visual git-visual">
-                        <!-- Example paraphrased from docs/git-add.md and docs/git-commit.md,
-                             section "Qué hace". This is not a recorded agent response. -->
-                        <svg class="diagram-defs" width="0" height="0" aria-hidden="true" focusable="false"><defs><marker id="git-tip" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" markerUnits="userSpaceOnUse" orient="auto-start-reverse"><path d="m1 1 6 3-6 3"/></marker></defs></svg>
-                        <div class="diagram-surface git-flow">
-                          <div class="git-inputs">
-                            <div class="input-branch">
-                              <svg class="flow-connectors input-rail diagram-mobile" aria-hidden="true" focusable="false"><line x1="100%" y1="50%" x2="12" y2="50%"/><line x1="12" y1="50%" x2="12" y2="100%"/></svg>
-                              <div class="diagram-panel question-panel">
-                                <div class="diagram-label"><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M20 11a7 7 0 0 1-7 7H7l-4 3V6a3 3 0 0 1 3-3h7a7 7 0 0 1 7 8Z"/><path d="M7 8h8M7 12h5"/></svg><span data-i18n="git.questionLabel">Question</span></div>
-                                <p data-i18n="git.question">How do git add and git commit differ?</p>
-                              </div>
-                            </div>
-                            <div class="input-branch">
-                              <svg class="flow-connectors input-rail diagram-mobile" aria-hidden="true" focusable="false"><line x1="12" y1="0" x2="12" y2="100%"/><line x1="100%" y1="50%" x2="12" y2="50%"/></svg>
-                              <div class="docs-stack">
-                                <div class="document-sheet">
-                                  <p class="diagram-label" data-i18n="git.notes">Local notes</p>
-                                  <ul class="note-files">
-                                    <li><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg><code translate="no">git-add.md</code></li>
-                                    <li><svg class="diagram-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg><code translate="no">git-commit.md</code></li>
+                        <svg class="diagram-defs" width="0" height="0" aria-hidden="true" focusable="fal…1902 tokens truncated…commit.md</code></li>
                                   </ul>
                                 </div>
                               </div>
