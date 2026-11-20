@@ -1,0 +1,102 @@
+/* Motion is progressive enhancement. The static layout remains the fallback. */
+.motion-progress { display: none; position: fixed; inset: 0 0 auto; z-index: 30; height: 3px; background: var(--mist); transform: scaleX(0); transform-origin: left; pointer-events: none; }
+.hero-frame { display: contents; }
+.hero-echo { display: none; }
+.skills-stage, .capability-viewport, .capability-track { min-width: 0; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .motion-ready .motion-progress { display: block; }
+  html.motion-ready { scroll-behavior: smooth; scroll-padding-top: 8rem; }
+  .motion-ready .site-header {
+    position: fixed; z-index: 20; top: 1rem; left: 50%;
+    width: min(1280px, calc(100% - var(--gutter) * 2));
+    padding: .4rem 1.15rem; border: 1px solid rgb(185 214 194 / 24%);
+    border-radius: 999px; background: rgb(23 52 73 / 96%); color: #f1f6fa;
+    transform: translateX(-50%); box-shadow: 0 6px 24px rgb(9 30 45 / 10%);
+  }
+  .motion-ready .site-header a, .motion-ready .site-header button { color: inherit; }
+  .motion-ready .site-header :focus-visible { outline-color: var(--mist); }
+  .motion-ready .site-header .brand { font-size: 2.2rem; }
+  .motion-ready .site-header .brand span,
+  .motion-ready .site-header button[aria-pressed="true"] { color: var(--mist); }
+  .motion-ready .opening { display: block; position: relative; background-image: radial-gradient(circle, rgb(185 214 194 / 13%) .7px, transparent .9px); background-size: 26px 26px; }
+  .motion-ready .skip-link { z-index: 31; }
+  .motion-ready .opening::before { content: ""; display: block; height: var(--header-space, 6rem); }
+  .motion-ready .hero { position: relative; }
+  .motion-ready .name-mask { overflow: clip; padding-bottom: .12em; margin-bottom: -.12em; }
+  .motion-ready .hero-frame {
+    position: relative; display: grid; grid-template-rows: 1fr;
+    width: 100%; min-width: 0; min-height: 100%; transform-origin: center;
+  }
+  .motion-ready .hero-frame::before {
+    content: ""; position: absolute; z-index: -1; inset: -1.75rem -2.5rem;
+    border: 1px solid rgb(185 214 194 / 32%); border-radius: 2rem;
+    background: #173449; box-shadow: 0 40px 90px rgb(4 22 35 / 24%);
+    opacity: var(--hero-frame-opacity, 0);
+  }
+  .motion-ready [data-motion-pending] { opacity: 0; }
+  .motion-ready [data-motion-pending]:focus-within { opacity: 1; }
+  .motion-ready .section-rule { transform-origin: left; }
+  .motion-ready .project-window { transition: border-color 260ms ease, box-shadow 260ms ease; }
+  .motion-ready .project-window:hover { border-color: #8aaca8; box-shadow: 0 18px 48px rgb(23 52 73 / 9%); }
+  .motion-ready .project-screenshot { transform-origin: center; transition: transform 240ms cubic-bezier(.16, 1, .3, 1); }
+  .motion-ready .project-visual { perspective: 1000px; }
+}
+
+@media (min-width: 1000px) and (min-height: 720px) and (prefers-reduced-motion: no-preference) {
+  .motion-ready .opening.hero-pinned { height: 180svh; }
+  .motion-ready .hero-pinned .hero {
+    position: sticky; top: var(--header-space, 6rem);
+    height: calc(100svh - var(--header-space, 6rem)); min-height: 0;
+    padding-block: 2.75rem 4rem; z-index: 1;
+  }
+  .motion-ready .hero-pinned .hero-frame { max-height: 100%; }
+  .motion-ready .hero-pinned .hero-echo {
+    position: absolute; z-index: -2; inset: 0 calc(-1 * var(--gutter));
+    display: flex; flex-direction: column; justify-content: center; gap: .25em;
+    overflow: clip; opacity: var(--hero-echo-opacity, 0); pointer-events: none; user-select: none;
+  }
+  .hero-echo span {
+    display: block; width: max-content; font-size: clamp(7rem, 16vw, 17rem);
+    line-height: 1.12; letter-spacing: -.07em; font-weight: 600;
+    color: transparent; -webkit-text-stroke: 1px var(--mist);
+    transform: translateX(var(--echo-offset, 0px));
+  }
+  .hero-echo span + span { transform: translateX(calc(-12% - var(--echo-offset, 0px))); }
+  .motion-ready .skills-pinned { position: relative; padding-top: 3rem; }
+  .motion-ready .skills-pinned .skills-stage { position: sticky; top: var(--skills-top, 7rem); }
+  .motion-ready .skills-pinned .section-heading { margin-bottom: 1.5rem; }
+  .motion-ready .skills-pinned .tool-bar { padding-bottom: 1.25rem; }
+  .motion-ready .skills-pinned .capability-viewport { overflow: clip; padding: .4rem .2rem 1.25rem; margin-inline: -.2rem; }
+  .motion-ready .skills-pinned .capability-viewport:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+  .motion-ready .skills-pinned .capability-track { display: flex; gap: 1.5rem; }
+  .motion-ready .skills-pinned .tool-group {
+    flex: 0 0 min(27rem, 38vw); min-height: 18rem; display: flex; flex-direction: column;
+    padding: 2rem; gap: 1.5rem; border: 1px solid var(--line); border-radius: 10px; background: #fff;
+  }
+  .motion-ready .skills-pinned .tool-group > div { display: block; }
+  .motion-ready .skills-pinned .tool-group h3 { margin-bottom: 1rem; }
+  .motion-ready .skills-pinned .tool-group .tool-icon { width: 30px; height: 30px; }
+  .motion-ready .skills-pinned .tool-notes { margin-top: 0; padding-block: 1.1rem; }
+  .motion-ready .skills-pinned .tool-notes .tool-group {
+    min-height: 0; flex-direction: row; padding: 0; gap: 1rem; border: 0; background: transparent;
+  }
+  .motion-ready .skills-pinned .tool-notes .tool-group h3 { margin-bottom: .4rem; }
+}
+
+@media (max-width: 999px), (max-height: 719px) {
+  .motion-ready .hero-frame { min-height: 0; }
+  .motion-ready .hero-frame::before { display: none; }
+}
+@media (max-width: 767px) and (prefers-reduced-motion: no-preference) {
+  .motion-ready .site-header { top: .5rem; padding: .35rem .8rem; border-radius: 1rem; }
+  .motion-ready .opening::before { height: var(--header-space, 8rem); }
+  .motion-ready .hero { padding-top: 2rem; }
+}
+@media (prefers-reduced-motion: reduce), print {
+  html { scroll-behavior: auto !important; }
+  .motion-progress, .hero-echo { display: none !important; }
+  [data-motion-pending] { opacity: 1 !important; }
+  .hero-frame, .capability-track { transform: none !important; }
+}
+
