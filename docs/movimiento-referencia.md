@@ -52,4 +52,3 @@ Se comprobó la preferencia reducida mediante un fixture de `matchMedia`, inclui
 También se revisaron el foco visible del recorrido, Inicio/Fin y la salida con Tab. Sintaxis de JavaScript, integridad del contenido HTML original, recursos locales y `git diff --check` comprobados. No se observaron errores propios de `motion.js` en la consola consultada.
 
 Las verificaciones móviles corresponden a marcos de navegador. Quedan pendientes Safari, Firefox, dispositivos físicos y lectores de pantalla.
-
