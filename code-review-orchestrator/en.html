@@ -32,18 +32,19 @@
       </header>
       <div class="case-hero site-shell">
         <h1 translate="no">code-review-<wbr>orchestrator</h1>
-        <p>A finding reproduced before integrating the change.</p>
+        <p>From an export failure in ShiftLab to reviewing a GitHub pull request.</p>
         <nav aria-label="Case study">
           <ul class="case-index">
-            <li><a href="#story">The ShiftLab case</a></li>
+            <li><a href="#story">ShiftLab #2</a></li>
             <li><a href="#isolation">Later isolation</a></li>
+            <li><a href="#pr-review">Reviewing a PR</a></li>
             <li><a href="#sources">Sources</a></li>
           </ul>
         </nav>
       </div>
     </div>
     <main class="site-shell" id="main" tabindex="-1">
-      <article class="case-reading" id="story" aria-label="Real ShiftLab case">
+      <article class="case-reading" id="story" aria-label="Code review cases">
           <section class="case-step" aria-labelledby="step-1-title">
             <h2 id="step-1-title">1. Regenerate without retraining</h2>
             <p>ShiftLab added <code>--from-results</code> to regenerate <code>results.json</code>, <code>cobertura-error.html</code> and <code>informe.txt</code> from a historical JSON file. It had to preserve the threshold and counts without retraining.</p>
@@ -67,6 +68,12 @@
             <p>Per-evaluation quotas cap results at 32 MiB and 1024 inodes, and stdout and stderr at 4 MiB each. If isolation fails, the workflow stops without running the candidate on the host.</p>
             <p>Local evidence for that change: <strong>10 passing integrations with real Podman containers</strong> and <strong>834 passing ordinary tests</strong> (10 other opt-in tests skipped). This evidence is separate from ShiftLab’s 61 tests; the linked CI also completed successfully.</p>
             <p><strong>The ShiftLab review did not use this isolated evaluator.</strong> Integrating changes remains a human decision.</p>
+        </section>
+        <section class="case-step" id="pr-review" aria-labelledby="pr-review-title">
+          <h2 id="pr-review-title">Reviewing a PR from its URL</h2>
+          <p>On <code>main</code>, <code>--pr-url</code> previews the selected Python files and review criteria. It compares the common ancestor with the candidate commit and pins both SHAs in a command that replays the same diff even if the base branch moves. Once you have inspected the full files, you can decide whether to send those materials to the reviewer and save the report. <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/docs/revision-diff.md#vista-previa-de-una-pull-request-de-github" hreflang="es">PR review guide (in Spanish)</a>.</p>
+          <p><strong>ShiftLab #3 · live review before merge.</strong> The report had zero findings and suggested checking what happens if another process creates the destination while the input is loading. When that case was reproduced, the exporter raised <code>FileExistsError</code> and preserved the existing file. The decision to merge stood. <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/docs/evaluacion-review-diff.md#revisión-antes-del-merge-de-shiftlab-3" hreflang="es">Check on the candidate commit (in Spanish)</a>.</p>
+          <p><strong>Orchestrator #42 · end-to-end check with a simulated reviewer.</strong> The preview read the PR from GitHub. The pinned diff was replayed from another directory and the review ran with a simulator. The saved report used exactly the materials in the preview. <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/pull/42">Change under review</a> · <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/pull/44">Replay test</a>.</p>
         </section>
         <aside class="case-sources" id="sources" aria-labelledby="sources-title">
           <h2 id="sources-title">Case sources</h2>

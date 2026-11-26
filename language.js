@@ -75,24 +75,24 @@
       "es": "Mis proyectos combinan Codex CLI, contexto versionado en Git, salidas estructuradas y evaluación independiente. Trabajo con criterios de aceptación, pruebas automatizadas y GitHub Actions para contrastar los cambios generados y conservar evidencia antes de su incorporación bajo supervisión humana."
     },
     "orchestrator.status": {
-      "en": "v1.2.0 released",
-      "es": "v1.2.0 publicada"
+      "en": "Latest stable release: v1.2.0",
+      "es": "Última versión estable: v1.2.0"
     },
     "orchestrator.summary": {
-      "en": "I built a supervised Python workflow for AI-assisted code changes. It combines planning with versioned Git references, developer and reviewer agents in separate sessions, independent tests in rootless Podman, execution limits and inspectable records. Changes require human approval before integration.",
-      "es": "He creado un flujo de trabajo supervisado en Python para cambios de código asistidos por IA. Combina planificación con referencias versionadas de Git, agentes de desarrollo y revisión en sesiones separadas, pruebas independientes en Podman rootless, límites de ejecución y registros consultables. Incorporar los cambios requiere autorización humana."
+      "en": "On main, you can preview a Python diff from a GitHub PR URL and replay it with the commit SHAs pinned. Inspect the files and criteria, then decide whether to run the review.",
+      "es": "En main puedes preparar la vista previa de un diff de Python desde la URL de una PR de GitHub y repetirla con los SHA fijados. Inspecciona los archivos y criterios antes de decidir si lanzas la revisión."
     },
     "orchestrator.results": {
       "en": "Release scope, compatibility and validation:",
       "es": "Alcance, compatibilidad y validación de la versión:"
     },
     "orchestrator.tests": {
-      "en": "v1.2.0 evidence: 860 ordinary tests passed in the merge CI, with 13 opt-in tests skipped. The PR CI passed all 13 real rootless Podman integrations with no skips. The checks use synthetic agents, without model calls.",
-      "es": "Evidencia de v1.2.0: 860 pruebas ordinarias correctas en la CI del merge, con 13 opt-in omitidas. La CI de la PR superó las 13 integraciones reales con Podman rootless, sin omisiones. Las comprobaciones usan agentes sintéticos, sin llamadas a modelos."
+      "en": "The release CI used simulated agents. A separate job ran the rootless Podman integrations.",
+      "es": "La CI de la versión usó agentes simulados. Un job separado ejecutó las integraciones con Podman rootless."
     },
     "orchestrator.problem": {
-      "en": "An agent’s own verdict is not enough to validate a code change. This workflow adds independent checks and human oversight.",
-      "es": "El dictamen de un agente no basta para validar un cambio de código. Este flujo añade comprobaciones independientes y supervisión humana."
+      "en": "Which changes will the reviewer see if the base branch moves?",
+      "es": "¿Qué cambios verá el revisor si la rama base avanza?"
     },
     "orchestrator.limits": {
       "en": "These results do not establish general reliability or measure an AI success rate.",
