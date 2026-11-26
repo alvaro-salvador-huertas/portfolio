@@ -32,18 +32,19 @@
       </header>
       <div class="case-hero site-shell">
         <h1 translate="no">code-review-<wbr>orchestrator</h1>
-        <p>Un hallazgo reproducido antes de incorporar el cambio.</p>
+        <p>Del fallo de exportación en ShiftLab a la revisión de una PR de GitHub.</p>
         <nav aria-label="Caso técnico">
           <ul class="case-index">
-            <li><a href="#story">El caso de ShiftLab</a></li>
+            <li><a href="#story">ShiftLab #2</a></li>
             <li><a href="#isolation">Aislamiento posterior</a></li>
+            <li><a href="#pr-review">Revisar una PR</a></li>
             <li><a href="#sources">Fuentes</a></li>
           </ul>
         </nav>
       </div>
     </div>
     <main class="site-shell" id="main" tabindex="-1">
-      <article class="case-reading" id="story" aria-label="Caso real de ShiftLab">
+      <article class="case-reading" id="story" aria-label="Casos de revisión de código">
           <section class="case-step" aria-labelledby="step-1-title">
             <h2 id="step-1-title">1. Regenerar sin reentrenar</h2>
             <p>ShiftLab añadió <code>--from-results</code> para regenerar <code>results.json</code>, <code>cobertura-error.html</code> e <code>informe.txt</code> desde un JSON histórico. Debía conservar el umbral y los recuentos, sin reentrenar.</p>
@@ -67,6 +68,12 @@
             <p>Las cuotas por evaluación limitan resultados a 32 MiB y 1024 inodos; stdout y stderr, a 4 MiB cada uno. Si falla el aislamiento, el flujo se detiene sin ejecutar el candidato en el anfitrión.</p>
             <p>Evidencia local de ese cambio: <strong>10 integraciones reales con Podman correctas</strong> y <strong>834 pruebas ordinarias correctas</strong> (otras 10 opt-in omitidas). Son evidencias separadas de las 61 de ShiftLab; la CI enlazada también terminó correctamente.</p>
             <p><strong>La revisión de ShiftLab no usó este evaluador aislado.</strong> La incorporación de cambios sigue bajo decisión humana.</p>
+        </section>
+        <section class="case-step" id="pr-review" aria-labelledby="pr-review-title">
+          <h2 id="pr-review-title">Revisar una PR desde su URL</h2>
+          <p>En <code>main</code>, <code>--pr-url</code> prepara una vista previa de los archivos Python y los criterios elegidos. Compara el ancestro común con el candidato y fija ambos SHA en un comando que repite el mismo diff, aunque la rama base avance. Tras inspeccionar los textos completos, puedes decidir si envías esos materiales al revisor y guardas el informe. <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/docs/revision-diff.md#vista-previa-de-una-pull-request-de-github">Guía de revisión de PR</a>.</p>
+          <p><strong>ShiftLab #3 · revisión real antes del merge.</strong> El informe tuvo cero hallazgos y sugirió comprobar qué ocurría si otro proceso creaba el destino durante la carga. Al reproducir ese caso, el exportador lanzó <code>FileExistsError</code> y conservó el archivo existente. La decisión de fusionar se mantuvo. <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/blob/main/docs/evaluacion-review-diff.md#revisión-antes-del-merge-de-shiftlab-3">Comprobación sobre el candidato</a>.</p>
+          <p><strong>Orquestador #42 · validación con revisor simulado.</strong> La vista previa consultó la PR en GitHub. Desde otro directorio se repitió el diff con los SHA fijados y se lanzó la revisión con un simulador. El informe se guardó con exactamente los materiales de la vista previa. <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/pull/42">Cambio revisado</a> · <a href="https://github.com/alvaro-salvador-huertas/code-review-orchestrator/pull/44">Prueba de repetición</a>.</p>
         </section>
         <aside class="case-sources" id="sources" aria-labelledby="sources-title">
           <h2 id="sources-title">Fuentes del caso</h2>
