@@ -75,8 +75,8 @@
       "es": "Mis proyectos combinan Codex CLI, contexto versionado en Git, salidas estructuradas y evaluación independiente. Trabajo con criterios de aceptación, pruebas automatizadas y GitHub Actions para contrastar los cambios generados y conservar evidencia antes de su incorporación bajo supervisión humana."
     },
     "orchestrator.status": {
-      "en": "Latest stable release: v1.2.0",
-      "es": "Última versión estable: v1.2.0"
+      "en": "Latest stable release: v1.3.0",
+      "es": "Última versión estable: v1.3.0"
     },
     "orchestrator.summary": {
       "en": "On main, you can preview a Python diff from a GitHub PR URL and replay it with the commit SHAs pinned. Inspect the files and criteria, then decide whether to run the review.",
@@ -87,8 +87,8 @@
       "es": "Alcance, compatibilidad y validación de la versión:"
     },
     "orchestrator.tests": {
-      "en": "The release CI used simulated agents. A separate job ran the rootless Podman integrations.",
-      "es": "La CI de la versión usó agentes simulados. Un job separado ejecutó las integraciones con Podman rootless."
+      "en": "The v1.2.0 CI used simulated agents. A separate job ran the rootless Podman integrations.",
+      "es": "La CI de v1.2.0 usó agentes simulados. Un job separado ejecutó las integraciones con Podman rootless."
     },
     "orchestrator.problem": {
       "en": "Which changes will the reviewer see if the base branch moves?",
@@ -99,8 +99,8 @@
       "es": "Estos resultados no acreditan fiabilidad general ni miden una tasa de éxito de la IA."
     },
     "orchestrator.release": {
-      "en": "Release v1.2.0",
-      "es": "Versión v1.2.0"
+      "en": "Release v1.3.0",
+      "es": "Versión v1.3.0"
     },
     "orchestrator.ci": {
       "en": "Merge CI: 860 ordinary tests passed",
